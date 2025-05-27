@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -10,37 +10,49 @@ const PromptsPage = () => {
   const predefinedPrompts = [
     {
       title: "Extract key concepts",
-      description: "Extract key concepts and definitions from the text."
+      description: "Extract key concept's and definitions from the text.",
     },
     {
       title: "Summarize main points",
-      description: "Summarize the main points of each section."
+      description: "Summarize the main points of each section.",
     },
     {
       title: "Identify medical terms",
-      description: "Identify and list important medical terms."
+      description: "Identify and list important medical terms.",
     },
     {
       title: "Format for PowerPoint",
-      description: "Extract and format text for PowerPoint slides."
+      description: "Extract and format text for PowerPoint slides.",
     },
-
   ];
-  const [selectedAltTextOption, setSelectedAltTextOption] = useState<string | null>(null);
-  const [selectedTextExtractionPrompt, setSelectedTextExtractionPrompt] = useState<string | null>(null);
+  const [selectedAltTextOption, setSelectedAltTextOption] = useState<
+    string | null
+  >(null);
+  const [selectedTextExtractionPrompt, setSelectedTextExtractionPrompt] =
+    useState<string | null>(null);
 
   const altTextOptions = [
     {
-      id: 'generate-alt-text',
+      id: "generate-alt-text",
       title: "Generate alt text for all images",
-      description: "Automatically generate descriptive alt text for all images in the document."
+      description:
+        "Automatically generate descriptive alt text for all images in the document.",
     },
-    { id: 'generate-aria-description', title: "Generate aria description for all images", description: "Create detailed ARIA descriptions for accessibility purposes for all images." }];
+    {
+      id: "generate-aria-description",
+      title: "Generate aria description for all images",
+      description:
+        "Create detailed ARIA descriptions for accessibility purposes for all images.",
+    },
+  ];
 
   return (
     <div className="container mx-auto py-8 p-8">
       <h1 className="text-3xl font-bold mb-4">Custom Prompts</h1>
-      <p className="text-gray-600 mb-8">Tailor the AI's content extraction with custom prompts or use pre-defined options.</p>
+      <p className="text-gray-600 mb-8">
+        Tailor the AI&#39;s content extraction with custom prompts or use
+        pre-defined options.
+      </p>
 
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Create New Prompt</h2>
@@ -57,21 +69,37 @@ const PromptsPage = () => {
         <Tabs defaultValue="text-extraction">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="text-extraction">Text Extraction</TabsTrigger>
-            <TabsTrigger value="alt-text-generation">Alt Text Generation</TabsTrigger>
-            <TabsTrigger value="markdown-formatting">Markdown Formatting</TabsTrigger>
+            <TabsTrigger value="alt-text-generation">
+              Alt Text Generation
+            </TabsTrigger>
+            <TabsTrigger value="markdown-formatting">
+              Markdown Formatting
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="text-extraction" className="py-4">
             <div className="space-y-6">
-              {predefinedPrompts.map((prompt, index) => (
-                <div key={prompt.title} className="flex justify-between items-center border-b pb-4">
+              {predefinedPrompts.map((prompt) => (
+                <div
+                  key={prompt.title}
+                  className="flex justify-between items-center border-b pb-4"
+                >
                   <div className="flex-grow pr-4">
                     <h3 className="font-semibold">{prompt.title}</h3>
-                    <p className="text-gray-600 text-sm">{prompt.description}</p>
+                    <p className="text-gray-600 text-sm">
+                      {prompt.description}
+                    </p>
                   </div>
- <Button
+                  <Button
                     variant="outline"
-                    onClick={() => setSelectedTextExtractionPrompt(prompt.title)}
-                    className={selectedTextExtractionPrompt === prompt.title ? 'bg-black text-white' : ''}>
+                    onClick={() =>
+                      setSelectedTextExtractionPrompt(prompt.title)
+                    }
+                    className={
+                      selectedTextExtractionPrompt === prompt.title
+                        ? "bg-black text-white"
+                        : ""
+                    }
+                  >
                     Use
                   </Button>
                 </div>
@@ -81,24 +109,36 @@ const PromptsPage = () => {
           <TabsContent value="alt-text-generation" className="py-4">
             <div className="space-y-6">
               {altTextOptions.map((option) => (
-                <div key={option.id} className="flex justify-between items-center border-b pb-4">
+                <div
+                  key={option.id}
+                  className="flex justify-between items-center border-b pb-4"
+                >
                   <div className="flex-grow pr-4">
                     <h3 className="font-semibold">{option.title}</h3>
-                    <p className="text-gray-600 text-sm">{option.description}</p>
+                    <p className="text-gray-600 text-sm">
+                      {option.description}
+                    </p>
                   </div>
- <Button
+                  <Button
                     variant="outline"
                     onClick={() => setSelectedAltTextOption(option.id)}
-                    className={selectedAltTextOption === option.id ? 'bg-black text-white' : ''}>
+                    className={
+                      selectedAltTextOption === option.id
+                        ? "bg-black text-white"
+                        : ""
+                    }
+                  >
                     Use
                   </Button>
-              </div>
+                </div>
               ))}
             </div>
           </TabsContent>
 
           <TabsContent value="markdown-formatting" className="py-4">
-             <p className="text-gray-500">Markdown Formatting prompts will appear here.</p>
+            <p className="text-gray-500">
+              Markdown Formatting prompts will appear here.
+            </p>
           </TabsContent>
         </Tabs>
       </div>
@@ -107,4 +147,3 @@ const PromptsPage = () => {
 };
 
 export default PromptsPage;
-                 
