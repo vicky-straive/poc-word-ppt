@@ -29,13 +29,19 @@ export default function PreviewPage() {
             with SlideSpark. Save time and enhance your presentations for
             nursing education with our intuitive tool.
           </p>
-          <Button asChild>
+        <div className="flex gap-4 justify-center">
+         
+          <Button asChild className="mt-4">
+            <Link href="/projects/pdf-to-ppt">View Project Table</Link>
+          </Button>
+          <Button asChild className="mt-4">
+            <Link href="">Download Slides</Link>
+          </Button>
+           <Button asChild className="mt-4">
             <Link href="/projects/pdf-to-ppt/new">New Project</Link>
           </Button>
         </div>
-        <Button asChild className="mt-4">
-          <Link href="/projects/pdf-to-ppt">View Project Table</Link>
-        </Button>
+        </div>
       </div>
     </div>
   );

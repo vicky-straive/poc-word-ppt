@@ -59,7 +59,7 @@ const PromptsPage = () => {
         <div className="flex flex-col gap-4">
           <Textarea placeholder="Enter your custom prompt here" rows={6} />
           <Link href="/projects/pdf-to-ppt/extracted" passHref>
-            <Button className="self-end">Save Prompt</Button>
+            <Button className="self-end">Save Prompt & Generate</Button>
           </Link>
         </div>
       </div>
