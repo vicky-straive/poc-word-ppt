@@ -11,9 +11,22 @@ export default function PreviewPage() {
         <h3 className="text-lg font-semibold mb-4">Slide Preview</h3>
         {/* Placeholder for slide previews */}
         <div className="space-y-4">
-          <div className="w-full h-32 bg-gray-300 rounded"></div>
-          <div className="w-full h-32 bg-gray-300 rounded"></div>
-          <div className="w-full h-32 bg-gray-300 rounded"></div>
+          <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
+            <span>Slide 1</span>
+          </div>
+          <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
+            <span className="flex justify-center align-middle">Slide 2</span>
+          </div>
+          <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
+            <span className="flex justify-center align-middle">Slide 3</span>
+          </div>
+          <div>
+            <img
+              src="/Slide-4.png"
+              alt="Slide 4"
+              className="w-full h-32 object-cover object-top rounded"
+            />
+          </div>
           {/* Add more placeholders as needed */}
         </div>
       </div>
@@ -29,18 +42,17 @@ export default function PreviewPage() {
             with SlideSpark. Save time and enhance your presentations for
             nursing education with our intuitive tool.
           </p>
-        <div className="flex gap-4 justify-center">
-         
-          <Button asChild className="mt-4">
-            <Link href="/projects/pdf-to-ppt">View Project Table</Link>
-          </Button>
-          <Button asChild className="mt-4">
-            <Link href="">Download Slides</Link>
-          </Button>
-           <Button asChild className="mt-4">
-            <Link href="/projects/pdf-to-ppt/new">New Project</Link>
-          </Button>
-        </div>
+          <div className="flex gap-4 justify-center">
+            <Button asChild className="mt-4">
+              <Link href="/projects/pdf-to-ppt">View Project Table</Link>
+            </Button>
+            <Button asChild className="mt-4">
+              <Link href="">Download Slides</Link>
+            </Button>
+            <Button asChild className="mt-4">
+              <Link href="/projects/pdf-to-ppt/new">New Project</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
