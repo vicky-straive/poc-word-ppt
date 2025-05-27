@@ -54,7 +54,9 @@ const [projects, ] = useState<Project[]>(sampleProjects);
     <div className="container mx-auto py-8 p-8">
       <div className="flex justify-between items-center mb-6">
         <h2>My Projects</h2>
-        <Button>New Project</Button>
+        <Link href="/projects/pdf-to-ppt/new" passHref>
+          <Button>New Project</Button>
+        </Link>
       </div>
 
       <div className="mb-6">
