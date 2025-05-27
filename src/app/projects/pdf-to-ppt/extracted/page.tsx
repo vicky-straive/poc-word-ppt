@@ -21,7 +21,9 @@ const ExtractedMarkdownPage = () => {
         <Button variant="outline" asChild>
           <Link href="/projects/pdf-to-ppt/prompts">Back</Link>
         </Button>
-        <Button>Generate Slides</Button>
+        <Button asChild>
+          <Link href="/projects/pdf-to-ppt/processing">Generate Slides</Link>
+        </Button>
       </div>
     </div>
   );
