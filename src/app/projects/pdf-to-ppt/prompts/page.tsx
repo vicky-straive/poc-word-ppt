@@ -1,6 +1,8 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
@@ -22,7 +24,18 @@ const PromptsPage = () => {
       title: "Format for PowerPoint",
       description: "Extract and format text for PowerPoint slides."
     },
+
   ];
+  const [selectedAltTextOption, setSelectedAltTextOption] = useState<string | null>(null);
+  const [selectedTextExtractionPrompt, setSelectedTextExtractionPrompt] = useState<string | null>(null);
+
+  const altTextOptions = [
+    {
+      id: 'generate-alt-text',
+      title: "Generate alt text for all images",
+      description: "Automatically generate descriptive alt text for all images in the document."
+    },
+    { id: 'generate-aria-description', title: "Generate aria description for all images", description: "Create detailed ARIA descriptions for accessibility purposes for all images." }];
 
   return (
     <div className="container mx-auto py-8 p-8">
@@ -33,7 +46,9 @@ const PromptsPage = () => {
         <h2 className="text-xl font-semibold mb-4">Create New Prompt</h2>
         <div className="flex flex-col gap-4">
           <Textarea placeholder="Enter your custom prompt here" rows={6} />
-          <Button className="self-end">Save Prompt</Button>
+          <Link href="/projects/pdf-to-ppt/extracted" passHref>
+            <Button className="self-end">Save Prompt</Button>
+          </Link>
         </div>
       </div>
 
@@ -48,26 +63,37 @@ const PromptsPage = () => {
           <TabsContent value="text-extraction" className="py-4">
             <div className="space-y-6">
               {predefinedPrompts.map((prompt, index) => (
-                <div key={index} className="flex justify-between items-center border-b pb-4">
-                  <div>
+                <div key={prompt.title} className="flex justify-between items-center border-b pb-4">
+                  <div className="flex-grow pr-4">
                     <h3 className="font-semibold">{prompt.title}</h3>
                     <p className="text-gray-600 text-sm">{prompt.description}</p>
                   </div>
-                  <Button variant="outline">Use</Button>
+ <Button
+                    variant="outline"
+                    onClick={() => setSelectedTextExtractionPrompt(prompt.title)}
+                    className={selectedTextExtractionPrompt === prompt.title ? 'bg-black text-white' : ''}>
+                    Use
+                  </Button>
                 </div>
               ))}
             </div>
           </TabsContent>
           <TabsContent value="alt-text-generation" className="py-4">
-            <div className="space-y-4">
-              <div className="p-4 border rounded-md cursor-pointer hover:bg-gray-50">
-                <h3 className="font-semibold">Generate alt text for all images</h3>
-                <p className="text-gray-600 text-sm">Automatically generate descriptive alt text for all images in the document.</p>
+            <div className="space-y-6">
+              {altTextOptions.map((option) => (
+                <div key={option.id} className="flex justify-between items-center border-b pb-4">
+                  <div className="flex-grow pr-4">
+                    <h3 className="font-semibold">{option.title}</h3>
+                    <p className="text-gray-600 text-sm">{option.description}</p>
+                  </div>
+ <Button
+                    variant="outline"
+                    onClick={() => setSelectedAltTextOption(option.id)}
+                    className={selectedAltTextOption === option.id ? 'bg-black text-white' : ''}>
+                    Use
+                  </Button>
               </div>
-              <div className="p-4 border rounded-md cursor-pointer hover:bg-gray-50">
-                <h3 className="font-semibold">Generate aria description for all images</h3>
-                <p className="text-gray-600 text-sm">Create detailed ARIA descriptions for accessibility purposes for all images.</p>
-              </div>
+              ))}
             </div>
           </TabsContent>
 
@@ -81,3 +107,4 @@ const PromptsPage = () => {
 };
 
 export default PromptsPage;
+                 
