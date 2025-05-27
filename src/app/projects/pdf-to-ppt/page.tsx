@@ -33,7 +33,7 @@ export default function PdfToPptProjectsPage() {
     { id: 5, project_name: "Mental Health Nursing: Anxiety Disorders", category: "Mental Health Nursing", status: "In Progress", last_modified: "2024-05-01", action_url: "/projects/pdf-to-ppt/5/edit" },
   ];
 
-  const [projects, setProjects] = useState<Project[]>(sampleProjects);
+const [projects, ] = useState<Project[]>(sampleProjects);
   const [filter, setFilter] = useState("All");
 
   // Simple client-side filtering for demonstration
@@ -51,7 +51,7 @@ export default function PdfToPptProjectsPage() {
   ];
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 p-8">
       <div className="flex justify-between items-center mb-6">
         <h2>My Projects</h2>
         <Button>New Project</Button>
