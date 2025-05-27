@@ -33,6 +33,9 @@ export default function PreviewPage() {
             <Link href="/projects/pdf-to-ppt/new">New Project</Link>
           </Button>
         </div>
+        <Button asChild className="mt-4">
+          <Link href="/projects/pdf-to-ppt">View Project Table</Link>
+        </Button>
       </div>
     </div>
   );
