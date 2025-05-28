@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+export const dynamic = "force-dynamic";
+
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,9 +15,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DatePickerDemo } from "@/components/ui/datePicker";
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export default function CreatePresentationPage() {
+function CreatePresentationForm() {
   const [template, setTemplate] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -36,11 +37,9 @@ export default function CreatePresentationPage() {
   return (
     <div className="container mx-auto py-8 px-8">
       <h1 className="text-2xl font-bold mb-6">Create a Presentation</h1>
-
       <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
         {/* Select Template */}
-        {/* Uncomment and use Shadcn Select if available */}
-        {/*
+        {/* Shadcn Select example (uncomment and edit if needed):
         <div>
           <label htmlFor="template" className="block text-sm font-medium text-gray-700">Select a template</label>
           <Select onValueChange={setTemplate} value={template}>
@@ -48,7 +47,6 @@ export default function CreatePresentationPage() {
               <SelectValue placeholder="Select a template" />
             </SelectTrigger>
             <SelectContent>
-              {/\* Add your template options here *\/}
               <SelectItem value="template1">Template 1</SelectItem>
               <SelectItem value="template2">Template 2</SelectItem>
             </SelectContent>
@@ -71,7 +69,6 @@ export default function CreatePresentationPage() {
             disabled
           />
         </div>
-
         {/* Presentation Title */}
         <div>
           <label
@@ -87,7 +84,6 @@ export default function CreatePresentationPage() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-
         {/* Author Name */}
         <div>
           <label
@@ -106,7 +102,6 @@ export default function CreatePresentationPage() {
             </SelectContent>
           </Select>
         </div>
-
         {/* Subject */}
         <div>
           <label
@@ -122,7 +117,6 @@ export default function CreatePresentationPage() {
             onChange={(e) => setSubject(e.target.value)}
           />
         </div>
-
         {/* Date */}
         <div>
           <label
@@ -133,7 +127,6 @@ export default function CreatePresentationPage() {
           </label>
           <DatePickerDemo />
         </div>
-
         {/* Keywords */}
         <div>
           <label
@@ -149,7 +142,6 @@ export default function CreatePresentationPage() {
             onChange={(e) => setKeywords(e.target.value)}
           />
         </div>
-
         {/* Notes */}
         {/* <div>
           <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Notes</label>
@@ -161,7 +153,6 @@ export default function CreatePresentationPage() {
             className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[100px]"
           />
         </div> */}
-
         {/* Upload Button */}
         <div className="flex justify-end mt-4">
           <Button asChild>
@@ -170,5 +161,13 @@ export default function CreatePresentationPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CreatePresentationPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreatePresentationForm />
+    </Suspense>
   );
 }
