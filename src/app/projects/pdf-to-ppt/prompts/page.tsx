@@ -48,24 +48,24 @@ const PromptsPage = () => {
 
   return (
     <div className="container mx-auto py-8 p-8">
-      <h1 className="text-3xl font-bold mb-4">Custom Prompts</h1>
+      <h1 className="text-3xl font-bold mb-4">Custom Instructions</h1>
       <p className="text-gray-600 mb-8">
-        Tailor the AI&#39;s content extraction with custom prompts or use
+        Tailor the AI&#39;s content extraction with custom instruction or use
         pre-defined options.
       </p>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Create New Prompt</h2>
+        <h2 className="text-xl font-semibold mb-4">Create New Instruction</h2>
         <div className="flex flex-col gap-4">
-          <Textarea placeholder="Enter your custom prompt here" rows={6} />
+          <Textarea placeholder="Enter your custom instruction here" rows={6} />
           <Link href="/projects/pdf-to-ppt/extracted" passHref>
-            <Button className="self-end">Save Prompt & Generate</Button>
+            <Button className="self-end">Generate Markdown</Button>
           </Link>
         </div>
       </div>
 
       <div>
-        <h2 className="text-xl font-semibold mb-4">Pre-defined Prompts</h2>
+        <h2 className="text-xl font-semibold mb-4">Pre-defined Instructions</h2>
         <Tabs defaultValue="text-extraction">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="text-extraction">Text Extraction</TabsTrigger>
@@ -137,7 +137,7 @@ const PromptsPage = () => {
 
           <TabsContent value="markdown-formatting" className="py-4">
             <p className="text-gray-500">
-              Markdown Formatting prompts will appear here.
+              Markdown Formatting instruction will appear here.
             </p>
           </TabsContent>
         </Tabs>

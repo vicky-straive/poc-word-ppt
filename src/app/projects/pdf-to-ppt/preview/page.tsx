@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function PreviewPage() {
@@ -17,13 +18,15 @@ export default function PreviewPage() {
           <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
             <span className="flex justify-center align-middle">Slide 2</span>
           </div>
-          <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
+          <div className="w-full h-32 bg-gray-300 rounded">
             <span className="flex justify-center align-middle">Slide 3</span>
           </div>
           <div>
-            <img
+            <Image
               src="/Slide-4.png"
               alt="Slide 4"
+              width={400}
+              height={128}
               className="w-full h-32 object-cover object-top rounded"
             />
           </div>

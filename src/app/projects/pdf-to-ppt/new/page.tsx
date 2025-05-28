@@ -35,7 +35,7 @@ const NewProjectPage = () => {
 
   const handleItemClick = (itemId: string) => {
     setSelectedItem(selectedItem === itemId ? null : itemId);
-    router.push("/projects/pdf-to-ppt/create");
+    router.push(`/projects/pdf-to-ppt/create?template=${itemId}`);
   };
 
   const renderItem = (item: Item) => (
