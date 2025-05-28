@@ -31,6 +31,9 @@ const PromptsPage = () => {
   const [selectedTextExtractionPrompt, setSelectedTextExtractionPrompt] =
     useState<string | null>(null);
 
+  const [selectedMarkdownFormattingOption, setSelectedMarkdownFormattingOption] =
+    useState<string | null>(null);
+
   const altTextOptions = [
     {
       id: "generate-alt-text",
@@ -55,12 +58,15 @@ const PromptsPage = () => {
       </p>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Create New Instruction</h2>
-        <div className="flex flex-col gap-4">
-          <Textarea placeholder="Enter your custom instruction here" rows={6} />
-          <Link href="/projects/pdf-to-ppt/extracted" passHref>
+        <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold mb-4">Add Custom Instruction</h2>
+        <Link href="/projects/pdf-to-ppt/extracted" passHref>
             <Button className="self-end">Generate Markdown</Button>
           </Link>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Textarea placeholder="Enter your custom instruction here" rows={6} />
+         
         </div>
       </div>
 
@@ -136,9 +142,50 @@ const PromptsPage = () => {
           </TabsContent>
 
           <TabsContent value="markdown-formatting" className="py-4">
-            <p className="text-gray-500">
-              Markdown Formatting instruction will appear here.
-            </p>
+            <div className="space-y-6">
+              {[
+                {
+                  title: "Headings Conversion",
+                  description:
+                    "Convert document headings into appropriate Markdown heading levels.",
+                },
+                {
+                  title: "Lists Formatting",
+                  description:
+                    "Format bullet points and numbered lists using Markdown syntax.",
+                },
+                {
+                  title: "Links and Images",
+                  description:
+                    "Ensure links and images are correctly represented with Markdown.",
+                },
+              ].map((option) => (
+                <div
+                  key={option.title}
+                  className="flex justify-between items-center border-b pb-4"
+                >
+                  <div className="flex-grow pr-4">
+                    <h3 className="font-semibold">{option.title}</h3>
+                    <p className="text-gray-600 text-sm">
+                      {option.description}
+                    </p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    onClick={() =>
+                      setSelectedMarkdownFormattingOption(option.title)
+                    }
+                    className={
+                      selectedMarkdownFormattingOption === option.title
+                        ? "bg-black text-white"
+                        : ""
+                    }
+                  >
+                    Use
+                  </Button>
+                </div>
+              ))}
+            </div>
           </TabsContent>
         </Tabs>
       </div>

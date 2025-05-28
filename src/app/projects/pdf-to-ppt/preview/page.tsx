@@ -6,10 +6,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 const images = [
-  "/assets/Slide1.png",
-  "/assets/Slide2.png",
-  "/assets/Slide3.png",
-  "/assets/Slide4.png",
+  "/assets/s1.png",
+  "/assets/s2.png",
 ];
 
 export default function PreviewPage() {
