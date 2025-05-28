@@ -5,26 +5,33 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { DatePickerDemo } from "@/components/ui/datePicker";
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
 
 export default function CreatePresentationPage() {
   const [template, setTemplate] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [subject, setSubject] = useState("");
-  const [date, setDate] = useState("");
+  // const [date, setDate] = useState("");
   const [keywords, setKeywords] = useState("");
   // const [notes, setNotes] = useState("");
 
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const templateFromUrl = searchParams.get('template');
+    const templateFromUrl = searchParams.get("template");
     if (templateFromUrl) {
       setTemplate(templateFromUrl);
-    }}, [searchParams]);
+    }
+  }, [searchParams]);
 
   return (
     <div className="container mx-auto py-8 px-8">
@@ -50,7 +57,12 @@ export default function CreatePresentationPage() {
         */}
         {/* Placeholder for template select if Shadcn Select is not used */}
         <div>
-          <label htmlFor="template" className="block text-sm font-medium text-gray-700">Selected template</label>
+          <label
+            htmlFor="template"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Selected template
+          </label>
           <Input
             id="template"
             placeholder="Select a template"
@@ -60,10 +72,14 @@ export default function CreatePresentationPage() {
           />
         </div>
 
-
         {/* Presentation Title */}
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">Presentation title</label>
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Presentation title
+          </label>
           <Input
             id="title"
             placeholder="Presentation title"
@@ -74,21 +90,31 @@ export default function CreatePresentationPage() {
 
         {/* Author Name */}
         <div>
- <label htmlFor="author" className="block text-sm font-medium text-gray-700">Author name</label>
- <Select onValueChange={setAuthor} value={author}>
- <SelectTrigger id="author">
- <SelectValue placeholder="Select an author" />
- </SelectTrigger>
- <SelectContent>
- <SelectItem value="author1">Author One</SelectItem>
- <SelectItem value="author2">Author Two</SelectItem>
- </SelectContent>
- </Select>
+          <label
+            htmlFor="author"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Author name
+          </label>
+          <Select onValueChange={setAuthor} value={author}>
+            <SelectTrigger id="author">
+              <SelectValue placeholder="Select an author" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="author1">Author One</SelectItem>
+              <SelectItem value="author2">Author Two</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Subject */}
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
+          <label
+            htmlFor="subject"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Subject
+          </label>
           <Input
             id="subject"
             placeholder="Subject"
@@ -99,19 +125,23 @@ export default function CreatePresentationPage() {
 
         {/* Date */}
         <div>
-          <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date</label>
-          <Input
-            id="date"
-            type="date"
-            placeholder="mm-dd-yyyy"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
+          <label
+            htmlFor="date"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Date
+          </label>
+          <DatePickerDemo />
         </div>
 
         {/* Keywords */}
         <div>
-          <label htmlFor="keywords" className="block text-sm font-medium text-gray-700">Keywords</label>
+          <label
+            htmlFor="keywords"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Keywords
+          </label>
           <Input
             id="keywords"
             placeholder="Keywords"
@@ -134,7 +164,9 @@ export default function CreatePresentationPage() {
 
         {/* Upload Button */}
         <div className="flex justify-end mt-4">
-          <Button asChild><Link href="/projects/pdf-to-ppt/upload">Upload PDF or eBook</Link></Button>
+          <Button asChild>
+            <Link href="/projects/pdf-to-ppt/upload">Upload PDF or eBook</Link>
+          </Button>
         </div>
       </div>
     </div>
