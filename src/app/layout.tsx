@@ -13,6 +13,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import Link from "next/link";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,14 +33,16 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+ children: React.ReactNode;
 }>) {
  return (
     <SidebarProvider>
  <html lang="en">
- <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+ <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen relative`}>
+ {/* Wrap sidebar and main content to push footer down */}
+ <div className="flex flex-grow w-full">
  <AppSidebar />
- <SidebarInset>
+ <SidebarInset className="flex flex-col min-h-screen pb-16">
  <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
  <SidebarTrigger className="-ml-1" />
  <Separator
@@ -56,7 +59,14 @@ export default function RootLayout({
  </BreadcrumbList>
  </Breadcrumb>
  </header>
- {children}</SidebarInset>
+ {children}
+ </SidebarInset>
+ </div>
+ <div className="flex flex-grow">
+ <footer className="bg-[#3c695a] text-white text-center p-4 absolute bottom-0 left-0 right-0">
+ ©2025 F.A. Davis Company All Rights Reserved
+ </footer>
+ </div>
  </body>
  </html>
  </SidebarProvider>

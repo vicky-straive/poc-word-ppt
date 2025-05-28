@@ -17,7 +17,7 @@ export default function CreatePresentationPage() {
   const [notes, setNotes] = useState("");
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 px-8">
       <h1 className="text-2xl font-bold mb-6">Create a Presentation</h1>
 
       <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
