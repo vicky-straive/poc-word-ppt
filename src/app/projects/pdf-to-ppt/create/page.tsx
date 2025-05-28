@@ -2,8 +2,8 @@
 
 export const dynamic = "force-dynamic";
 
-import React, { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { Suspense, useState } from "react";
+// import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 
 function CreatePresentationForm() {
-  const [template, setTemplate] = useState("");
+  // const [template, setTemplate] = useState("");
   const [title, setAuthor] = useState("");
   const [author, setTitle] = useState("");
   const [subject, setSubject] = useState("");
@@ -24,14 +24,14 @@ function CreatePresentationForm() {
   const [keywords, setKeywords] = useState("");
   // const [notes, setNotes] = useState("");
 
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const templateFromUrl = searchParams.get("template");
-    if (templateFromUrl) {
-      setTemplate(templateFromUrl);
-    }
-  }, [searchParams]);
+  // useEffect(() => {
+  //   const templateFromUrl = searchParams.get("template");
+  //   if (templateFromUrl) {
+  //     setTemplate(templateFromUrl);
+  //   }
+  // }, [searchParams]);
 
   return (
     <div className="container mx-auto py-8 px-8">
@@ -110,9 +110,9 @@ function CreatePresentationForm() {
           >
             Subject
           </label>
-          <Select onValueChange={setAuthor} value={author}>
-            <SelectTrigger id="author">
-              <SelectValue placeholder="Select an author" />
+          <Select onValueChange={setSubject} value={subject}>
+            <SelectTrigger id="subject  ">
+              <SelectValue placeholder="Select a subject" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="author1">Subject One</SelectItem>
