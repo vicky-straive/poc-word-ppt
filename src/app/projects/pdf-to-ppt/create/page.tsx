@@ -14,12 +14,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DatePickerDemo } from "@/components/ui/datePicker";
 
 function CreatePresentationForm() {
   const [template, setTemplate] = useState("");
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
+  const [title, setAuthor] = useState("");
+  const [author, setTitle] = useState("");
   const [subject, setSubject] = useState("");
   // const [date, setDate] = useState("");
   const [keywords, setKeywords] = useState("");
@@ -125,7 +124,12 @@ function CreatePresentationForm() {
           >
             Date
           </label>
-          <DatePickerDemo />
+          <input
+            type="date"
+            id="date"
+            name="date"
+            className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
         </div>
         {/* Keywords */}
         <div>
