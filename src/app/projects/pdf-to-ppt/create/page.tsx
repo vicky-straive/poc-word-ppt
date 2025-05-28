@@ -53,7 +53,7 @@ function CreatePresentationForm() {
         </div>
         */}
         {/* Placeholder for template select if Shadcn Select is not used */}
-        <div>
+        {/* <div>
           <label
             htmlFor="template"
             className="block text-sm font-medium text-gray-700"
@@ -67,7 +67,7 @@ function CreatePresentationForm() {
             onChange={(e) => setTemplate(e.target.value)}
             disabled
           />
-        </div>
+        </div> */}
         {/* Presentation Title */}
         <div>
           <label
@@ -83,6 +83,7 @@ function CreatePresentationForm() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
+        <div className="flex gap-5 items-center flex-column">
         {/* Author Name */}
         <div>
           <label
@@ -109,12 +110,16 @@ function CreatePresentationForm() {
           >
             Subject
           </label>
-          <Input
-            id="subject"
-            placeholder="Subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-          />
+          <Select onValueChange={setAuthor} value={author}>
+            <SelectTrigger id="author">
+              <SelectValue placeholder="Select an author" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="author1">Subject One</SelectItem>
+              <SelectItem value="author2">Subject Two</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         </div>
         {/* Date */}
         <div>

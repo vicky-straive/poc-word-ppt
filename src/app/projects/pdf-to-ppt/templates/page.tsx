@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const TemplatesPage = () => {
   return (
@@ -12,29 +13,53 @@ const TemplatesPage = () => {
         {/* Template Option 1 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
-            <div className="w-full h-32 bg-gray-200 rounded-md mb-2"></div> {/* Placeholder for image */}
-            <p className="text-sm font-medium">Nursing Report Template</p>
+          <Image
+                src="/assets/temp1.png"
+                alt="slide1"
+                width={400}
+                height={128}
+                className="w-full h-auto object-cover object-top rounded"
+              />
+            <p className="text-sm mt-5 font-medium">Nursing Report Template</p>
           </div>
         </Link>
         {/* Template Option 2 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
-            <div className="w-full h-32 bg-gray-200 rounded-md mb-2"></div> {/* Placeholder for image */}
-            <p className="text-sm font-medium">Clinical Case Study Template</p>
+           <Image
+                src="/assets/temp2.png"
+                alt="slide1"
+                width={400}
+                height={128}
+                className="w-full h-auto object-cover object-top rounded"
+              />
+            <p className="text-sm mt-5 font-medium">Clinical Case Study Template</p>
           </div>
         </Link>
         {/* Template Option 3 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
-            <div className="w-full h-32 bg-gray-200 rounded-md mb-2"></div> {/* Placeholder for image */}
-            <p className="text-sm font-medium">Patient Education Template</p>
+           <Image
+                src="/assets/temp3.png"
+                alt="slide1"
+                width={400}
+                height={128}
+                className="w-full h-auto object-cover object-top rounded"
+              />
+            <p className="text-sm mt-5 font-medium">Patient Education Template</p>
           </div>
         </Link>
         {/* Template Option 4 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
-            <div className="w-full h-32 bg-gray-200 rounded-md mb-2"></div> {/* Placeholder for image */}
-            <p className="text-sm font-medium">Medical Research Presentation</p>
+           <Image
+                src="/assets/temp4.png"
+                alt="slide1"
+                width={400}
+                height={128}
+                className="w-full h-auto object-cover object-top rounded"
+              />
+            <p className="text-sm mt-5 font-medium">Medical Research Template</p>
           </div>
         </Link>
       </div>

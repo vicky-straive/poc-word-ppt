@@ -4,7 +4,23 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const ExtractedMarkdownPage = () => {
-  const extractedMarkdown = `Patient History: Patient presented to the emergency room with a chief complaint of chest pain. The patient reported that the pain started suddenly and is a 7/10 on the pain scale. The patient denies any known allergies and has been taking aspirin for headache on and off for the past few months. Medical Guideline Excerpt: The American Heart Association recommends that all patients presenting with acute myocardial infarction receive thrombolytic therapy within 3 hours of symptom onset. The decision to use thrombolytics should be made in consultation with the patient and their family. Clinical Procedure Description: The procedure involves a minimally invasive approach to the surgical site. The surgeon will make a small incision in the skin and then insert a specialized instrument into the cavity. Once inside, the surgeon will use a camera to view the area and then perform the necessary steps to repair the affected structure.`;
+  const extractedMarkdown = `Interactive Quiz
+Test your knowledge with this interactive quiz based on the material from your uploaded documents. Each question is designed to reinforce key concepts and help you retain information effectively.
+
+Question 1: What is the primary function of insulin in the human body?
+Type your answer here
+
+Question 2: Which of the following is a common symptom of dehydration?
+Type your answer here
+
+Question 3: What is the recommended daily intake of water for an adult?
+Type your answer here
+
+Question 4: Which nutrient is essential for bone health?
+Type your answer here
+
+Question 5: What is the normal range for human body temperature?
+Type your answer here`;
 
   return (
     <div className="container mx-auto px-8 py-8">
