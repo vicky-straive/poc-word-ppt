@@ -14,7 +14,7 @@ export default function CreatePresentationPage() {
   const [subject, setSubject] = useState("");
   const [date, setDate] = useState("");
   const [keywords, setKeywords] = useState("");
-  const [notes, setNotes] = useState("");
+  // const [notes, setNotes] = useState("");
 
   return (
     <div className="container mx-auto py-8 px-8">
@@ -106,7 +106,7 @@ export default function CreatePresentationPage() {
         </div>
 
         {/* Notes */}
-        <div>
+        {/* <div>
           <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Notes</label>
           <textarea
             id="notes"
@@ -115,7 +115,7 @@ export default function CreatePresentationPage() {
             onChange={(e) => setNotes(e.target.value)}
             className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[100px]"
           />
-        </div>
+        </div> */}
 
         {/* Upload Button */}
         <div className="flex justify-end mt-4">

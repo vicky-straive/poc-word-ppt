@@ -53,9 +53,9 @@ const [projects, ] = useState<Project[]>(sampleProjects);
   return (
     <div className="container mx-auto py-8 p-8">
       <div className="flex justify-between items-center mb-6">
-        <h2>My Projects</h2>
+        <h2>My Presentations</h2>
         <Link href="/projects/pdf-to-ppt/new" passHref>
-          <Button>New Project</Button>
+          <Button>New Presentation</Button>
         </Link>
       </div>
 
@@ -74,7 +74,7 @@ const [projects, ] = useState<Project[]>(sampleProjects);
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Project Name</TableHead>
+            <TableHead>Presentation Name</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Last Modified</TableHead>
             <TableHead>Actions</TableHead>
