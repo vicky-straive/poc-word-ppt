@@ -13,23 +13,42 @@ export default function PreviewPage() {
         {/* Placeholder for slide previews */}
         <div className="space-y-4">
           <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
-            <span>Slide 1</span>
+            <Image
+              src="/assets/Slide_1.png"
+              alt="Slide 1"
+              width={400}
+              height={128}
+              className="w-full h-32 object-cover object-top rounded"
+            />
           </div>
           <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
-            <span className="flex justify-center align-middle">Slide 2</span>
+            <Image
+              src="/assets/Slide_2.png"
+              alt="Slide 2"
+              width={400}
+              height={128}
+              className="w-full h-32 object-cover object-top rounded"
+            />
           </div>
           <div className="w-full h-32 bg-gray-300 rounded">
-            <span className="flex justify-center align-middle">Slide 3</span>
+            <Image
+              src="/assets/Slide_3.png"
+              alt="Slide 3"
+              width={400}
+              height={128}
+              className="w-full h-32 object-cover object-top rounded"
+            />
           </div>
           <div>
             <Image
-              src="/Slide-4.png"
+              src="/assets/Slide_4.png"
               alt="Slide 4"
               width={400}
               height={128}
               className="w-full h-32 object-cover object-top rounded"
             />
           </div>
+          
           {/* Add more placeholders as needed */}
         </div>
       </div>
