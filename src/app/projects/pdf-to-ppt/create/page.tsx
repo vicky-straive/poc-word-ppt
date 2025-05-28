@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-// Assuming you have a Select component in Shadcn
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 
 export default function CreatePresentationPage() {
   const [template, setTemplate] = useState("");
@@ -15,6 +17,14 @@ export default function CreatePresentationPage() {
   const [date, setDate] = useState("");
   const [keywords, setKeywords] = useState("");
   // const [notes, setNotes] = useState("");
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const templateFromUrl = searchParams.get('template');
+    if (templateFromUrl) {
+      setTemplate(templateFromUrl);
+    }}, [searchParams]);
 
   return (
     <div className="container mx-auto py-8 px-8">
@@ -40,12 +50,13 @@ export default function CreatePresentationPage() {
         */}
         {/* Placeholder for template select if Shadcn Select is not used */}
         <div>
-          <label htmlFor="template" className="block text-sm font-medium text-gray-700">Select a template</label>
+          <label htmlFor="template" className="block text-sm font-medium text-gray-700">Selected template</label>
           <Input
             id="template"
             placeholder="Select a template"
             value={template}
             onChange={(e) => setTemplate(e.target.value)}
+            disabled
           />
         </div>
 
@@ -63,13 +74,16 @@ export default function CreatePresentationPage() {
 
         {/* Author Name */}
         <div>
-          <label htmlFor="author" className="block text-sm font-medium text-gray-700">Author name</label>
-          <Input
-            id="author"
-            placeholder="Author name"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+ <label htmlFor="author" className="block text-sm font-medium text-gray-700">Author name</label>
+ <Select onValueChange={setAuthor} value={author}>
+ <SelectTrigger id="author">
+ <SelectValue placeholder="Select an author" />
+ </SelectTrigger>
+ <SelectContent>
+ <SelectItem value="author1">Author One</SelectItem>
+ <SelectItem value="author2">Author Two</SelectItem>
+ </SelectContent>
+ </Select>
         </div>
 
         {/* Subject */}
@@ -89,6 +103,7 @@ export default function CreatePresentationPage() {
           <Input
             id="date"
             type="date"
+            placeholder="mm-dd-yyyy"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />

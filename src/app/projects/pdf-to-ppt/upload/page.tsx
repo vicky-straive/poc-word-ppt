@@ -29,8 +29,8 @@ const UploadPage = () => {
       <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center flex flex-col items-center justify-center mb-4">
         <p className="text-lg font-semibold mb-2">Drag and drop a PDF or eBook here</p>
         <p className="text-gray-500 mb-4">Or browse files</p>
-        <Button onClick={handleBrowseFilesClick}>Browse Files</Button>
-        <Button onClick={handleSimulateUpload} className="mt-4">Simulate Upload (Temporary)</Button>
+        <Button onClick={handleSimulateUpload} className="mt-4">Browse Files</Button>
+        <Button onClick={handleBrowseFilesClick} className="mt-4">Connect</Button>
       </div>
 
       <p className="text-gray-500 text-sm text-center">
