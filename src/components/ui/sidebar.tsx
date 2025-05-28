@@ -54,7 +54,7 @@ function useSidebar() {
 }
 
 function SidebarProvider({
-  defaultOpen = true,
+  defaultOpen = false,
   open: openProp,
   onOpenChange: setOpenProp,
   className,
@@ -258,8 +258,10 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
-
+  // const { toggleSidebar } = useSidebar()
+  
+  // Disabled: do not run toggleSidebar for now
+  // const { toggleSidebar } = useSidebar()
   return (
     <Button
       data-sidebar="trigger"
@@ -269,7 +271,7 @@ function SidebarTrigger({
       className={cn("size-7", className)}
       onClick={(event) => {
         onClick?.(event)
-        toggleSidebar()
+        // toggleSidebar()
       }}
       {...props}
     >
