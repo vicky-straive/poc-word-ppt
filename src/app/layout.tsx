@@ -3,15 +3,17 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
- Breadcrumb,
- BreadcrumbItem,
- BreadcrumbLink,
- BreadcrumbList,
- BreadcrumbPage,
- BreadcrumbSeparator,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -33,42 +35,56 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
- children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
- return (
+  return (
     <SidebarProvider>
- <html lang="en">
- <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen relative`}>
- {/* Wrap sidebar and main content to push footer down */}
- <div className="flex flex-grow w-full">
- <AppSidebar />
- <SidebarInset className="flex flex-col min-h-screen pb-16">
- <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
- <SidebarTrigger className="-ml-1" />
- <Separator
- orientation="vertical"
- className="mr-2 data-[orientation=vertical]:h-4"
- />
- <Breadcrumb>
- <BreadcrumbList>
- <BreadcrumbItem>
- <BreadcrumbLink asChild>
- <Link href="/">Home</Link>
- </BreadcrumbLink>
- </BreadcrumbItem>
- </BreadcrumbList>
- </Breadcrumb>
- </header>
- {children}
- </SidebarInset>
- </div>
- <div className="flex flex-grow">
- <footer className="bg-[#3c695a] text-white text-center p-4 absolute bottom-0 left-0 right-0">
- ©2025 F.A. Davis Company All Rights Reserved
- </footer>
- </div>
- </body>
- </html>
- </SidebarProvider>
- );
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen relative`}
+        >
+          {/* Wrap sidebar and main content to push footer down */}
+          <div className="flex flex-grow w-full">
+            <AppSidebar />
+            <SidebarInset className="flex flex-col min-h-screen pb-16">
+              <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                <SidebarTrigger className="-ml-1" />
+                <Separator
+                  orientation="vertical"
+                  className="mr-2 data-[orientation=vertical]:h-4"
+                />
+                <div className="flex items-center justify-between w-full">
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                          <Link href="/">Home</Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                  <div className="flex justify-end px-6">
+                    <Image
+                      src="/assets/FA_Davis_Logo.png"
+                      alt="Logo"
+                      width={100}
+                      height={32}
+                      className="h-8 ml-2"
+                      priority
+                    />
+                  </div>
+                </div>
+              </header>
+              {children}
+            </SidebarInset>
+          </div>
+          <div className="flex flex-grow">
+            <footer className="bg-[#3c695a] text-white text-center p-4 absolute bottom-0 left-0 right-0">
+              ©2025 F.A. Davis Company All Rights Reserved
+            </footer>
+          </div>
+        </body>
+      </html>
+    </SidebarProvider>
+  );
 }
