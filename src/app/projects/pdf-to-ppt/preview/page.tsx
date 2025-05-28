@@ -3,57 +3,68 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+
+const images = [
+  "/assets/Slide1.png",
+  "/assets/Slide2.png",
+  "/assets/Slide3.png",
+  "/assets/Slide4.png",
+];
 
 export default function PreviewPage() {
+  const [selectedImage, setSelectedImage] = useState(images[0]);
+
   return (
     <div className="flex h-screen">
       {/* Left Sidebar for Slide Previews */}
       <div className="w-1/4 bg-gray-100 p-4 overflow-y-auto">
         <h3 className="text-lg font-semibold mb-4">Slide Preview</h3>
         {/* Placeholder for slide previews */}
-        <div className="space-y-4">
-          <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
-            <span>Slide 1</span>
+        <div className="space-y-2">
+          {images.map((src, index) => (
+            <div
+              key={index}
+              className={`relative w-full rounded cursor-pointer ${
+                selectedImage === src ? "ring-2 ring-blue-500" : ""
+              }`}
+              onClick={() => setSelectedImage(src)}
+            >
+              <Image
+                src={src}
+                alt={`Slide ${index + 1}`}
+                width={400}
+                height={128}
+                className="w-full h-auto object-cover object-top rounded"
+              />
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-10 transition-opacity rounded"></div>
+            </div>
+          ))}
+          {/* Add more image containers as needed */}
+          <div className="w-full h-32 rounded flex items-center justify-center">
+            {/* Placeholder for potential additional content or spacing */}
           </div>
-          <div className="w-full h-32 bg-gray-300 rounded flex items-center justify-center">
-            <span className="flex justify-center align-middle">Slide 2</span>
-          </div>
-          <div className="w-full h-32 bg-gray-300 rounded">
-            <span className="flex justify-center align-middle">Slide 3</span>
-          </div>
-          <div>
-            <Image
-              src="/Slide-4.png"
-              alt="Slide 4"
-              width={400}
-              height={128}
-              className="w-full h-32 object-cover object-top rounded"
-            />
-          </div>
-          {/* Add more placeholders as needed */}
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col justify-center items-center p-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">
-            Transform Your Clinical Documents into Engaging Presentations
-          </h1>
-          <p className="text-lg text-gray-600 mb-8">
-            Effortlessly convert PDFs and eBooks into dynamic PowerPoint slides
-            with SlideSpark. Save time and enhance your presentations for
-            nursing education with our intuitive tool.
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Button asChild className="mt-4">
-              <Link href="/projects/pdf-to-ppt">View Project Table</Link>
-            </Button>
+      <div className="flex-1 flex flex-col justify-center items-center p-8 bg-gray-200">
+        {selectedImage && (
+          <div className="w-full max-w-screen-lg bg-white rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src={selectedImage}
+              alt="Selected Slide Preview"
+              width={800}
+              height={128}
+              className="w-full object-cover object-top rounded"
+            />
+          </div>
+          
+        )}
+        <div className="text-center mt-8">
+          <div className="flex w-full gap-4 justify-end align-end">
             <Button asChild className="mt-4">
               <Link href="">Download Slides</Link>
-            </Button>
-            <Button asChild className="mt-4">
-              <Link href="/projects/pdf-to-ppt/new">New Project</Link>
             </Button>
           </div>
         </div>
