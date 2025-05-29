@@ -28,7 +28,7 @@ const ChaptersPage = () => {
             <Link 
               href={{
                 pathname: "/projects/pdf-to-ppt/templates",
-                query: { book: book.title, chapter: chapter.title },
+                query: { book: book.title, chapter: `Chapter ${chapter.number}: ${chapter.title}` },
               }} 
               className="flex-1"
             >

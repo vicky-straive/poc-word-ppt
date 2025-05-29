@@ -12,9 +12,10 @@ const ExtractedMarkdownPage = () => {
   const chapter = searchParams.get("chapter") || "";
   const template = searchParams.get("template") || "";
 
-  // Find the correct markdown path from templateData.json
+  // Extract the chapter title from the chapter query parameter
+  const chapterTitle = chapter.replace(/^Chapter\s*\d+:\s*/, "");
   const bookObj = templateData.find((b) => b.book === book);
-  const chapterObj = bookObj?.chapters.find((c) => c.chapter === chapter);
+  const chapterObj = bookObj?.chapters.find((c) => c.chapter === chapterTitle);
   const templateObj = chapterObj?.templates.find((t) => t.template === template);
   const markdownPath = templateObj?.markdown || "No markdown found.";
 
