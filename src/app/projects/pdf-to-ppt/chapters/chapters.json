@@ -1,0 +1,96 @@
+[
+
+  {
+    "title": "Medical Terminology in a Flash",
+    "image": "/assets/B1.jpg",
+    "description": "A quick guide to essential medical terms and their meanings.",
+    "chapters": [
+      {
+        "title": "Introduction to Medical Terminology",
+        "description": "Overview of medical terminology and its importance.",
+        "chapter": "1"
+      },
+      {
+        "title": "Body Structures and Organization ",
+        "description": "Best practices for Body Structures and Organization.",
+        "chapter": "2"
+      },
+      {
+        "title": "Medical Specialties and Procedures",
+        "description": "Discussion on Medical Specialties and Procedures.",
+        "chapter": "3"
+
+      }
+    ]
+  },
+  {
+    "title": "  Medical - Surgical Nursing Fundamentals and Applications",
+    "image": "/assets/B1.jpg",
+    "description": "A quick guide to surgical nursing fundamentals and applications.",
+    "chapters": [
+      {
+        "title": "Foundation of Medical - Surgical Nursing",
+        "description": "Overview of medical - surgical nursing and its importance.",
+        "chapter": "1"
+      },
+      {
+        "title": "Patient Assessment and Management",
+        "description": "Best practices for patient assessment and management.",
+        "chapter": "2"
+      },
+      {
+        "title": "Preioperative and Postoperative Care",
+        "description": "Discussion on Medical Specialties and Procedures.",
+        "chapter": "3"
+
+      }
+    ]
+  },
+  {
+    "title": "Pharmacology for Nursing Practice",
+    "image": "/assets/B1.jpg",
+    "description": "Key pharmacological concepts and drug administration for nurses.",
+    "chapters": [
+      {
+        "title": "Principles of Pharmacology",
+        "description": "Overview of pharmacology and its significance in nursing.",
+        "chapter": "1"
+      },
+      {
+        "title": "Drug Administration ",
+        "description": "Best practices for drug administration in nursing.",
+        "chapter": "2"
+      },
+      {
+        "title": "Medication Safety",
+        "description": "Discussion on medication safety practices in nursing.",
+        "chapter": "3"
+
+      }
+    ]
+  },
+  {
+    "title": "Understanding Medical-Surgical Nursing",
+    "image": "/assets/B1.jpg",
+    "description": "A quick guide to surgical nursing fundamentals and applications.",
+    "chapters": [
+      {
+        "title": "Foundation of Medical - Surgical Nursing",
+        "description": "Overview of medical - surgical nursing and its importance.",
+        "chapter": "1"
+      },
+      {
+        "title": "Patient Assessment and Management",
+        "description": "Best practices for patient assessment and management.",
+        "chapter": "2"
+      },
+      {
+        "title": "Preioperative and Postoperative Care",
+        "description": "Discussion on Medical Specialties and Procedures.",
+        "chapter": "3"
+
+      }
+    ]
+  }
+
+]

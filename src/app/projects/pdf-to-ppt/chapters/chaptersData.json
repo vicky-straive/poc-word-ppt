@@ -1,0 +1,46 @@
+[
+    {
+        "title": "Medical Terminology in a Flash",
+        "image": "public/MedicalTerminology.jpg",
+        "icon": "BookOpen",
+        "description": "Master medical terminology quickly and effectively with this comprehensive guide.",
+        "chapters": [
+            { "number": 1, "title": "Introduction to Medical Terminology", "image": "https://images.pexels.com/photos/4226262/pexels-photo-4226262.jpeg" },
+            { "number": 2, "title": "Body Structure and Organization", "image": "https://images.pexels.com/photos/4226263/pexels-photo-4226263.jpeg" },
+            { "number": 3, "title": "Medical Specialties and Procedures", "image": "https://images.pexels.com/photos/4226264/pexels-photo-4226264.jpeg" }
+        ]
+    },
+    {
+        "title": "Medical-Surgical Nursing",
+        "image": "public/MedSurgical1.jpg",
+        "icon": "Heart",
+        "description": "Fundamentals and applications of medical-surgical nursing practice and procedures.",
+        "chapters": [
+            { "number": 1, "title": "Foundations of Medical-Surgical Nursing", "image": "https://images.pexels.com/photos/4226265/pexels-photo-4226265.jpeg" },
+            { "number": 2, "title": "Patient Assessment and Management", "image": "https://images.pexels.com/photos/4226266/pexels-photo-4226266.jpeg" },
+            { "number": 3, "title": "Perioperative Care", "image": "https://images.pexels.com/photos/4226267/pexels-photo-4226267.jpeg" }
+        ]
+    },
+    {
+        "title": "Understanding Medical-Surgical Nursing",
+        "image": "public/Nursing1.jpg",
+        "icon": "Stethoscope",
+        "description": "A comprehensive guide to understanding medical-surgical nursing concepts.",
+        "chapters": [
+            { "number": 1, "title": "Basic Concepts in Nursing", "image": "https://images.pexels.com/photos/4225921/pexels-photo-4225921.jpeg" },
+            { "number": 2, "title": "Clinical Decision Making", "image": "https://images.pexels.com/photos/4225922/pexels-photo-4225922.jpeg" },
+            { "number": 3, "title": "Evidence-Based Practice", "image": "https://images.pexels.com/photos/4225923/pexels-photo-4225923.jpeg" }
+        ]
+    },
+    {
+        "title": "Pharmacology for Nursing Practice",
+        "image": "public/PharmaNursing.jpg",
+        "icon": "Pill",
+        "description": "Essential pharmacology concepts for nursing professionals and pharmacologists.",
+        "chapters": [
+            { "number": 1, "title": "Principles of Pharmacology", "image": "https://images.pexels.com/photos/4226767/pexels-photo-4226767.jpeg" },
+            { "number": 2, "title": "Drug Administration", "image": "https://images.pexels.com/photos/4226768/pexels-photo-4226768.jpeg" },
+            { "number": 3, "title": "Medication Safety", "image": "https://images.pexels.com/photos/4226769/pexels-photo-4226769.jpeg" }
+        ]
+    }
+]
