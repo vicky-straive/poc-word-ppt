@@ -2,83 +2,67 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const TemplatesPage = () => {
+const booksData = [
+  {
+    id: 1,
+    href: "/projects/pdf-to-ppt/chapters",
+    imgSrc: "/assets/B1.jpg",
+    imgAlt: "Medical Terminology in a Flash",
+    title: "Medical Terminology in a Flash",
+    description: "A quick guide to essential medical terms and their meanings.",
+  },
+  {
+    id: 2,
+    href: "/projects/pdf-to-ppt/chapters",
+    imgSrc: "/assets/B2.jpg",
+    imgAlt: "Medical - Surgical Nursing Fundamentals and Applications",
+    title: "Medical - Surgical Nursing Fundamentals and Applications",
+    description: "Comprehensive coverage of nursing principles and practices.",
+  },
+  {
+    id: 3,
+    href: "/projects/pdf-to-ppt/chapters",
+    imgSrc: "/assets/B3.jpg",
+    imgAlt: "Understanding Medical-Surgical Nursing",
+    title: "Understanding Medical-Surgical Nursing",
+    description:
+      "Focuses on patient care in various medical-surgical settings.",
+  },
+  {
+    id: 4,
+    href: "/projects/pdf-to-ppt/chapters",
+    imgSrc: "/assets/B4.jpg",
+    imgAlt: "Pharmacology for Nursing Practice",
+    title: "Pharmacology for Nursing Practice",
+    description:
+      "Key pharmacological concepts and drug administration for nurses.",
+  },
+];
+
+const BookSelectionPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Select a book</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        {/* Template Option 1 */}
-        {/* <Link href="/projects/pdf-to-ppt/prompts">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
-          <Image
-                src="/assets/T1.jpg"
-                alt="slide1"
-                width={400}
-                height={128}
-                className="w-full h-auto object-cover object-top rounded"
-              />
-            <p className="text-sm mt-5 font-medium">Nursing Research Template</p>
-          </div>
-        </Link> */}
-        {/* Template Option 2 */}
-        <Link href="/projects/pdf-to-ppt/chapters">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
-            <Image
-              src="/assets/B1.jpg"
-              alt="slide1"
-              width={400}
-              height={128}
-              className="w-full h-auto object-cover object-top rounded"
-            />
-            <p className="text-sm mt-5 font-medium">
-              Medical Terminology in a Flash
-            </p>
-          </div>
-        </Link>
-        {/* Template Option 3 */}
-        <Link href="/projects/pdf-to-ppt/chapters">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
-            <Image
-              src="/assets/B2.jpg"
-              alt="slide1"
-              width={400}
-              height={128}
-              className="w-full h-auto object-cover object-top rounded"
-            />
-            <p className="text-sm mt-5 font-medium">
-              Medical - Surgical Nursing Fundamentals and Applications
-            </p>
-          </div>
-        </Link>
-        {/* Template Option 4 */}
-        <Link href="/projects/pdf-to-ppt/chapters">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
-            <Image
-              src="/assets/B3.jpg"
-              alt="slide1"
-              width={400}
-              height={128}
-              className="w-full h-auto object-cover object-top rounded"
-            />
-            <p className="text-sm mt-5 font-medium">
-              Understanding Medical-Surgical Nursing
-            </p>
-          </div>
-        </Link>
-        <Link href="/projects/pdf-to-ppt/chapters">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
-            <Image
-              src="/assets/B4.jpg"
-              alt="slide1"
-              width={400}
-              height={128}
-              className="w-full h-auto object-cover object-top rounded"
-            />
-            <p className="text-sm mt-5 font-medium">
-              Pharmacology for Nursing Practice
-            </p>
-          </div>
-        </Link>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {booksData.map((book) => (
+          <Link href={book.href} key={book.id} passHref>
+            <div className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between">
+              <div>
+                <Image
+                  src={book.imgSrc}
+                  alt={book.imgAlt}
+                  width={400}
+                  height={400} // Adjusted height for better aspect ratio if images vary
+                  className="w-full h-64 object-cover object-top rounded-md mb-4"
+                />
+                <h3 className="text-md font-semibold text-gray-800 mb-1">
+                  {book.title}
+                </h3>
+                <p className="text-xs text-gray-600 px-2">{book.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
 
       {/* <h2 className="text-xl font-semibold mb-4">Start from scratch</h2>
@@ -91,4 +75,4 @@ const TemplatesPage = () => {
   );
 };
 
-export default TemplatesPage;
+export default BookSelectionPage;
