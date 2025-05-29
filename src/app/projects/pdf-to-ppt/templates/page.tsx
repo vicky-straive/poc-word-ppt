@@ -1,18 +1,37 @@
+"use client";
+
 // import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-
-
+import { useSearchParams } from "next/navigation";
 
 const TemplatesPage = () => {
+  const searchParams = useSearchParams();
+  const book = searchParams.get("book");
+  const chapter = searchParams.get("chapter");
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Create a new presentation</h1>
-      <p className="text-gray-600 mb-8">
-        Start with a template or create your own
-      </p>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Create a new presentation</h1>
+          <p className="text-gray-600 mb-8">
+            Start with a template or create your own
+          </p>
+        </div>
+        {(book || chapter) && (
+          <div className="mb-6">
+            {book && <h2 className="text-2xl font-bold mb-4 text-end">Book: {book}</h2>}
+            {chapter && (
+              <p className="text-gray-600 text-end">
+                Chapter: {chapter}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
 
-      <h2 className="text-xl font-semibold mb-4">Select a template</h2>
+      <h2 className="text-xl font-bold mb-4">Select a template</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Template Option 1 */}
         {/* <Link href="/projects/pdf-to-ppt/prompts">
@@ -30,6 +49,7 @@ const TemplatesPage = () => {
         {/* Template Option 2 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
+            <p className="text-md mb-5 font-medium">Nursing Lecture Template</p>
             <Image
               src="/assets/T2.jpg"
               alt="slide1"
@@ -37,12 +57,18 @@ const TemplatesPage = () => {
               height={128}
               className="w-full h-auto object-cover object-top rounded"
             />
-            <p className="text-sm mt-5 font-medium">Nursing Lecture Template</p>
+            <p className="text-sm mt-5">
+              Clear and structured template for teaching fundamental nursing
+              concepts and theories
+            </p>
           </div>
         </Link>
         {/* Template Option 3 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
+            <p className="text-md mb-5 font-medium">
+              Nursing Case Studies Template
+            </p>
             <Image
               src="/assets/T3.jpg"
               alt="slide1"
@@ -50,14 +76,18 @@ const TemplatesPage = () => {
               height={128}
               className="w-full h-auto object-cover object-top rounded"
             />
-            <p className="text-sm mt-5 font-medium">
-              Nursing Case Studies Template
+            <p className="text-sm mt-5">
+              Interactive template designed for presenting and analyzing
+              real-world patient cases
             </p>
           </div>
         </Link>
         {/* Template Option 4 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
+            <p className="text-md mb-5 font-medium">
+              Nursing Concepts Template
+            </p>
             <Image
               src="/assets/T4.jpg"
               alt="slide1"
@@ -65,8 +95,10 @@ const TemplatesPage = () => {
               height={128}
               className="w-full h-auto object-cover object-top rounded"
             />
-            <p className="text-sm mt-5 font-medium">
-              Nursing Concepts Template
+
+            <p className="text-sm mt-5">
+              Comprehensive template for detailed lecture notes and key learning
+              points
             </p>
           </div>
         </Link>

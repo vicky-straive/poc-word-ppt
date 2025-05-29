@@ -36,19 +36,17 @@ const ProcessingPage = () => {
         currentStep++;
       } else {
         clearInterval(stepInterval); // All steps shown as completed
+        // Navigation after all steps are completed
+        setTimeout(() => {
+          router.push("/projects/pdf-to-ppt/extracted");
+        }, 500); // Short delay for user to see last step as completed
       }
     }, 1000); // Update step every 1 second
-
-    // Navigation after 5 seconds
-    const navigationTimer = setTimeout(() => {
-      router.push("/projects/pdf-to-ppt/extracted");
-    }, 5000);
 
     // Cleanup function
     return () => {
       clearInterval(progressInterval);
       clearInterval(stepInterval);
-      clearTimeout(navigationTimer);
     };
   }, [router]);
 
@@ -67,14 +65,32 @@ const ProcessingPage = () => {
                 index <= completedStepIndex ? "text-green-600" : "text-gray-500"
               }`}
             >
-              <span
-                className={`mr-2 ${
-                  index <= completedStepIndex
-                    ? "text-green-600"
-                    : "text-transparent"
-                }`}
-              >
-                ✓
+              <span className="mr-2">
+                {index < completedStepIndex ? (
+                  <span className="text-green-600">✓</span>
+                ) : index === completedStepIndex ? (
+                  <svg
+                    className="animate-spin h-4 w-4 text-blue-500"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
+                  </svg>
+                ) : (
+                  <span className="text-transparent">✓</span>
+                )}
               </span>
               {step}
               {index > completedStepIndex &&

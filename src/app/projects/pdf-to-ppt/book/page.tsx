@@ -6,7 +6,8 @@ import chaptersData from "../chapters/chaptersData.json";
 const BookSelectionPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Select a book</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Medical Education Excellence </h1>
+      <p className="text-center py-4">Comprehensive medical textbooks for healthcare professional and students</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {chaptersData.map((book, idx) => (
           <Link
@@ -24,9 +25,9 @@ const BookSelectionPage = () => {
                   alt={book.title}
                   width={400}
                   height={400}
-                  className="w-full h-64 object-cover object-top rounded-md mb-4"
+                  className="w-full h-80 object-cover object-top rounded-md mb-4 flex mx-auto"
                 />
-                <h3 className="text-md font-semibold text-gray-800 mb-1">
+                <h3 className="text-md font-bold text-gray-800 mb-1">
                   {book.title}
                 </h3>
                 <p className="text-xs text-gray-600 px-2">{book.description}</p>
