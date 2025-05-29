@@ -36,19 +36,17 @@ const ProcessingPage = () => {
         currentStep++;
       } else {
         clearInterval(stepInterval); // All steps shown as completed
+        // Navigation after all steps are completed
+        setTimeout(() => {
+          router.push("/projects/pdf-to-ppt/extracted");
+        }, 500); // Short delay for user to see last step as completed
       }
     }, 1000); // Update step every 1 second
-
-    // Navigation after 5 seconds
-    const navigationTimer = setTimeout(() => {
-      router.push("/projects/pdf-to-ppt/extracted");
-    }, 5000);
 
     // Cleanup function
     return () => {
       clearInterval(progressInterval);
       clearInterval(stepInterval);
-      clearTimeout(navigationTimer);
     };
   }, [router]);
 
