@@ -37,4 +37,14 @@ const ChaptersPage = () => {
   );
 };
 
-export default ChaptersPage;
+import { Suspense } from 'react';
+
+function ChaptersPageWithSuspense() {
+  return (
+    <Suspense fallback={<p>Loading chapters...</p>}>
+      <ChaptersPage />
+    </Suspense>
+  );
+}
+
+export default ChaptersPageWithSuspense;
