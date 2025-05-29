@@ -36,7 +36,7 @@ const TemplatesPage = () => {
           </div>
         </Link>
         {/* Template Option 3 */}
-        <Link href="/projects/pdf-to-ppt/prompts">
+        <Link href="/projects/pdf-to-ppt/chapters">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
             <Image
               src="/assets/B2.jpg"
@@ -51,7 +51,7 @@ const TemplatesPage = () => {
           </div>
         </Link>
         {/* Template Option 4 */}
-        <Link href="/projects/pdf-to-ppt/prompts">
+        <Link href="/projects/pdf-to-ppt/chapters">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
             <Image
               src="/assets/B3.jpg"

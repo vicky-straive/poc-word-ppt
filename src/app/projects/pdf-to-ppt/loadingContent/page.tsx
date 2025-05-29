@@ -4,38 +4,86 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Progress } from "@/components/ui/progress";
 
+const loadingSteps = [
+  "Extracting Content",
+  "Constructing as per Instructions",
+  "Alt Text Generation",
+  "Generating Markdown Content",
+];
+
 const ProcessingPage = () => {
   const [progress, setProgress] = useState(0);
+  const [completedStepIndex, setCompletedStepIndex] = useState(-1); // -1 means no steps completed yet
   const router = useRouter();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress < 100) {
-          return prevProgress + 2; // Simulate progress
+    // Progress bar update (smoothly to 100% in 5 seconds)
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev < 100) {
+          return prev + 2; // 2% every 100ms = 100% in 5s
         }
-        clearInterval(interval);
-        return prevProgress;
+        clearInterval(progressInterval);
+        return 100;
       });
-    }, 100); // Update progress every 100ms
+    }, 100);
 
-    const timer = setTimeout(() => {
-      router.push("/projects/pdf-to-ppt/preview");
-    }, 5000); // Navigate after 5 seconds
+    // Update completed steps (one step per second for 4 seconds)
+    let currentStep = 0;
+    const stepInterval = setInterval(() => {
+      if (currentStep < loadingSteps.length) {
+        setCompletedStepIndex(currentStep);
+        currentStep++;
+      } else {
+        clearInterval(stepInterval); // All steps shown as completed
+      }
+    }, 1000); // Update step every 1 second
 
+    // Navigation after 5 seconds
+    const navigationTimer = setTimeout(() => {
+      router.push("/projects/pdf-to-ppt/extracted");
+    }, 5000);
+
+    // Cleanup function
     return () => {
-      clearInterval(interval);
-      clearTimeout(timer);
+      clearInterval(progressInterval);
+      clearInterval(stepInterval);
+      clearTimeout(navigationTimer);
     };
   }, [router]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-2xl font-bold mb-4">Processing Document</h1>
-      <p className="text-gray-600 mb-4">Analyzing content</p>
-      <div className="w-full max-w-md">
-        <Progress value={progress} className="w-full" />
-        <p className="text-sm text-gray-500 mt-2">{progress}% complete</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
+      <h1 className="text-2xl font-semibold mb-8 text-gray-700">
+        Processing Your Request
+      </h1>
+      <div className="w-full max-w-md bg-white p-6 shadow-lg rounded-lg">
+        <Progress value={progress} className="w-full mb-6" />
+        <ul className="space-y-3">
+          {loadingSteps.map((step, index) => (
+            <li
+              key={index}
+              className={`flex items-center text-sm ${
+                index <= completedStepIndex ? "text-green-600" : "text-gray-500"
+              }`}
+            >
+              <span
+                className={`mr-2 ${
+                  index <= completedStepIndex
+                    ? "text-green-600"
+                    : "text-transparent"
+                }`}
+              >
+                ✓
+              </span>
+              {step}
+              {index > completedStepIndex &&
+                index === completedStepIndex + 1 && (
+                  <span className="ml-1 animate-pulse">...</span>
+                )}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
