@@ -25,7 +25,13 @@ const ChaptersPage = () => {
               height={54}
               className="w-20 h-24 object-cover object-top rounded"
             />
-            <Link href="/projects/pdf-to-ppt/templates" className="flex-1">
+            <Link 
+              href={{
+                pathname: "/projects/pdf-to-ppt/templates",
+                query: { book: book.title, chapter: chapter.title },
+              }} 
+              className="flex-1"
+            >
               <span className="block text-base font-medium text-gray-800">
                 Chapter {chapter.number}: {chapter.title}
               </span>
