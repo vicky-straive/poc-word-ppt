@@ -46,6 +46,19 @@ const TemplatesPage = () => {
     );
   }
 
+  // Before return, extract chapter number and clean chapter name for display
+  let chapterDisplay = null;
+  if (chapter) {
+    const match = chapter.match(/Chapter\s*(\d+):?\s*(.*)/i);
+    const chapterNumber = match ? match[1] : null;
+    const chapterName = match ? match[2] : chapter;
+    chapterDisplay = (
+      <p className="text-gray-600 text-start ">
+        Chapter{chapterNumber ? ` ${chapterNumber}` : ""}{chapterName ? `: ${chapterName}` : ""}
+      </p>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col items-center justify-between mb-8">
@@ -61,18 +74,7 @@ const TemplatesPage = () => {
           {book && (
             <h2 className="text-gray-600 mb-4 text-start">Book: {book}</h2>
           )}
-          {chapter && (
-            (() => {
-              // Try to extract chapter number from the chapter string
-              const match = chapter.match(/Chapter\s*(\d+)/i);
-              const chapterNumber = match ? match[1] : null;
-              return (
-                <p className="text-gray-600 text-start ">
-                  Chapter{chapterNumber ? ` ${chapterNumber}` : ""}: {chapter}
-                </p>
-              );
-            })()
-          )}
+          {chapterDisplay}
         </div>
       )}
 

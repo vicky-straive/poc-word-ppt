@@ -13,11 +13,12 @@ function PreviewPageInner() {
   const chapter = searchParams.get("chapter") || "";
   const template = searchParams.get("template") || "";
 
-  // Lookup slides from templateData.json
-  let images: string[] = [];
+  // Extract just the chapter title (remove 'Chapter X: ' if present)
+  const chapterTitle = chapter.replace(/^Chapter\s*\d+:\s*/, "");
   const bookObj = templateData.find((b) => b.book === book);
-  const chapterObj = bookObj?.chapters.find((c) => c.chapter === chapter);
+  const chapterObj = bookObj?.chapters.find((c) => c.chapter === chapterTitle);
   const templateObj = chapterObj?.templates.find((t) => t.template === template);
+  let images: string[] = [];
   if (templateObj?.slides) {
     images = templateObj.slides;
   }
