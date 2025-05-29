@@ -25,10 +25,10 @@ const tiles = [
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4">
-      <h1 className="text-4xl font-bold mb-8">
+      <h1 className="text-4xl font-bold mb-8 text-center">
         Operationalizing AI for Human-Centric Tasks
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full m-8">
         {tiles.map((tile, index) => (
           <Card
             key={index}
