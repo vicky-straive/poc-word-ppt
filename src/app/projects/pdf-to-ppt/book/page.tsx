@@ -6,10 +6,10 @@ const TemplatesPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Select a book</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         {/* Template Option 1 */}
         {/* <Link href="/projects/pdf-to-ppt/prompts">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
+          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
           <Image
                 src="/assets/T1.jpg"
                 alt="slide1"
@@ -22,7 +22,7 @@ const TemplatesPage = () => {
         </Link> */}
         {/* Template Option 2 */}
         <Link href="/projects/pdf-to-ppt/chapters">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
+          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
             <Image
               src="/assets/B1.jpg"
               alt="slide1"
@@ -37,7 +37,7 @@ const TemplatesPage = () => {
         </Link>
         {/* Template Option 3 */}
         <Link href="/projects/pdf-to-ppt/chapters">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
+          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
             <Image
               src="/assets/B2.jpg"
               alt="slide1"
@@ -52,7 +52,7 @@ const TemplatesPage = () => {
         </Link>
         {/* Template Option 4 */}
         <Link href="/projects/pdf-to-ppt/chapters">
-          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
+          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
             <Image
               src="/assets/B3.jpg"
               alt="slide1"
@@ -62,6 +62,20 @@ const TemplatesPage = () => {
             />
             <p className="text-sm mt-5 font-medium">
               Understanding Medical-Surgical Nursing
+            </p>
+          </div>
+        </Link>
+        <Link href="/projects/pdf-to-ppt/chapters">
+          <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 h-full flex flex-col">
+            <Image
+              src="/assets/B4.jpg"
+              alt="slide1"
+              width={400}
+              height={128}
+              className="w-full h-auto object-cover object-top rounded"
+            />
+            <p className="text-sm mt-5 font-medium">
+              Pharmacology for Nursing Practice
             </p>
           </div>
         </Link>
