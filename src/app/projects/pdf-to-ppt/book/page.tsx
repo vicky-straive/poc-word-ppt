@@ -1,58 +1,29 @@
-// import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button};
 import Link from "next/link";
 import Image from "next/image";
-
-const booksData = [
-  {
-    id: 1,
-    href: "/projects/pdf-to-ppt/chapters",
-    imgSrc: "/assets/B1.jpg",
-    imgAlt: "Medical Terminology in a Flash",
-    title: "Medical Terminology in a Flash",
-    description: "A quick guide to essential medical terms and their meanings.",
-  },
-  {
-    id: 2,
-    href: "/projects/pdf-to-ppt/chapters",
-    imgSrc: "/assets/B2.jpg",
-    imgAlt: "Medical - Surgical Nursing Fundamentals and Applications",
-    title: "Medical - Surgical Nursing Fundamentals and Applications",
-    description: "Comprehensive coverage of nursing principles and practices.",
-  },
-  {
-    id: 3,
-    href: "/projects/pdf-to-ppt/chapters",
-    imgSrc: "/assets/B3.jpg",
-    imgAlt: "Understanding Medical-Surgical Nursing",
-    title: "Understanding Medical-Surgical Nursing",
-    description:
-      "Focuses on patient care in various medical-surgical settings.",
-  },
-  {
-    id: 4,
-    href: "/projects/pdf-to-ppt/chapters",
-    imgSrc: "/assets/B4.jpg",
-    imgAlt: "Pharmacology for Nursing Practice",
-    title: "Pharmacology for Nursing Practice",
-    description:
-      "Key pharmacological concepts and drug administration for nurses.",
-  },
-];
+import chaptersData from "../chapters/chaptersData.json";
 
 const BookSelectionPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Select a book</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {booksData.map((book) => (
-          <Link href={book.href} key={book.id} passHref>
+        {chaptersData.map((book, idx) => (
+          <Link
+            href={{
+              pathname: "/projects/pdf-to-ppt/chapters",
+              query: { book: book.title },
+            }}
+            key={idx}
+            passHref
+          >
             <div className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between">
               <div>
                 <Image
-                  src={book.imgSrc}
-                  alt={book.imgAlt}
+                  src={book.image.replace(/^public\//, "/")}
+                  alt={book.title}
                   width={400}
-                  height={400} // Adjusted height for better aspect ratio if images vary
+                  height={400}
                   className="w-full h-64 object-cover object-top rounded-md mb-4"
                 />
                 <h3 className="text-md font-semibold text-gray-800 mb-1">
