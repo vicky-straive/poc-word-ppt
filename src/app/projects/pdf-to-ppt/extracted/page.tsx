@@ -19,15 +19,19 @@ const ExtractedMarkdownPage = () => {
   const markdownPath = templateObj?.markdown || "No markdown found.";
 
   const [markdown, setMarkdown] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (markdownPath.startsWith("/assets/")) {
+      setLoading(true);
       fetch(markdownPath)
         .then((res) => res.text())
         .then((text) => setMarkdown(text))
-        .catch(() => setMarkdown("Failed to load markdown."));
+        .catch(() => setMarkdown("Failed to load markdown."))
+        .finally(() => setLoading(false));
     } else {
       setMarkdown(markdownPath);
+      setLoading(false);
     }
   }, [markdownPath]);
 
@@ -40,8 +44,12 @@ const ExtractedMarkdownPage = () => {
         slides effectively.
       </p>
 
-      <div className="bg-gray-100 p-6 rounded-md mb-6">
-        <pre className="whitespace-pre-wrap">{markdown}</pre>
+      <div className="bg-gray-100 p-6 rounded-md mb-6 min-h-[120px] flex items-center justify-center">
+        {loading ? (
+          <span className="text-gray-500 animate-pulse">Loading markdown...</span>
+        ) : (
+          <pre className="whitespace-pre-wrap w-full">{markdown}</pre>
+        )}
       </div>
 
       <div className="flex justify-end space-x-4">
