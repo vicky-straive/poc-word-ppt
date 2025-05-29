@@ -21,45 +21,48 @@ const TemplatesPage = () => {
           </div>
         </Link> */}
         {/* Template Option 2 */}
-        <Link href="/projects/pdf-to-ppt/prompts">
+        <Link href="/projects/pdf-to-ppt/chapters">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
-           <Image
-                src="/assets/B1.jpg"
-                alt="slide1"
-                width={400}
-                height={128}
-                className="w-full h-auto object-cover object-top rounded"
-              />
-            <p className="text-sm mt-5 font-medium">Medical Terminology in a Flash
-</p>
+            <Image
+              src="/assets/B1.jpg"
+              alt="slide1"
+              width={400}
+              height={128}
+              className="w-full h-auto object-cover object-top rounded"
+            />
+            <p className="text-sm mt-5 font-medium">
+              Medical Terminology in a Flash
+            </p>
           </div>
         </Link>
         {/* Template Option 3 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
-           <Image
-                src="/assets/B2.jpg"
-                alt="slide1"
-                width={400}
-                height={128}
-                className="w-full h-auto object-cover object-top rounded"
-              />
-            <p className="text-sm mt-5 font-medium">Medical - Surgical Nursing Fundamentals and Applications
-</p>
+            <Image
+              src="/assets/B2.jpg"
+              alt="slide1"
+              width={400}
+              height={128}
+              className="w-full h-auto object-cover object-top rounded"
+            />
+            <p className="text-sm mt-5 font-medium">
+              Medical - Surgical Nursing Fundamentals and Applications
+            </p>
           </div>
         </Link>
         {/* Template Option 4 */}
         <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
-           <Image
-                src="/assets/B3.jpg"
-                alt="slide1"
-                width={400}
-                height={128}
-                className="w-full h-auto object-cover object-top rounded"
-              />
-            <p className="text-sm mt-5 font-medium">Understanding Medical-Surgical Nursing
-</p>
+            <Image
+              src="/assets/B3.jpg"
+              alt="slide1"
+              width={400}
+              height={128}
+              className="w-full h-auto object-cover object-top rounded"
+            />
+            <p className="text-sm mt-5 font-medium">
+              Understanding Medical-Surgical Nursing
+            </p>
           </div>
         </Link>
       </div>
