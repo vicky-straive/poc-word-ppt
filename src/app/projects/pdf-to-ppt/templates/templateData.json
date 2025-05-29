@@ -54,26 +54,26 @@
               "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
           {
             "template": "Nursing Concepts Template",
-           "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -83,18 +83,36 @@
         "templates": [
           {
             "template": "Nursing Lecture Template",
-            "markdown": "Generated markdown for Medical Terminology in a Flash - Medical Specialties and Procedures - Nursing Lecture Template.",
-            "slides": ["/assets/s1.png", "/assets/s2.png"]
+            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "slides": [
+              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+            ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-            "markdown": "Generated markdown for Medical Terminology in a Flash - Medical Specialties and Procedures - Nursing Case Studies Template.",
-            "slides": ["/assets/s1.png", "/assets/s2.png"]
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "slides": [
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
+            ]
           },
-          {
+           {
             "template": "Nursing Concepts Template",
-            "markdown": "Generated markdown for Medical Terminology in a Flash - Medical Specialties and Procedures - Nursing Concepts Template.",
-            "slides": ["/assets/s1.png", "/assets/s2.png"]
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
+            "slides": [
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
+            ]
           }
         ]
       }
@@ -106,7 +124,7 @@
       {
         "chapter": "Foundations of Medical-Surgical Nursing",
         "templates": [
-          {
+           {
             "template": "Nursing Lecture Template",
             "markdown": "/assets/medical_terminology/C1/medical_terminology",
             "slides": [
@@ -119,24 +137,24 @@
           },
           {
             "template": "Nursing Case Studies Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
           {
             "template": "Nursing Concepts Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -144,7 +162,7 @@
       {
         "chapter": "Patient Assessment and Management",
         "templates": [
-          {
+           {
             "template": "Nursing Lecture Template",
             "markdown": "/assets/medical_terminology/C1/medical_terminology",
             "slides": [
@@ -155,26 +173,26 @@
               "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Concepts Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -195,24 +213,24 @@
           },
           {
             "template": "Nursing Case Studies Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Concepts Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -238,24 +256,24 @@
           },
           {
             "template": "Nursing Case Studies Template",
-           "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
           {
             "template": "Nursing Concepts Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -274,26 +292,26 @@
               "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-           "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
           {
             "template": "Nursing Concepts Template",
-           "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -312,26 +330,26 @@
               "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Concepts Template",
-            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -355,9 +373,9 @@
               "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-                        "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
               "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
               "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
@@ -368,13 +386,13 @@
           },
           {
             "template": "Nursing Concepts Template",
-                        "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -382,20 +400,20 @@
       {
         "chapter": "Drug Administration",
         "templates": [
-          {
+        {
             "template": "Nursing Lecture Template",
-                        "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C1/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-                        "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
               "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
               "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
@@ -406,13 +424,13 @@
           },
           {
             "template": "Nursing Concepts Template",
-                        "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
@@ -420,20 +438,20 @@
       {
         "chapter": "Medication Safety",
         "templates": [
-          {
+         {
             "template": "Nursing Lecture Template",
-                       "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C1/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Case Studies Template",
-                        "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C2/medical_terminology",
             "slides": [
               "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
               "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
@@ -442,15 +460,15 @@
               "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
             ]
           },
-          {
+           {
             "template": "Nursing Concepts Template",
-                       "markdown": "/assets/medical_terminology/C2/medical_terminology",
+            "markdown": "/assets/medical_terminology/C3/medical_terminology",
             "slides": [
-              "/assets/medical_terminology/C2/MedicalTerm_c1_1.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_2.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_3.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_4.png",
-              "/assets/medical_terminology/C2/MedicalTerm_c1_5.png"
+              "/assets/medical_terminology/C3/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C3/MedicalTerm_c1_5.png"
             ]
           }
         ]
