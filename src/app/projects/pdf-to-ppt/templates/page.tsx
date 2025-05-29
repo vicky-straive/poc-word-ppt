@@ -38,32 +38,43 @@ const TemplatesPage = () => {
   function handleTemplateSelect(templateName: string) {
     // Go to prompts page with book, chapter, and template in query params
     router.push(
-      `/projects/pdf-to-ppt/prompts?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(templateName)}`
+      `/projects/pdf-to-ppt/prompts?book=${encodeURIComponent(
+        book
+      )}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(
+        templateName
+      )}`
     );
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl font-bold mb-4">Create a new presentation</h1>
-          <p className="text-gray-600 mb-8">
-            Start with a template or create your own
-          </p>
+      <div className="flex flex-col items-center justify-between mb-8">
+        <div className="">
+          <h1 className="text-2xl font-bold mb-4">
+            Want to create a stunning presentation? Look no further! Choose a template that best suits your requirements.
+          </h1>
+          <p className="text-2xl font-bold mb-8"></p>
         </div>
-        {(book || chapter) && (
-          <div className="mb-6">
-            {book && (
-              <h2 className="text-2xl font-bold mb-4 text-end">
-                Book: {book}
-              </h2>
-            )}
-            {chapter && (
-              <p className="text-gray-600 text-end">Chapter: {chapter}</p>
-            )}
-          </div>
-        )}
       </div>
+      {(book || chapter) && (
+        <div className="mb-6 mt-8">
+          {book && (
+            <h2 className="text-gray-600 mb-4 text-start">Book: {book}</h2>
+          )}
+          {chapter && (
+            (() => {
+              // Try to extract chapter number from the chapter string
+              const match = chapter.match(/Chapter\s*(\d+)/i);
+              const chapterNumber = match ? match[1] : null;
+              return (
+                <p className="text-gray-600 text-start ">
+                  Chapter{chapterNumber ? ` ${chapterNumber}` : ""}: {chapter}
+                </p>
+              );
+            })()
+          )}
+        </div>
+      )}
 
       <h2 className="text-xl font-bold mb-4">Select a template</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
