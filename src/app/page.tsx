@@ -17,7 +17,7 @@ export default function Home() {
           <Card key={index} className="transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
             {tile.href ? (
               <Link href={tile.href} passHref>
-                <div className="flex flex-col h-full">
+                <div className="flex flex-col h-auto">
                   <CardHeader>
                     <CardTitle>{tile.title}</CardTitle>
                   </CardHeader>
@@ -27,7 +27,7 @@ export default function Home() {
                 </div>
               </Link>
             ) : (
-              <div className="flex flex-col h-full">
+              <div className="flex flex-col h-auto">
                 <CardHeader>
                   <CardTitle>{tile.title}</CardTitle>
                 </CardHeader>

@@ -123,17 +123,17 @@ function CreatePresentationForm() {
         </div>
         {/* Date */}
         <div>
-          <label
-            htmlFor="date"
+           <label
+            htmlFor="keywords"
             className="block text-sm font-medium text-gray-700"
           >
-            Date
+            Pick a date
           </label>
-          <input
-            type="date"
+          <Input
             id="date"
-            name="date"
-            className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="MM-DD-YYYY"
+            value={keywords}
+            onChange={(e) => setKeywords(e.target.value)}
           />
         </div>
         {/* Keywords */}
