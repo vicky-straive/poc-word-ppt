@@ -23,7 +23,7 @@ const ChaptersPage = () => {
               alt={chapter.title}
               width={80}
               height={54}
-              className="w-20 h-14 object-cover object-top rounded"
+              className="w-20 h-24 object-cover object-top rounded"
             />
             <Link href="/projects/pdf-to-ppt/templates" className="flex-1">
               <span className="block text-base font-medium text-gray-800">
