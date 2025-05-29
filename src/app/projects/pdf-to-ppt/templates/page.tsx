@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 // import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -114,4 +115,12 @@ const TemplatesPage = () => {
   );
 };
 
-export default TemplatesPage;
+function TemplatesPageWithSuspense() {
+  return (
+    <Suspense fallback={<p>Loading templates...</p>}>
+      <TemplatesPage />
+    </Suspense>
+  );
+}
+
+export default TemplatesPageWithSuspense;
