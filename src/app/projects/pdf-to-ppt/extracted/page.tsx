@@ -2,21 +2,34 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import templateData from "../templates/templateData.json";
 
 const ExtractedMarkdownPage = () => {
-  const extractedMarkdown = `Interactive Quiz
-  
-Test your knowledge with this interactive quiz based on the material from your uploaded documents. Each question is designed to reinforce key concepts and help you retain information effectively.
+  const searchParams = useSearchParams();
+  const book = searchParams.get("book") || "";
+  const chapter = searchParams.get("chapter") || "";
+  const template = searchParams.get("template") || "";
 
-Question 1: What is the primary function of insulin in the human body?
+  // Find the correct markdown path from templateData.json
+  const bookObj = templateData.find((b) => b.book === book);
+  const chapterObj = bookObj?.chapters.find((c) => c.chapter === chapter);
+  const templateObj = chapterObj?.templates.find((t) => t.template === template);
+  const markdownPath = templateObj?.markdown || "No markdown found.";
 
-Question 2: Which of the following is a common symptom of dehydration?
+  const [markdown, setMarkdown] = useState<string>("");
 
-Question 3: What is the recommended daily intake of water for an adult?
-
-Question 4: Which nutrient is essential for bone health?
-
-Question 5: What is the normal range for human body temperature?`;
+  useEffect(() => {
+    if (markdownPath.startsWith("/assets/")) {
+      fetch(markdownPath)
+        .then((res) => res.text())
+        .then((text) => setMarkdown(text))
+        .catch(() => setMarkdown("Failed to load markdown."));
+    } else {
+      setMarkdown(markdownPath);
+    }
+  }, [markdownPath]);
 
   return (
     <div className="container mx-auto px-8 py-8">
@@ -28,19 +41,25 @@ Question 5: What is the normal range for human body temperature?`;
       </p>
 
       <div className="bg-gray-100 p-6 rounded-md mb-6">
-        <pre className="whitespace-pre-wrap">{extractedMarkdown}</pre>
+        <pre className="whitespace-pre-wrap">{markdown}</pre>
       </div>
 
       <div className="flex justify-end space-x-4">
         <Button variant="outline" asChild>
-          <Link href="/projects/pdf-to-ppt/prompts">Back</Link>
+          <Link href={`/projects/pdf-to-ppt/prompts?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(template)}`}>Back</Link>
         </Button>
         <Button asChild>
-          <Link href="/projects/pdf-to-ppt/processing">Generate Slides</Link>
+          <Link href={`/projects/pdf-to-ppt/processing?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(template)}`}>Generate Slides</Link>
         </Button>
       </div>
     </div>
   );
 };
 
-export default ExtractedMarkdownPage;
+export default function ExtractedMarkdownPageWithSuspense() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ExtractedMarkdownPage />
+    </Suspense>
+  );
+}

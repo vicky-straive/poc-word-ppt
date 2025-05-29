@@ -15,17 +15,14 @@ const ProcessingPage = () => {
           return prevProgress + 2; // Simulate progress
         }
         clearInterval(interval);
+        // Redirect to preview page when done
+        router.push(`/projects/pdf-to-ppt/preview${window.location.search}`);
         return prevProgress;
       });
     }, 100); // Update progress every 100ms
 
-    const timer = setTimeout(() => {
-      router.push("/projects/pdf-to-ppt/preview");
-    }, 5000); // Navigate after 5 seconds
-
     return () => {
       clearInterval(interval);
-      clearTimeout(timer);
     };
   }, [router]);
 
