@@ -7,7 +7,7 @@ const ChaptersPage = () => {
       <h1 className="text-2xl font-bold mb-4">Select a Chapter</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Chapter Option 1 */}
-        <Link href="/projects/pdf-to-ppt/templates">
+        <Link href="/projects/pdf-to-ppt/prompts">
           <div className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500">
             <Image
               src="/assets/temp1.png"

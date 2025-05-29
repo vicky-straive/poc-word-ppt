@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Progress } from '@/components/ui/progress';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Progress } from "@/components/ui/progress";
 
 const ProcessingPage = () => {
   const [progress, setProgress] = useState(0);
@@ -20,7 +20,7 @@ const ProcessingPage = () => {
     }, 100); // Update progress every 100ms
 
     const timer = setTimeout(() => {
-      router.push('/projects/pdf-to-ppt/preview');
+      router.push("/projects/pdf-to-ppt/preview");
     }, 5000); // Navigate after 5 seconds
 
     return () => {
@@ -31,7 +31,7 @@ const ProcessingPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-2xl font-bold mb-4">Processing Document</h1>
+      <h1 className="text-2xl font-bold mb-4">Preparing Your Presentation</h1>
       <p className="text-gray-600 mb-4">Analyzing content</p>
       <div className="w-full max-w-md">
         <Progress value={progress} className="w-full" />

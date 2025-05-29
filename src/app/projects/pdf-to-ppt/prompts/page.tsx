@@ -31,8 +31,10 @@ const PromptsPage = () => {
   const [selectedTextExtractionPrompt, setSelectedTextExtractionPrompt] =
     useState<string | null>(null);
 
-  const [selectedMarkdownFormattingOption, setSelectedMarkdownFormattingOption] =
-    useState<string | null>(null);
+  const [
+    selectedMarkdownFormattingOption,
+    setSelectedMarkdownFormattingOption,
+  ] = useState<string | null>(null);
 
   const altTextOptions = [
     {
@@ -59,14 +61,13 @@ const PromptsPage = () => {
 
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold mb-4">Add Custom Instruction</h2>
-        <Link href="/projects/pdf-to-ppt/extracted" passHref>
+          <h2 className="text-xl font-semibold mb-4">Add Custom Instruction</h2>
+          <Link href="/projects/pdf-to-ppt/loadingContent" passHref>
             <Button className="self-end">Generate Markdown</Button>
           </Link>
         </div>
         <div className="flex flex-col gap-4">
           <Textarea placeholder="Enter your custom instruction here" rows={6} />
-         
         </div>
       </div>
 
