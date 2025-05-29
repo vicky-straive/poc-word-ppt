@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -207,4 +207,10 @@ const PromptsPage = () => {
   );
 };
 
-export default PromptsPage;
+export default function PromptsPageWithSuspense() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PromptsPage />
+    </Suspense>
+  );
+}
