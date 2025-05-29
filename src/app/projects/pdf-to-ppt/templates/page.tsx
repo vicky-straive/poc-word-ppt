@@ -2,6 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
+
+
 const TemplatesPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -10,7 +12,7 @@ const TemplatesPage = () => {
         Start with a template or create your own
       </p>
 
-      <h2 className="text-xl font-semibold mb-4">Start with a template</h2>
+      <h2 className="text-xl font-semibold mb-4">Select a template</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Template Option 1 */}
         {/* <Link href="/projects/pdf-to-ppt/prompts">
