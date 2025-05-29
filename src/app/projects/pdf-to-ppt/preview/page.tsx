@@ -3,11 +3,11 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import templateData from "../templates/templateData.json";
 
-export default function PreviewPage() {
+function PreviewPageInner() {
   const searchParams = useSearchParams();
   const book = searchParams.get("book") || "";
   const chapter = searchParams.get("chapter") || "";
@@ -90,5 +90,13 @@ export default function PreviewPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PreviewPage() {
+  return (
+    <Suspense fallback={<div>Loading preview...</div>}>
+      <PreviewPageInner />
+    </Suspense>
   );
 }

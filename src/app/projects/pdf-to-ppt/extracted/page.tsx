@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import templateData from "../templates/templateData.json";
 
@@ -56,4 +56,10 @@ const ExtractedMarkdownPage = () => {
   );
 };
 
-export default ExtractedMarkdownPage;
+export default function ExtractedMarkdownPageWithSuspense() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ExtractedMarkdownPage />
+    </Suspense>
+  );
+}
