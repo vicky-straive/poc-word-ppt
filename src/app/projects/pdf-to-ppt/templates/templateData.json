@@ -1,0 +1,268 @@
+[
+  {
+    "book": "Medical Terminology in a Flash",
+    "chapters": [
+      {
+        "chapter": "Introduction to Medical Terminology",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "slides": [
+              "/assets/medical_terminology/C1/MedicalTerm_c1_1.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_2.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_3.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_4.png",
+              "/assets/medical_terminology/C1/MedicalTerm_c1_5.png"
+            ]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "/assets/medical_terminology/C1/medical_terminology",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Body Structure and Organization",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Medical Terminology in a Flash - Body Structure and Organization - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Medical Terminology in a Flash - Body Structure and Organization - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Medical Terminology in a Flash - Body Structure and Organization - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Medical Specialties and Procedures",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Medical Terminology in a Flash - Medical Specialties and Procedures - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Medical Terminology in a Flash - Medical Specialties and Procedures - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Medical Terminology in a Flash - Medical Specialties and Procedures - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "book": "Medical-Surgical Nursing",
+    "chapters": [
+      {
+        "chapter": "Foundations of Medical-Surgical Nursing",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Foundations of Medical-Surgical Nursing - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Foundations of Medical-Surgical Nursing - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Foundations of Medical-Surgical Nursing - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Patient Assessment and Management",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Patient Assessment and Management - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Patient Assessment and Management - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Patient Assessment and Management - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Perioperative Care",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Perioperative Care - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Perioperative Care - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Medical-Surgical Nursing - Perioperative Care - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "book": "Understanding Medical-Surgical Nursing",
+    "chapters": [
+      {
+        "chapter": "Basic Concepts in Nursing",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Basic Concepts in Nursing - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Basic Concepts in Nursing - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Basic Concepts in Nursing - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Clinical Decision Making",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Clinical Decision Making - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Clinical Decision Making - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Clinical Decision Making - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Evidence-Based Practice",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Evidence-Based Practice - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Evidence-Based Practice - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Understanding Medical-Surgical Nursing - Evidence-Based Practice - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "book": "Pharmacology for Nursing Practice",
+    "chapters": [
+      {
+        "chapter": "Principles of Pharmacology",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Principles of Pharmacology - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Principles of Pharmacology - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Principles of Pharmacology - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Drug Administration",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Drug Administration - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Drug Administration - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Drug Administration - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      },
+      {
+        "chapter": "Medication Safety",
+        "templates": [
+          {
+            "template": "Nursing Lecture Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Medication Safety - Nursing Lecture Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Case Studies Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Medication Safety - Nursing Case Studies Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          },
+          {
+            "template": "Nursing Concepts Template",
+            "markdown": "Generated markdown for Pharmacology for Nursing Practice - Medication Safety - Nursing Concepts Template.",
+            "slides": ["/assets/s1.png", "/assets/s2.png"]
+          }
+        ]
+      }
+    ]
+  }
+]

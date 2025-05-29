@@ -4,14 +4,37 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-const images = [
-  "/assets/s1.png",
-  "/assets/s2.png",
-];
+import { useSearchParams } from "next/navigation";
+import templateData from "../templates/templateData.json";
 
 export default function PreviewPage() {
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const searchParams = useSearchParams();
+  const book = searchParams.get("book") || "";
+  const chapter = searchParams.get("chapter") || "";
+  const template = searchParams.get("template") || "";
+
+  // Lookup slides from templateData.json
+  let images: string[] = [];
+  const bookObj = templateData.find((b) => b.book === book);
+  const chapterObj = bookObj?.chapters.find((c) => c.chapter === chapter);
+  const templateObj = chapterObj?.templates.find((t) => t.template === template);
+  if (templateObj?.slides) {
+    images = templateObj.slides;
+  }
+
+  const [selectedImage, setSelectedImage] = useState(images[0] || "");
+
+  // If no images, show a message
+  if (!images.length) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-bold mb-4">No slides found for this selection.</h2>
+          <p className="text-gray-600">Please go back and select a different template, chapter, or book.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen">
@@ -57,7 +80,6 @@ export default function PreviewPage() {
               className="w-full object-cover object-top rounded"
             />
           </div>
-          
         )}
         <div className="text-center mt-8">
           <div className="flex w-full gap-4 justify-end align-end">

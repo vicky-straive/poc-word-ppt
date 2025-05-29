@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useSearchParams } from "next/navigation";
 
 const PromptsPage = () => {
   const predefinedPrompts = [
@@ -51,6 +52,11 @@ const PromptsPage = () => {
     },
   ];
 
+  const searchParams = useSearchParams();
+  const book = searchParams.get("book") || "";
+  const chapter = searchParams.get("chapter") || "";
+  const template = searchParams.get("template") || "";
+
   return (
     <div className="container mx-auto py-8 p-8">
       <h1 className="text-3xl font-bold mb-4">Custom Instructions</h1>
@@ -62,7 +68,14 @@ const PromptsPage = () => {
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold mb-4">Add Custom Instruction</h2>
-          <Link href="/projects/pdf-to-ppt/loadingContent" passHref>
+          <Link
+            href={`/projects/pdf-to-ppt/loadingContent?book=${encodeURIComponent(
+              book
+            )}&chapter=${encodeURIComponent(
+              chapter
+            )}&template=${encodeURIComponent(template)}`}
+            passHref
+          >
             <Button className="self-end">Generate Markdown</Button>
           </Link>
         </div>

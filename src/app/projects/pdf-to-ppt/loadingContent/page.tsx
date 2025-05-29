@@ -38,7 +38,8 @@ const ProcessingPage = () => {
         clearInterval(stepInterval); // All steps shown as completed
         // Navigation after all steps are completed
         setTimeout(() => {
-          router.push("/projects/pdf-to-ppt/extracted");
+          // Use current query params for navigation
+          router.push(`/projects/pdf-to-ppt/extracted${window.location.search}`);
         }, 500); // Short delay for user to see last step as completed
       }
     }, 1000); // Update step every 1 second
