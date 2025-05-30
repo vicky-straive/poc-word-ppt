@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import chaptersData from "./chaptersData.json";
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
 
 interface Chapter {
   number: number;
@@ -62,15 +63,18 @@ const ChaptersPage = () => {
               {unit.chapters.map((chapter, chapterIndex) => (
                 <li key={chapterIndex} className="py-2 ml-5">
                   <label
-                    className="flex items-center space-x-2"
+                    className="flex text-lg font-semibold items-center space-x-2"
                     htmlFor={`chapter-${chapter.number}`}
                   >
                     <Checkbox
                       id={`chapter-${chapter.number}`}
                       checked={selectedChapter === chapter.title}
                       onCheckedChange={() => handleChapterChange(chapter.title)}
+                      className="data-[state=checked]:bg-blue-600 border-green-700 focus:ring-blue-600"
                     />
-                    <span>{chapter.title}</span>
+                    <span className="font-semibold">
+                      Chapter {chapter.number}: {chapter.title}
+                    </span>
                   </label>
                 </li>
               ))}
@@ -82,11 +86,25 @@ const ChaptersPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4 m-2">Select Chapters</h1>
-      <div className="mb-4 m-2">
-        <h2 className="text-xl font-semibold mb-5">Book: {book.title}</h2>
+    <div className="container mx-auto px-4 py-8 flex justify-between items-start">
+      <div>
+        <h1 className="text-2xl font-bold mb-4 m-2">Select Chapters</h1>
+        <div className="mb-4 m-2"></div>
+        <h2 className="text-2xl font-semibold mt-8 mb-5 ml-2">Book: {book.title}</h2>
         <ChapterTree units={book.units} />
+      </div>
+      <div className="flex items-center p-auto mr-30">
+        <Image
+          src={
+            book.image.startsWith("/")
+              ? book.image
+              : `/` + book.image.replace(/^public\//, "")
+          }
+          alt={book.title}
+          width={2000}
+          height={800}
+          className="h-90 w-auto "
+        />
       </div>
     </div>
   );
