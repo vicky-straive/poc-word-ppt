@@ -5,7 +5,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import chaptersData from "./chaptersData.json";
 import { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Image from "next/image";
 
 interface Chapter {
@@ -54,32 +54,28 @@ const ChaptersPage = () => {
   const ChapterTree = ({ units }: { units: Unit[] }) => {
     return (
       <ul>
-        {units.map((unit, unitIndex) => (
-          <li key={unitIndex}>
+ {units.map((unit, unitIndex) => (
+ <li key={unitIndex}>
             <h3 className="text-lg font-semibold mt-2 ml-5 mb-5">
               {unit.title}
             </h3>
-            <ul className="list-none pl-5">
-              {unit.chapters.map((chapter, chapterIndex) => (
-                <li key={chapterIndex} className="py-2 ml-5">
-                  <label
-                    className="flex text-lg font-semibold items-center space-x-2"
-                    htmlFor={`chapter-${chapter.number}`}
-                  >
-                    <Checkbox
-                      id={`chapter-${chapter.number}`}
-                      checked={selectedChapter === chapter.title}
-                      onCheckedChange={() => handleChapterChange(chapter.title)}
-                      className="data-[state=checked]:bg-blue-600 border-green-700 focus:ring-blue-600"
-                    />
-                    <span className="font-semibold">
-                      Chapter {chapter.number}: {chapter.title}
-                    </span>
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </li>
+ <RadioGroup
+ value={selectedChapter || ""}
+ onValueChange={handleChapterChange}
+ >
+ {unit.chapters.map((chapter, chapterIndex) => (
+ <div key={chapterIndex} className="flex items-center space-x-2 py-2 ml-5">
+ <RadioGroupItem
+ value={chapter.title}
+ id={`chapter-${chapter.number}`}
+ />
+ <label htmlFor={`chapter-${chapter.number}`} className="text-lg font-semibold">
+ Chapter {chapter.number}: {chapter.title}
+ </label>
+ </div>
+ ))}
+ </RadioGroup>
+ </li>
         ))}
       </ul>
     );
