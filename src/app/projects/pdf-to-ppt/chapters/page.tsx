@@ -47,7 +47,7 @@ const ChaptersPage = () => {
                     {chapter.description}
                   </span>
                 </span>
-                {/* <span className="block text-base font-medium text-gray-800">
+                <span className="block text-base font-medium text-gray-800">
                   <span className="font-semibold">Keywords:</span>{" "}
                   <span className="font-normal text-gray-600">
                     {chapter.keywords.join(", ")}
@@ -58,7 +58,7 @@ const ChaptersPage = () => {
                   <span className="font-normal text-gray-600">
                     {chapter.concepts.join(", ")}
                   </span>
-                </span> */}
+                </span>
               </div>
             </Link>
           </li>
