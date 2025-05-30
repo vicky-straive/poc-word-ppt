@@ -46,34 +46,38 @@ const TemplatesPage = () => {
     );
   }
 
-  // Before return, extract chapter number and clean chapter name for display
+  // Before return, extract chapter number for display
   let chapterDisplay = null;
   if (chapter) {
+    // Remove "Chapter X:" prefix from the display if present
     const match = chapter.match(/Chapter\s*(\d+):?\s*(.*)/i);
     const chapterNumber = match ? match[1] : null;
-    const chapterName = match ? match[2] : chapter;
+    const chapterTitle = match ? match[2] : chapter;
     chapterDisplay = (
       <p className="text-gray-600 text-start ">
-        Chapter{chapterNumber ? ` ${chapterNumber}` : ""}{chapterName ? `: ${chapterName}` : ""}
+        {chapterNumber ? `Chapter ${chapterNumber}: ` : ""}
+        {chapterTitle}
       </p>
     );
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col items-center justify-between mb-8">
+      <div className="flex flex-col gap-4 items-center justify-between mb-8">
         <div className="">
           <h1 className="text-2xl font-bold mb-4">
-            Want to create a stunning presentation? Look no further! Choose a template that best suits your requirements.
+            Want to create a stunning presentation? Look no further! Choose a
+            template that best suits your requirements.
           </h1>
           <p className="text-2xl font-bold mb-8"></p>
         </div>
       </div>
       {(book || chapter) && (
-        <div className="mb-6 mt-8">
+        <div className="mb-6 mt-8 flex gap-4">
           {book && (
             <h2 className="text-gray-600 mb-4 text-start">Book: {book}</h2>
           )}
+          <span className="text-gray-400">|</span>
           {chapterDisplay}
         </div>
       )}
