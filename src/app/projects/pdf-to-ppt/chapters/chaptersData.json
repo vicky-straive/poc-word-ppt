@@ -6,7 +6,11 @@
         "author": "Dr. Emily Carter",
         "isbn": "978-1-56619-123-4",
         "description": "Master medical terminology quickly and effectively with this comprehensive guide.",
-        "chapters": [
+        "units": [
+            {
+                "unit": 1,
+                "title": "Fundamentals of Medical Terminology",
+                "chapters": [
             { 
                 "number": 1, 
                 "title": "Introduction to Medical Terminology", 
@@ -50,6 +54,8 @@
                 ]
             }
         ]
+            }
+        ]
     },
     {
         "title": "Medical-Surgical Nursing",
@@ -58,7 +64,11 @@
         "author": "Prof. Linda Nguyen",
         "isbn": "978-1-56619-456-7",
         "description": "Fundamentals and applications of medical-surgical nursing practice and procedures.",
-        "chapters": [
+        "units": [
+            {
+                "unit": 1,
+                "title": "Introduction to Medical-Surgical Nursing",
+                "chapters": [
             { 
                 "number": 1, 
                 "title": "Foundations of Medical-Surgical Nursing", 
@@ -102,6 +112,8 @@
                 ]
             }
         ]
+            }
+        ]
     },
     {
         "title": "Understanding Medical-Surgical Nursing",
@@ -110,7 +122,11 @@
         "author": "Dr. Michael Brown",
         "isbn": "978-1-56619-789-0",
         "description": "A comprehensive guide to understanding medical-surgical nursing concepts.",
-        "chapters": [
+        "units": [
+            {
+                "unit": 1,
+                "title": "Core Nursing Concepts",
+                "chapters": [
             { 
                 "number": 1, 
                 "title": "Basic Concepts in Nursing", 
@@ -154,6 +170,8 @@
                 ]
             }
         ]
+            }
+        ]
     },
     {
         "title": "Pharmacology for Nursing Practice",
@@ -162,7 +180,11 @@
         "author": "Dr. Sarah Lee",
         "isbn": "978-1-56619-234-5",
         "description": "Essential pharmacology concepts for nursing professionals and pharmacologists.",
-        "chapters": [
+        "units": [
+            {
+                "unit": 1,
+                "title": "Pharmacological Principles",
+                "chapters": [
             { 
                 "number": 1, 
                 "title": "Principles of Pharmacology", 
@@ -204,6 +226,8 @@
                     "Error prevention systems",
                     "Reporting and managing errors"
                 ]
+            }
+        ]
             }
         ]
     }

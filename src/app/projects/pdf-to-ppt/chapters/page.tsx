@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import chaptersData from "./chaptersData.json";
 
@@ -11,59 +12,41 @@ const ChaptersPage = () => {
   // Find the book data from chaptersData
   const book =
     chaptersData.find((b) => b.title === bookTitle) || chaptersData[0];
+  const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
+
+  const handleRadioChange = (chapterTitle: string) => {
+    setSelectedChapter(chapterTitle);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">
-        Select chapters of {book.title}
-      </h1>
-      <ul className="divide-y divide-gray-200 flex flex-col bg-white rounded-md shadow-md">
-        {book.chapters.map((chapter, idx) => (
-          <li
-            key={idx}
-            className="flex items-center gap-5 py-6 px-2 hover:bg-green-50 transition-colors"
-          >
-            <div className="flex items-center justify-center w-20 h-30 rounded" style={{ background: "#BBE7C2" }}>
-              <span className="text-2xl font-bold text-green-500">C{chapter.number}</span>
+      <h1 className="text-2xl font-bold mb-2">Select chapter</h1>
+      <p className="text-gray-600 mb-6">{book.title}</p>
+
+      {book.units.map((unit) => (
+        <div key={unit.unit} className="mb-6">
+          <h2 className="text-xl font-semibold mb-3">{`Unit ${unit.unit}: ${unit.title}`}</h2>
+          <ul className="space-y-3">
+            {unit.chapters.map((chapter) => (
+              <li key={chapter.title} className="flex items-center">
+                <input
+                  type="radio"
+                  id={`chapter-${chapter.title}`}
+                  className="mr-2 w-5 h-5 accent-green-500"
+                  checked={selectedChapter === chapter.title}
+                  onChange={() => handleRadioChange(chapter.title)}
+                />
+                <label
+                  htmlFor={`chapter-${chapter.title}`}
+                  className="text-lg text-gray-800 cursor-pointer"
+                >
+                  {chapter.title}
+                </label>
+              </li>
+            ))}
+          </ul>
             </div>
-            <Link
-              href={{
-                pathname: "/projects/pdf-to-ppt/templates",
-                query: {
-                  book: book.title,
-                  chapter: `Chapter ${chapter.number}: ${chapter.title}`,
-                },
-              }}
-              className="flex-1"
-            >
-              <div className="flex flex-col gap-1">
-                <span className="block text-base font-medium text-gray-800 mb-3">
-                  
-                  <span className="font-semibold text-xl">{chapter.title}</span>
-                </span>
-                <span className="block text-base font-medium text-gray-800">
-                  <span className="font-semibold">Description:</span>{" "}
-                  <span className="font-normal text-gray-600">
-                    {chapter.description}
-                  </span>
-                </span>
-                <span className="block text-base font-medium text-gray-800">
-                  <span className="font-semibold">Keywords:</span>{" "}
-                  <span className="font-normal text-gray-600">
-                    {chapter.keywords.join(", ")}
-                  </span>
-                </span>
-                <span className="block text-base font-medium text-gray-800">
-                  <span className="font-semibold">Concepts:</span>{" "}
-                  <span className="font-normal text-gray-600">
-                    {chapter.concepts.join(", ")}
-                  </span>
-                </span>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      ))}
     </div>
   );
 };
