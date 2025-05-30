@@ -84,7 +84,7 @@ const ChaptersPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex justify-between items-start">
       <div>
-        <h1 className="text-2xl font-bold mb-4 m-2">Select Chapters</h1>
+        <h1 className="text-2xl font-bold mb-4 m-2">Select Chapter</h1>
         <div className="mb-4 m-2"></div>
         <h2 className="text-2xl font-semibold mt-8 mb-5 ml-2">Book: {book.title}</h2>
         <ChapterTree units={book.units} />
