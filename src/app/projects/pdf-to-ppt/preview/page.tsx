@@ -8,7 +8,11 @@ import { useSearchParams } from "next/navigation";
 import templateData from "../templates/templateData.json";
 import { IconRefresh } from "@tabler/icons-react";
 import { Download } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 function PreviewPageInner() {
   const searchParams = useSearchParams();
@@ -85,9 +89,9 @@ function PreviewPageInner() {
 
       {/* Main Content Area */}
 
-      <div className="w-full flex  justify-between  items-start bg-gray-200">
+      <div className="w-full flex justify-center items-start bg-gray-200">
         {selectedImage && (
-          <div className="w-full m-4 mt-8 justify-center max-w-screen-lg bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="w-full m-4 justify-center bg-white rounded-lg shadow-lg overflow-hidden max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
             <Image
               src={selectedImage}
               alt="Selected Slide Preview"
@@ -97,32 +101,30 @@ function PreviewPageInner() {
             />
           </div>
         )}
-        <div className="flex">
-          <div className="flex flex-col items-start flex-wrap justify-start mr-8 pr-8 mt-4">
-            <div className="mt-4">
-              <Tooltip>
+        <div className="flex flex-col items-center justify-center mr-6 ">
+          <div className="mt-4">
+            <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="outline">
-                <IconRefresh />
+                <Button variant="outline" className="cursor-pointer">
+                  <IconRefresh />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <span>Regenerate Slides</span>
+                <span>Regenerate Slide</span>
               </TooltipContent>
-              </Tooltip>
-            </div>
-            <div className="mt-4">
-              <Tooltip>
+            </Tooltip>
+          </div>
+          <div className="mt-4">
+            <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="outline">
-                <Download color="black" />
+                <Button variant="outline" className="cursor-pointer">
+                  <Download color="black" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
                 <span>Download Slide</span>
               </TooltipContent>
-              </Tooltip>
-            </div>
+            </Tooltip>
           </div>
         </div>
       </div>
