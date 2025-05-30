@@ -5,7 +5,6 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import chaptersData from "./chaptersData.json";
 import { useState } from "react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Image from "next/image";
 
 interface Chapter {
@@ -54,28 +53,36 @@ const ChaptersPage = () => {
   const ChapterTree = ({ units }: { units: Unit[] }) => {
     return (
       <ul>
- {units.map((unit, unitIndex) => (
- <li key={unitIndex}>
+        {units.map((unit, unitIndex) => (
+          <li key={unitIndex}>
             <h3 className="text-lg font-semibold mt-2 ml-5 mb-5">
               {unit.title}
             </h3>
- <RadioGroup
- value={selectedChapter || ""}
- onValueChange={handleChapterChange}
- >
- {unit.chapters.map((chapter, chapterIndex) => (
- <div key={chapterIndex} className="flex items-center space-x-2 py-2 ml-5">
- <RadioGroupItem
- value={chapter.title}
- id={`chapter-${chapter.number}`}
- />
- <label htmlFor={`chapter-${chapter.number}`} className="text-lg font-semibold">
- Chapter {chapter.number}: {chapter.title}
- </label>
- </div>
- ))}
- </RadioGroup>
- </li>
+            <div role="radiogroup">
+              {unit.chapters.map((chapter, chapterIndex) => (
+                <div
+                  key={chapterIndex}
+                  className="flex items-center space-x-2 py-2 ml-5"
+                >
+                  <input
+                    type="radio"
+                    id={`chapter-${chapter.number}`}
+                    name="chapter"
+                    value={chapter.title}
+                    checked={selectedChapter === chapter.title}
+                    onChange={() => handleChapterChange(chapter.title)}
+                    className="appearance-none border border-green-700 size-5 rounded-full align-middle transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-700 checked:bg-green-700 checked:border-green-700"
+                  />
+                  <label
+                    htmlFor={`chapter-${chapter.number}`}
+                    className="text-lg font-semibold cursor-pointer"
+                  >
+                    Chapter {chapter.number}: {chapter.title}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </li>
         ))}
       </ul>
     );
@@ -84,9 +91,11 @@ const ChaptersPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex justify-between items-start">
       <div>
-        <h1 className="text-2xl font-bold mb-4 m-2">Select Chapter</h1>
+        <h1 className="text-2xl font-bold mb-4 m-2">Select a Chapter</h1>
         <div className="mb-4 m-2"></div>
-        <h2 className="text-2xl font-semibold mt-8 mb-5 ml-2">Book: {book.title}</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-5 ml-2">
+          Book: {book.title}
+        </h2>
         <ChapterTree units={book.units} />
       </div>
       <div className="flex items-center p-auto mr-30">
