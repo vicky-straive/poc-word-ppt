@@ -1,76 +1,93 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+"use client";
+
+import { useSearchParams, useRouter } from "next/navigation";
 import chaptersData from "./chaptersData.json";
+import { useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+
+interface Chapter {
+  number: number;
+  title: string;
+  image: string;
+  keywords: string[];
+  description: string;
+  concepts: string[];
+}
+
+interface Unit {
+  title: string;
+  chapters: Chapter[];
+}
+
+interface Book {
+  title: string;
+  image: string;
+  icon: string;
+  author: string;
+  isbn: string;
+  description: string;
+  units: Unit[];
+}
 
 const ChaptersPage = () => {
   const searchParams = useSearchParams();
-  // Get the book title from the query string (e.g., ?book=Medical Terminology in a Flash)
+  const router = useRouter();
   const bookTitle = searchParams.get("book");
-  // Find the book data from chaptersData
-  const book =
-    chaptersData.find((b) => b.title === bookTitle) || chaptersData[0];
+  const book: Book =
+    (chaptersData.find((b) => b.title === bookTitle) as Book) ||
+    (chaptersData[0] as Book);
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">
-        Select chapters of {book.title}
-      </h1>
-      <ul className="divide-y divide-gray-200 flex flex-col bg-white rounded-md shadow-md">
-        {book.chapters.map((chapter, idx) => (
-          <li
-            key={idx}
-            className="flex items-center gap-5 py-6 px-2 hover:bg-blue-50 transition-colors"
-          >
-            <Image
-              src={chapter.image}
-              alt={chapter.title}
-              width={80}
-              height={54}
-              className="w-30 h-34 object-cover object-top rounded"
-            />
-            <Link
-              href={{
-                pathname: "/projects/pdf-to-ppt/templates",
-                query: {
-                  book: book.title,
-                  chapter: `Chapter ${chapter.number}: ${chapter.title}`,
-                },
-              }}
-              className="flex-1"
-            >
-              <div className="flex flex-col gap-1">
-                <span className="block text-base font-medium text-gray-800 mb-3">
-                  <span className="font-semibold text-xl">
-                    Chapter {chapter.number}:
-                  </span>{" "}
-                  <span className="font-semibold text-xl">{chapter.title}</span>
-                </span>
-                <span className="block text-base font-medium text-gray-800">
-                  <span className="font-semibold">Description:</span>{" "}
-                  <span className="font-normal text-gray-600">
-                    {chapter.description}
-                  </span>
-                </span>
-                <span className="block text-base font-medium text-gray-800">
-                  <span className="font-semibold">Keywords:</span>{" "}
-                  <span className="font-normal text-gray-600">
-                    {chapter.keywords.join(", ")}
-                  </span>
-                </span>
-                <span className="block text-base font-medium text-gray-800">
-                  <span className="font-semibold">Concepts:</span>{" "}
-                  <span className="font-normal text-gray-600">
-                    {chapter.concepts.join(", ")}
-                  </span>
-                </span>
-              </div>
-            </Link>
+  const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
+
+  const handleChapterChange = (chapterTitle: string) => {
+    setSelectedChapter(chapterTitle === selectedChapter ? null : chapterTitle);
+    if (chapterTitle !== selectedChapter) {
+      router.push(
+        `/projects/pdf-to-ppt/templates?book=${book.title}&chapter=${chapterTitle}`
+      );
+    }
+  };
+
+  const ChapterTree = ({ units }: { units: Unit[] }) => {
+    return (
+      <ul>
+        {units.map((unit, unitIndex) => (
+          <li key={unitIndex}>
+            <h3 className="text-lg font-semibold mt-2 ml-5 mb-5">
+              {unit.title}
+            </h3>
+            <ul className="list-none pl-5">
+              {unit.chapters.map((chapter, chapterIndex) => (
+                <li key={chapterIndex} className="py-2 ml-5">
+                  <label
+                    className="flex items-center space-x-2"
+                    htmlFor={`chapter-${chapter.number}`}
+                  >
+                    <Checkbox
+                      id={`chapter-${chapter.number}`}
+                      checked={selectedChapter === chapter.title}
+                      onCheckedChange={() => handleChapterChange(chapter.title)}
+                    />
+                    <span>{chapter.title}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
+    );
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-4 m-2">Select Chapters</h1>
+      <div className="mb-4 m-2">
+        <h2 className="text-xl font-semibold mb-5">Book: {book.title}</h2>
+        <ChapterTree units={book.units} />
+      </div>
     </div>
   );
 };

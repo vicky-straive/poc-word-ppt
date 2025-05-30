@@ -51,7 +51,7 @@ function PreviewPageInner() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       {/* Left Sidebar for Slide Previews */}
       <div className="w-1/4 bg-gray-100 p-4 overflow-y-auto">
         <div className="flex items-center justify-between mb-auto">
@@ -61,7 +61,7 @@ function PreviewPageInner() {
           </Button>
         </div>
         {/* Placeholder for slide previews */}
-        <div className="space-y-2">
+        <div className="space-y-5">
           {images.map((src, index) => (
             <div
               key={index}
@@ -88,21 +88,23 @@ function PreviewPageInner() {
       </div>
 
       {/* Main Content Area */}
-
-      <div className="w-full flex justify-center items-start bg-gray-200">
+      <div className="flex-1 flex justify-center items-start bg-gray-200 overflow-auto">
         {selectedImage && (
-          <div className="w-full m-4 justify-center bg-white rounded-lg shadow-lg overflow-hidden max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
-            <Image
-              src={selectedImage}
-              alt="Selected Slide Preview"
-              width={800}
-              height={128}
-              className="w-full object-cover object-top rounded"
-            />
+          <div className="w-full m-4 flex justify-center">
+            <div className="bg-white rounded-lg shadow-lg mt-8 overflow-hidden ">
+              <Image
+                src={selectedImage}
+                alt="Selected Slide Preview"
+                width={800}
+                height={128}
+                className="w-full h-auto object-contain object-top rounded max-h-[80vh]"
+                style={{ maxWidth: "auto", height: "auto" }}
+              />
+            </div>
           </div>
         )}
         <div className="flex flex-col items-center justify-center mr-6 ">
-          <div className="mt-4">
+          <div className="mt-11">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="outline" className="cursor-pointer">
@@ -114,7 +116,7 @@ function PreviewPageInner() {
               </TooltipContent>
             </Tooltip>
           </div>
-          <div className="mt-4">
+          <div className="mt-5">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="outline" className="cursor-pointer">
