@@ -3,22 +3,51 @@
         "title": "Medical Terminology in a Flash",
         "image": "public/MedicalTerminology.jpg",
         "icon": "BookOpen",
+        "author": "Dr. Emily Carter",
+        "isbn": "978-1-56619-123-4",
         "description": "Master medical terminology quickly and effectively with this comprehensive guide.",
         "chapters": [
             { 
                 "number": 1, 
                 "title": "Introduction to Medical Terminology", 
-                "image": "/assets/Chapter1_MedicalTerminology.jpg"
+                "image": "/assets/Chapter1_MedicalTerminology.jpg",
+                "keywords": ["word roots", "prefixes", "suffixes", "medical language basics", "pronunciation"],
+                "description": "Learn the foundational elements of medical language, including word roots, prefixes, and suffixes, and how to pronounce medical terms.",
+                "concepts": [
+                    "Word root identification",
+                    "Prefix and suffix usage",
+                    "Medical term construction",
+                    "Pronunciation rules",
+                    "Common medical abbreviations"
+                ]
             },
             { 
                 "number": 2, 
                 "title": "Body Structure and Organization", 
-                "image": "/assets/Chapter2_MedicalTerminology.jpg"
+                "image": "/assets/Chapter2_MedicalTerminology.jpg",
+                "keywords": ["anatomy", "body systems", "cell structure", "tissues", "organs"],
+                "description": "Explore the organization of the human body, from cells and tissues to organs and body systems.",
+                "concepts": [
+                    "Levels of body organization",
+                    "Cellular structure and function",
+                    "Tissue types",
+                    "Major organs",
+                    "Body systems overview"
+                ]
             },
             { 
                 "number": 3, 
                 "title": "Medical Specialties and Procedures", 
-                "image": "/assets/Chapter3_MedicalTerminology.jpg"
+                "image": "/assets/Chapter3_MedicalTerminology.jpg",
+                "keywords": ["medical fields", "specialists", "diagnostic procedures", "treatments"],
+                "description": "Understand various medical specialties, the roles of specialists, and common diagnostic and treatment procedures.",
+                "concepts": [
+                    "Medical specialty definitions",
+                    "Roles of healthcare specialists",
+                    "Common diagnostic procedures",
+                    "Treatment modalities",
+                    "Interdisciplinary collaboration"
+                ]
             }
         ]
     },
@@ -26,22 +55,51 @@
         "title": "Medical-Surgical Nursing",
         "image": "public/MedSurgical1.jpg",
         "icon": "Heart",
+        "author": "Prof. Linda Nguyen",
+        "isbn": "978-1-56619-456-7",
         "description": "Fundamentals and applications of medical-surgical nursing practice and procedures.",
         "chapters": [
             { 
                 "number": 1, 
                 "title": "Foundations of Medical-Surgical Nursing", 
-                "image": "/assets/Chapter1_MedSurgical.jpg"
+                "image": "/assets/Chapter1_MedSurgical.jpg",
+                "keywords": ["nursing roles", "patient care", "healthcare settings", "nursing process"],
+                "description": "Gain an overview of the core principles, roles, and responsibilities in medical-surgical nursing.",
+                "concepts": [
+                    "Nursing roles and responsibilities",
+                    "Patient-centered care",
+                    "Healthcare team dynamics",
+                    "Nursing process steps",
+                    "Ethical and legal considerations"
+                ]
             },
             { 
                 "number": 2, 
                 "title": "Patient Assessment and Management", 
-                "image": "/assets/Chapter2_MedSurgical.jpg"
+                "image": "/assets/Chapter2_MedSurgical.jpg",
+                "keywords": ["vital signs", "physical assessment", "history taking", "care planning"],
+                "description": "Learn how to assess patients, gather health histories, and develop effective care plans.",
+                "concepts": [
+                    "Vital sign measurement",
+                    "Physical examination techniques",
+                    "Patient history collection",
+                    "Assessment documentation",
+                    "Care plan development"
+                ]
             },
             { 
                 "number": 3, 
                 "title": "Perioperative Care", 
-                "image": "/assets/Chapter3_MedSurgical.jpg"
+                "image": "/assets/Chapter3_MedSurgical.jpg",
+                "keywords": ["preoperative", "intraoperative", "postoperative", "surgical procedures", "patient safety"],
+                "description": "Understand the nursing care required before, during, and after surgical procedures to ensure patient safety.",
+                "concepts": [
+                    "Preoperative assessment",
+                    "Intraoperative nursing roles",
+                    "Postoperative monitoring",
+                    "Surgical asepsis",
+                    "Patient safety protocols"
+                ]
             }
         ]
     },
@@ -49,22 +107,51 @@
         "title": "Understanding Medical-Surgical Nursing",
         "image": "public/Nursing1.jpg",
         "icon": "Stethoscope",
+        "author": "Dr. Michael Brown",
+        "isbn": "978-1-56619-789-0",
         "description": "A comprehensive guide to understanding medical-surgical nursing concepts.",
         "chapters": [
             { 
                 "number": 1, 
                 "title": "Basic Concepts in Nursing", 
-                "image": "/assets/Chapter1_Nursing1.jpg" 
+                "image": "/assets/Chapter1_Nursing1.jpg",
+                "keywords": ["nursing theories", "patient-centered care", "ethics", "communication"],
+                "description": "Discover the essential theories, ethical principles, and communication skills in nursing practice.",
+                "concepts": [
+                    "Major nursing theories",
+                    "Principles of patient-centered care",
+                    "Ethical frameworks in nursing",
+                    "Effective communication techniques",
+                    "Professionalism in nursing"
+                ]
             },
             { 
                 "number": 2, 
                 "title": "Clinical Decision Making", 
-                "image": "/assets/Chapter2_Nursing1.jpg" 
+                "image": "/assets/Chapter2_Nursing1.jpg",
+                "keywords": ["critical thinking", "problem solving", "clinical judgment", "evidence-based decisions"],
+                "description": "Develop skills in critical thinking and clinical judgment for effective decision making in patient care.",
+                "concepts": [
+                    "Critical thinking processes",
+                    "Problem-solving strategies",
+                    "Clinical judgment models",
+                    "Evidence-based decision making",
+                    "Reflective practice"
+                ]
             },
             { 
                 "number": 3, 
                 "title": "Evidence-Based Practice", 
-                "image": "/assets/Chapter3_Nursing1.jpg" 
+                "image": "/assets/Chapter3_Nursing1.jpg",
+                "keywords": ["research", "best practices", "clinical guidelines", "quality improvement"],
+                "description": "Learn how to apply research and clinical guidelines to improve patient outcomes through evidence-based practice.",
+                "concepts": [
+                    "Research appraisal",
+                    "Implementing best practices",
+                    "Using clinical guidelines",
+                    "Quality improvement methods",
+                    "Outcome measurement"
+                ]
             }
         ]
     },
@@ -72,22 +159,51 @@
         "title": "Pharmacology for Nursing Practice",
         "image": "public/PharmaNursing.jpg",
         "icon": "Pill",
+        "author": "Dr. Sarah Lee",
+        "isbn": "978-1-56619-234-5",
         "description": "Essential pharmacology concepts for nursing professionals and pharmacologists.",
         "chapters": [
             { 
                 "number": 1, 
                 "title": "Principles of Pharmacology", 
-                "image": "/assets/Chapter1_PharmaNursing.jpg" 
+                "image": "/assets/Chapter1_PharmaNursing.jpg",
+                "keywords": ["drug classifications", "pharmacokinetics", "pharmacodynamics", "drug interactions"],
+                "description": "Understand the basic principles of pharmacology, including how drugs work and interact in the body.",
+                "concepts": [
+                    "Drug classification systems",
+                    "Pharmacokinetics (ADME)",
+                    "Pharmacodynamics principles",
+                    "Drug-receptor interactions",
+                    "Factors affecting drug action"
+                ]
             },
             { 
                 "number": 2, 
                 "title": "Drug Administration", 
-                "image": "/assets/Chapter2_PharmaNursing.jpg" 
+                "image": "/assets/Chapter2_PharmaNursing.jpg",
+                "keywords": ["routes of administration", "dosage calculation", "medication errors", "safe practices"],
+                "description": "Learn the correct methods for administering medications and ensuring patient safety.",
+                "concepts": [
+                    "Routes of drug administration",
+                    "Dosage calculation methods",
+                    "Medication administration techniques",
+                    "Prevention of medication errors",
+                    "Documentation and legal aspects"
+                ]
             },
             { 
                 "number": 3, 
                 "title": "Medication Safety", 
-                "image": "/assets/Chapter3_PharmaNursing.jpg" 
+                "image": "/assets/Chapter3_PharmaNursing.jpg",
+                "keywords": ["adverse effects", "monitoring", "patient education", "error prevention"],
+                "description": "Explore strategies for monitoring medications, educating patients, and preventing medication errors.",
+                "concepts": [
+                    "Identifying adverse drug reactions",
+                    "Monitoring patient response",
+                    "Patient education strategies",
+                    "Error prevention systems",
+                    "Reporting and managing errors"
+                ]
             }
         ]
     }

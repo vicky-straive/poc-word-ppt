@@ -6,6 +6,9 @@ import Link from "next/link";
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import templateData from "../templates/templateData.json";
+import { IconRefresh } from "@tabler/icons-react";
+import { Download } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 function PreviewPageInner() {
   const searchParams = useSearchParams();
@@ -17,7 +20,9 @@ function PreviewPageInner() {
   const chapterTitle = chapter.replace(/^Chapter\s*\d+:\s*/, "");
   const bookObj = templateData.find((b) => b.book === book);
   const chapterObj = bookObj?.chapters.find((c) => c.chapter === chapterTitle);
-  const templateObj = chapterObj?.templates.find((t) => t.template === template);
+  const templateObj = chapterObj?.templates.find(
+    (t) => t.template === template
+  );
   let images: string[] = [];
   if (templateObj?.slides) {
     images = templateObj.slides;
@@ -30,8 +35,12 @@ function PreviewPageInner() {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
-          <h2 className="text-xl font-bold mb-4">No slides found for this selection.</h2>
-          <p className="text-gray-600">Please go back and select a different template, chapter, or book.</p>
+          <h2 className="text-xl font-bold mb-4">
+            No slides found for this selection.
+          </h2>
+          <p className="text-gray-600">
+            Please go back and select a different template, chapter, or book.
+          </p>
         </div>
       </div>
     );
@@ -41,7 +50,12 @@ function PreviewPageInner() {
     <div className="flex h-screen">
       {/* Left Sidebar for Slide Previews */}
       <div className="w-1/4 bg-gray-100 p-4 overflow-y-auto">
-        <h3 className="text-lg font-semibold mb-4">Slide Preview</h3>
+        <div className="flex items-center justify-between mb-auto">
+          <h3 className="text-sm font-semibold mb-4">Slide Preview</h3>
+          <Button className="mb-4" variant="outline">
+            <Link href="">Download All Slides</Link>
+          </Button>
+        </div>
         {/* Placeholder for slide previews */}
         <div className="space-y-2">
           {images.map((src, index) => (
@@ -70,9 +84,10 @@ function PreviewPageInner() {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col justify-center items-center p-8 bg-gray-200">
+
+      <div className="w-full flex  justify-between  items-start bg-gray-200">
         {selectedImage && (
-          <div className="w-full max-w-screen-lg bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="w-full m-4 mt-8 justify-center max-w-screen-lg bg-white rounded-lg shadow-lg overflow-hidden">
             <Image
               src={selectedImage}
               alt="Selected Slide Preview"
@@ -82,11 +97,32 @@ function PreviewPageInner() {
             />
           </div>
         )}
-        <div className="text-center mt-8">
-          <div className="flex w-full gap-4 justify-end align-end">
-            <Button asChild className="mt-4">
-              <Link href="">Download Slides</Link>
-            </Button>
+        <div className="flex">
+          <div className="flex flex-col items-start flex-wrap justify-start mr-8 pr-8 mt-4">
+            <div className="mt-4">
+              <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">
+                <IconRefresh />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <span>Regenerate Slides</span>
+              </TooltipContent>
+              </Tooltip>
+            </div>
+            <div className="mt-4">
+              <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">
+                <Download color="black" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <span>Download Slide</span>
+              </TooltipContent>
+              </Tooltip>
+            </div>
           </div>
         </div>
       </div>

@@ -2,12 +2,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import chaptersData from "../chapters/chaptersData.json";
+import { Separator } from "@/components/ui/separator";
 
 const BookSelectionPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4 text-center">Medical Education Excellence </h1>
-      <p className="text-center py-4">Comprehensive medical textbooks for healthcare professional and students</p>
+      <h1 className="text-2xl font-bold mb-4 text-center">
+        Medical Education Excellence{" "}
+      </h1>
+      <p className="text-center py-4">
+        Comprehensive medical textbooks for healthcare professional and students
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {chaptersData.map((book, idx) => (
           <Link
@@ -30,7 +35,19 @@ const BookSelectionPage = () => {
                 <h3 className="text-md font-bold text-gray-800 mb-1">
                   {book.title}
                 </h3>
-                <p className="text-xs text-gray-600 px-2">{book.description}</p>
+                <p className="text-xs text-gray-600 px-2 py-2">{book.description}</p>
+                 <Separator
+                  orientation="horizontal"
+                  className="mr-2 data-[orientation=vertical]:h-4"
+                />
+                <div className="mt-3 flex items-center justify-between">
+                  <p className="text-xs font-bold text-[#3c695a] px-2">
+                    {book.author}
+                  </p>
+                  <p className="text-xs font-bold px-2 text-[#3c695a]">
+                    {book.isbn}
+                  </p>
+                </div>
               </div>
             </div>
           </Link>
