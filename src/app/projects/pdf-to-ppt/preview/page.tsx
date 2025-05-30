@@ -51,82 +51,84 @@ function PreviewPageInner() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       {/* Left Sidebar for Slide Previews */}
       <div className="w-1/4 bg-gray-100 p-4 overflow-y-auto">
-        <div className="flex items-center justify-between mb-auto">
-          <h3 className="text-sm font-semibold mb-4">Slide Preview</h3>
-          <Button className="mb-4" variant="outline">
-            <Link href="">Download All Slides</Link>
-          </Button>
+      <div className="flex items-center justify-between mb-auto">
+        <h3 className="text-sm font-semibold mb-4">Slide Preview</h3>
+        <Button className="mb-4" variant="outline">
+        <Link href="">Download All Slides</Link>
+        </Button>
+      </div>
+      {/* Placeholder for slide previews */}
+      <div className="space-y-2">
+        {images.map((src, index) => (
+        <div
+          key={index}
+          className={`relative w-full rounded cursor-pointer ${
+          selectedImage === src ? "ring-2 ring-blue-500" : ""
+          }`}
+          onClick={() => setSelectedImage(src)}
+        >
+          <Image
+          src={src}
+          alt={`Slide ${index + 1}`}
+          width={400}
+          height={128}
+          className="w-full h-auto object-cover object-top rounded"
+          />
+          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-10 transition-opacity rounded"></div>
         </div>
-        {/* Placeholder for slide previews */}
-        <div className="space-y-2">
-          {images.map((src, index) => (
-            <div
-              key={index}
-              className={`relative w-full rounded cursor-pointer ${
-                selectedImage === src ? "ring-2 ring-blue-500" : ""
-              }`}
-              onClick={() => setSelectedImage(src)}
-            >
-              <Image
-                src={src}
-                alt={`Slide ${index + 1}`}
-                width={400}
-                height={128}
-                className="w-full h-auto object-cover object-top rounded"
-              />
-              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-10 transition-opacity rounded"></div>
-            </div>
-          ))}
-          {/* Add more image containers as needed */}
-          <div className="w-full h-32 rounded flex items-center justify-center">
-            {/* Placeholder for potential additional content or spacing */}
-          </div>
+        ))}
+        {/* Add more image containers as needed */}
+        <div className="w-full h-32 rounded flex items-center justify-center">
+        {/* Placeholder for potential additional content or spacing */}
         </div>
+      </div>
       </div>
 
       {/* Main Content Area */}
-
-      <div className="w-full flex justify-center items-start bg-gray-200">
-        {selectedImage && (
-          <div className="w-full m-4 justify-center bg-white rounded-lg shadow-lg overflow-hidden max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
-            <Image
-              src={selectedImage}
-              alt="Selected Slide Preview"
-              width={800}
-              height={128}
-              className="w-full object-cover object-top rounded"
-            />
-          </div>
-        )}
-        <div className="flex flex-col items-center justify-center mr-6 ">
-          <div className="mt-4">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline" className="cursor-pointer">
-                  <IconRefresh />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <span>Regenerate Slide</span>
-              </TooltipContent>
-            </Tooltip>
-          </div>
-          <div className="mt-4">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline" className="cursor-pointer">
-                  <Download color="black" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <span>Download Slide</span>
-              </TooltipContent>
-            </Tooltip>
-          </div>
+      <div className="flex-1 flex justify-center items-start bg-gray-200 overflow-auto">
+      {selectedImage && (
+        <div className="w-full m-4 flex justify-center">
+        <div className="bg-white rounded-lg shadow-lg mt-8 overflow-hidden max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
+          <Image
+          src={selectedImage}
+          alt="Selected Slide Preview"
+          width={800}
+          height={128}
+          className="w-full h-auto object-contain object-top rounded max-h-[80vh]"
+          style={{ maxWidth: "100%", height: "auto" }}
+          />
         </div>
+        </div>
+      )}
+      <div className="flex flex-col items-center justify-center mr-6 ">
+        <div className="mt-11">
+        <Tooltip>
+          <TooltipTrigger asChild>
+          <Button variant="outline" className="cursor-pointer">
+            <IconRefresh />
+          </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+          <span>Regenerate Slide</span>
+          </TooltipContent>
+        </Tooltip>
+        </div>
+        <div className="mt-5">
+        <Tooltip>
+          <TooltipTrigger asChild>
+          <Button variant="outline" className="cursor-pointer">
+            <Download color="black" />
+          </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+          <span>Download Slide</span>
+          </TooltipContent>
+        </Tooltip>
+        </div>
+      </div>
       </div>
     </div>
   );
