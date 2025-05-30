@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import chaptersData from "./chaptersData.json";
 
@@ -22,15 +21,11 @@ const ChaptersPage = () => {
         {book.chapters.map((chapter, idx) => (
           <li
             key={idx}
-            className="flex items-center gap-5 py-6 px-2 hover:bg-blue-50 transition-colors"
+            className="flex items-center gap-5 py-6 px-2 hover:bg-green-50 transition-colors"
           >
-            <Image
-              src={chapter.image}
-              alt={chapter.title}
-              width={80}
-              height={54}
-              className="w-30 h-34 object-cover object-top rounded"
-            />
+            <div className="flex items-center justify-center w-20 h-30 rounded" style={{ background: "#BBE7C2" }}>
+              <span className="text-2xl font-bold text-green-500">C{chapter.number}</span>
+            </div>
             <Link
               href={{
                 pathname: "/projects/pdf-to-ppt/templates",
@@ -43,9 +38,7 @@ const ChaptersPage = () => {
             >
               <div className="flex flex-col gap-1">
                 <span className="block text-base font-medium text-gray-800 mb-3">
-                  <span className="font-semibold text-xl">
-                    Chapter {chapter.number}:
-                  </span>{" "}
+                  
                   <span className="font-semibold text-xl">{chapter.title}</span>
                 </span>
                 <span className="block text-base font-medium text-gray-800">
@@ -54,7 +47,7 @@ const ChaptersPage = () => {
                     {chapter.description}
                   </span>
                 </span>
-                <span className="block text-base font-medium text-gray-800">
+                {/* <span className="block text-base font-medium text-gray-800">
                   <span className="font-semibold">Keywords:</span>{" "}
                   <span className="font-normal text-gray-600">
                     {chapter.keywords.join(", ")}
@@ -65,7 +58,7 @@ const ChaptersPage = () => {
                   <span className="font-normal text-gray-600">
                     {chapter.concepts.join(", ")}
                   </span>
-                </span>
+                </span> */}
               </div>
             </Link>
           </li>

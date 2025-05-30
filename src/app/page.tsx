@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 import Link from "next/link";
 
 const tiles = [
@@ -24,7 +25,14 @@ const tiles = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4">
+    <div className="flex flex-col items-center justify-center min-h- py-12 px-4">
+      <Image
+        src="/assets/FA_Davis_Logo.png"
+        alt="Logo"
+        width={250}
+        height={150}
+        className="mb-6"
+      />
       <h1 className="text-4xl font-bold mb-8 text-center">
         Operationalizing AI for Human-Centric Tasks
       </h1>
@@ -40,7 +48,7 @@ export default function Home() {
                   <CardHeader>
                     <CardTitle>{tile.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="flex-grow">
+                  <CardContent className="flex-grow ">
                     <p>{tile.description}</p>
                   </CardContent>
                 </div>
