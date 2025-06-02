@@ -53,6 +53,11 @@ const BookSelectionPage = () => {
     setTourSkipped(true);
   };
 
+  const handleNextTour = () => {
+    setShowTour(false);
+    // Do NOT setTourSkipped here, so the tour continues on next page
+  };
+
   const SpotlightOverlay = () => {
     if (!showTour) return null;
     return createPortal(
@@ -118,7 +123,7 @@ const BookSelectionPage = () => {
           <div className="flex gap-2 mt-2">
             <button
               className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
-              onClick={() => setShowTour(false)}
+              onClick={handleNextTour}
             >
               Next
             </button>
@@ -150,7 +155,7 @@ const BookSelectionPage = () => {
             <div
               ref={idx === 0 ? focusRef : undefined}
               className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between"
-              style={idx === 0 && showTour ? { position: "relative", zIndex: 50, boxShadow: "0 0 0 4px #22c55e" } : {}}
+              style={idx === 0 && showTour ? { position: "relative", zIndex: 50 } : {}}
             >
               <div>
                 <Image
