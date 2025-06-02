@@ -43,7 +43,6 @@ const ChaptersPage = () => {
 
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const { tourSkipped, setTourSkipped, hydrate } = useTourStore();
-  const firstRadioRef = useRef<HTMLInputElement | null>(null);
   const radioGroupRef = useRef<HTMLDivElement | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [spotlightStyle, setSpotlightStyle] = useState({
