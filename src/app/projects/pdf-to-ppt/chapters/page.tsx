@@ -44,6 +44,7 @@ const ChaptersPage = () => {
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const { tourSkipped, setTourSkipped, hydrate } = useTourStore();
   const firstRadioRef = useRef<HTMLInputElement | null>(null);
+  const radioGroupRef = useRef<HTMLDivElement | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [spotlightStyle, setSpotlightStyle] = useState({
     left: 0,
@@ -63,8 +64,8 @@ const ChaptersPage = () => {
   }, [tourSkipped]);
 
   useEffect(() => {
-    if (showTour && firstRadioRef.current) {
-      const rect = firstRadioRef.current.getBoundingClientRect();
+    if (showTour && radioGroupRef.current) {
+      const rect = radioGroupRef.current.getBoundingClientRect();
       setSpotlightStyle({
         left: rect.left - 12,
         top: rect.top - 8,
@@ -112,7 +113,10 @@ const ChaptersPage = () => {
             <h3 className="text-lg font-semibold mt-2 ml-5 mb-5">
               {unit.title}
             </h3>
-            <div role="radiogroup">
+            <div
+              role="radiogroup"
+              ref={unitIndex === 0 ? radioGroupRef : undefined}
+            >
               {unit.chapters.map((chapter, chapterIndex) => (
                 <div
                   key={chapterIndex}
@@ -126,7 +130,6 @@ const ChaptersPage = () => {
                     checked={selectedChapter === chapter.title}
                     onChange={() => handleChapterChange(chapter.title)}
                     className="appearance-none border border-green-700 size-5 rounded-full align-middle transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-700 checked:bg-green-700 checked:border-green-700"
-                    ref={unitIndex === 0 && chapterIndex === 0 ? firstRadioRef : undefined}
                   />
                   <label
                     htmlFor={`chapter-${chapter.number}`}
@@ -206,8 +209,8 @@ const ChaptersPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex justify-between items-start">
       <SpotlightOverlay />
-      {/* Tour Tooltip for the first radio button */}
-      {showTour && firstRadioRef.current && (
+      {/* Tour Tooltip for the radio group */}
+      {showTour && radioGroupRef.current && (
         <div
           style={{
             position: "fixed",
