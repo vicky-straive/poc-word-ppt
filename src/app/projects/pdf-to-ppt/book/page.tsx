@@ -1,12 +1,136 @@
+"use client";
+
 // import { Button } from "@/components/ui/button};
 import Link from "next/link";
 import Image from "next/image";
 import chaptersData from "../chapters/chaptersData.json";
 import { Separator } from "@/components/ui/separator";
+import { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { useTourStore } from "../tourStore";
 
 const BookSelectionPage = () => {
+  const focusRef = useRef<HTMLDivElement | null>(null);
+  const [showTour, setShowTour] = useState(false);
+  const [spotlightStyle, setSpotlightStyle] = useState({ left: 0, top: 0, width: 0, height: 0 });
+  const { tourSkipped, setTourSkipped, hydrate } = useTourStore();
+
+  useEffect(() => {
+    hydrate();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (!tourSkipped) setShowTour(true);
+    else setShowTour(false);
+  }, [tourSkipped]);
+
+  useEffect(() => {
+    if (showTour && focusRef.current) {
+      const rect = focusRef.current.getBoundingClientRect();
+      setSpotlightStyle({
+        left: rect.left - 12,
+        top: rect.top - 8,
+        width: rect.width + 24,
+        height: rect.height + 16,
+      });
+    }
+  }, [showTour]);
+
+  useEffect(() => {
+    if (showTour) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showTour]);
+
+  const handleSkipTour = () => {
+    setShowTour(false);
+    setTourSkipped(true);
+  };
+
+  const SpotlightOverlay = () => {
+    if (!showTour) return null;
+    return createPortal(
+      <div style={{ position: "fixed", inset: 0, zIndex: 40, pointerEvents: "auto" }}>
+        <svg width="100vw" height="100vh" style={{ position: "absolute", inset: 0, width: "100vw", height: "100vh" }}>
+          <defs>
+            <mask id="spotlight-mask">
+              <rect x="0" y="0" width="100vw" height="100vh" fill="white" />
+              <rect
+                x={spotlightStyle.left}
+                y={spotlightStyle.top}
+                width={spotlightStyle.width}
+                height={spotlightStyle.height}
+                rx="12"
+                fill="black"
+              />
+            </mask>
+          </defs>
+          <rect
+            x="0"
+            y="0"
+            width="100vw"
+            height="100vh"
+            fill="rgba(0,0,0,0.7)"
+            mask="url(#spotlight-mask)"
+          />
+        </svg>
+        <div style={{ position: "fixed", inset: 0, zIndex: 41, pointerEvents: "auto" }} onClick={() => setShowTour(false)} />
+      </div>,
+      document.body
+    );
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
+      <SpotlightOverlay />
+      {/* Tour Tooltip for the first book */}
+      {showTour && focusRef.current && (
+        <div
+          style={{
+            position: "fixed",
+            left: spotlightStyle.left + spotlightStyle.width + 24,
+            top: spotlightStyle.top,
+            zIndex: 100,
+            background: "white",
+            borderRadius: 8,
+            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
+            padding: 16,
+            minWidth: 260,
+            maxWidth: 320,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <div className="mb-2 font-semibold text-center">
+            Click here to select{" "}
+            <span className="text-green-700 font-bold">
+              Medical Terminology in a Flash
+            </span>{" "}
+            and view its chapters!
+          </div>
+          <div className="flex gap-2 mt-2">
+            <button
+              className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
+              onClick={() => setShowTour(false)}
+            >
+              Next
+            </button>
+            <button
+              className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
+              onClick={handleSkipTour}
+            >
+              Skip
+            </button>
+          </div>
+        </div>
+      )}
       <h1 className="text-2xl font-bold mb-4 text-center">
         Medical Education Excellence{" "}
       </h1>
@@ -23,7 +147,11 @@ const BookSelectionPage = () => {
             key={idx}
             passHref
           >
-            <div className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between">
+            <div
+              ref={idx === 0 ? focusRef : undefined}
+              className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between"
+              style={idx === 0 && showTour ? { position: "relative", zIndex: 50, boxShadow: "0 0 0 4px #22c55e" } : {}}
+            >
               <div>
                 <Image
                   src={book.image.replace(/^public\//, "/")}
@@ -36,7 +164,7 @@ const BookSelectionPage = () => {
                   {book.title}
                 </h3>
                 <p className="text-xs text-gray-600 px-2 py-2">{book.description}</p>
-                 <Separator
+                <Separator
                   orientation="horizontal"
                   className="mr-2 data-[orientation=vertical]:h-4"
                 />

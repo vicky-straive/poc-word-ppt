@@ -28,19 +28,59 @@ interface Project {
 export default function PdfToPptProjectsPage() {
   // Sample data - replace with actual data fetching
   const sampleProjects: Project[] = [
-    { id: 1, project_name: "Pediatric Nursing: Respiratory Distress", category: "Pediatric Nursing", status: "Completed", last_modified: "2024-01-15", action_url: "/projects/pdf-to-ppt/1/download" },
-    { id: 2, project_name: "Critical Care: Cardiac Arrest Management", category: "Critical Care", status: "In Progress", last_modified: "2024-02-20", action_url: "/projects/pdf-to-ppt/2/edit" },
-    { id: 3, project_name: "Medical-Surgical Nursing: Diabetes Management", category: "Medical-Surgical Nursing", status: "Completed", last_modified: "2024-03-10", action_url: "/projects/pdf-to-ppt/3/download" },
-    { id: 4, project_name: "Geriatric Nursing: Fall Prevention Strategies", category: "Geriatric Nursing", status: "Completed", last_modified: "2024-04-05", action_url: "/projects/pdf-to-ppt/4/download" },
-    { id: 5, project_name: "Mental Health Nursing: Anxiety Disorders", category: "Mental Health Nursing", status: "In Progress", last_modified: "2024-05-01", action_url: "/projects/pdf-to-ppt/5/edit" },
+    {
+      id: 1,
+      project_name: "Pediatric Nursing: Respiratory Distress",
+      category: "Pediatric Nursing",
+      status: "Completed",
+      last_modified: "2024-01-15",
+      action_url: "/projects/pdf-to-ppt/1/download",
+    },
+    {
+      id: 2,
+      project_name: "Critical Care: Cardiac Arrest Management",
+      category: "Critical Care",
+      status: "In Progress",
+      last_modified: "2024-02-20",
+      action_url: "/projects/pdf-to-ppt/2/edit",
+    },
+    {
+      id: 3,
+      project_name: "Medical-Surgical Nursing: Diabetes Management",
+      category: "Medical-Surgical Nursing",
+      status: "Completed",
+      last_modified: "2024-03-10",
+      action_url: "/projects/pdf-to-ppt/3/download",
+    },
+    {
+      id: 4,
+      project_name: "Geriatric Nursing: Fall Prevention Strategies",
+      category: "Geriatric Nursing",
+      status: "Completed",
+      last_modified: "2024-04-05",
+      action_url: "/projects/pdf-to-ppt/4/download",
+    },
+    {
+      id: 5,
+      project_name: "Mental Health Nursing: Anxiety Disorders",
+      category: "Mental Health Nursing",
+      status: "In Progress",
+      last_modified: "2024-05-01",
+      action_url: "/projects/pdf-to-ppt/5/edit",
+    },
   ];
 
-const [projects, ] = useState<Project[]>(sampleProjects);
+  const [projects] = useState<Project[]>(sampleProjects);
   const [filter, setFilter] = useState("All");
   const [showTour, setShowTour] = useState(false);
   const [tourSkipped, setTourSkipped] = useState(false);
   const newPresentationBtnRef = useRef<HTMLButtonElement | null>(null);
-  const [spotlightStyle, setSpotlightStyle] = useState({ left: 0, top: 0, width: 0, height: 0 });
+  const [spotlightStyle, setSpotlightStyle] = useState({
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0,
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -75,9 +115,10 @@ const [projects, ] = useState<Project[]>(sampleProjects);
   };
 
   // Simple client-side filtering for demonstration
-  const filteredProjects = filter === "All"
-    ? projects
-    : projects.filter(project => project.category === filter);
+  const filteredProjects =
+    filter === "All"
+      ? projects
+      : projects.filter((project) => project.category === filter);
 
   const categories = [
     "All",
@@ -92,14 +133,25 @@ const [projects, ] = useState<Project[]>(sampleProjects);
   const SpotlightOverlay = () => {
     if (!showTour) return null;
     return createPortal(
-      <div style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 40,
-        pointerEvents: "auto",
-      }}>
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 40,
+          pointerEvents: "auto",
+        }}
+      >
         {/* Mask */}
-        <svg width="100vw" height="100vh" style={{ position: "absolute", inset: 0, width: "100vw", height: "100vh" }}>
+        <svg
+          width="100vw"
+          height="100vh"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+          }}
+        >
           <defs>
             <mask id="spotlight-mask">
               <rect x="0" y="0" width="100vw" height="100vh" fill="white" />
@@ -124,7 +176,12 @@ const [projects, ] = useState<Project[]>(sampleProjects);
         </svg>
         {/* Click to skip area */}
         <div
-          style={{ position: "fixed", inset: 0, zIndex: 41, pointerEvents: "auto" }}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 41,
+            pointerEvents: "auto",
+          }}
           onClick={handleSkipTour}
         />
       </div>,
@@ -152,10 +209,12 @@ const [projects, ] = useState<Project[]>(sampleProjects);
             maxWidth: 320,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
-          <div className="mb-2 font-semibold text-center">Click here to start a new presentation!</div>
+          <div className="mb-2 font-semibold text-center">
+            Click here to start a new presentation!
+          </div>
           <div className="flex gap-2 mt-2">
             <button
               className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
@@ -213,7 +272,9 @@ const [projects, ] = useState<Project[]>(sampleProjects);
         <TableBody>
           {filteredProjects.map((project) => (
             <TableRow key={project.id}>
-              <TableCell className="font-medium">{project.project_name}</TableCell>
+              <TableCell className="font-medium">
+                {project.project_name}
+              </TableCell>
               <TableCell>
                 <Badge
                   variant={
