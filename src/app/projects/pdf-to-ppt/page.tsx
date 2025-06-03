@@ -245,11 +245,8 @@ export default function PdfToPptProjectsPage() {
         >
           <Button
             ref={newPresentationBtnRef}
-            style={
-              showTour
-                ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' }
-                : {}
-            }
+            className={showTour ? "relative border-pulse" : undefined}
+            style={showTour ? { zIndex: 1, borderColor: '#3c695a', boxShadow: '0 0 0 2px #3c695a80', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}
           >
             New Presentation
           </Button>
@@ -308,6 +305,55 @@ export default function PdfToPptProjectsPage() {
         @keyframes blink-cursor-smooth {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.8; }
+        }
+      `}</style>
+      <style>{`
+        /* Optional: add a subtle pulse to the glow if you want it animated */
+        @keyframes glow-pulse {
+          0%, 100% { box-shadow: 0 0 16px 4px #3c695a80, 0 0 0 4px #3c695a40; }
+          50% { box-shadow: 0 0 32px 8px #3c695a80, 0 0 0 8px #3c695a40; }
+        }
+      `}</style>
+      <style>{`
+        .pulse-glow::before {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 120%;
+          height: 120%;
+          border-radius: 9999px;
+          background: radial-gradient(circle, #3c695a40 0%, #3c695a00 80%);
+          z-index: 0;
+          pointer-events: none;
+          animation: pulse-glow-anim 1.6s infinite;
+        }
+        .pulse-glow {
+          z-index: 1;
+          overflow: visible;
+        }
+        @keyframes pulse-glow-anim {
+          0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+          50% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.15); }
+        }
+      `}</style>
+      <style>{`
+        .border-pulse {
+          border-width: 2px !important;
+          animation: border-pulse-anim 1.4s infinite;
+          box-shadow: 0 0 0 2px #3c695a80;
+          border-color: #3c695a !important;
+        }
+        @keyframes border-pulse-anim {
+          0%, 100% {
+            box-shadow: 0 0 0 2px #3c695a80;
+            border-color: #3c695a;
+          }
+          50% {
+            box-shadow: 0 0 0 6px #3c695a40;
+            border-color: #3c695a80;
+          }
         }
       `}</style>
     </div>
