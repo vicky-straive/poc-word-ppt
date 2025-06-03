@@ -1,6 +1,11 @@
+'use client'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useTourStore } from "@/app/projects/pdf-to-ppt/tourStore";
+import { IconHandFinger } from '@tabler/icons-react';
 
 const tiles = [
   {
@@ -24,6 +29,22 @@ const tiles = [
 ];
 
 export default function Home() {
+  const pdfCardRef = useRef<HTMLDivElement | null>(null);
+  const showTour = useTourStore((state) => state.showTour);
+  const setShowTour = useTourStore((state) => state.setShowTour);
+  const setTourSkipped = useTourStore((state) => state.setTourSkipped);
+  const [, setPointerPos] = useState<{left: number, top: number}>({left: 0, top: 0});
+
+  useEffect(() => {
+    if (showTour && pdfCardRef.current) {
+      const rect = pdfCardRef.current.getBoundingClientRect();
+      setPointerPos({
+        left: rect.left + rect.width / 2 - 24, // center pointer (icon ~48px)
+        top: rect.bottom + 12 // 12px below card
+      });
+    }
+  }, [showTour]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h- py-12 px-4">
       <Image
@@ -42,9 +63,10 @@ export default function Home() {
           return (
             <Card
               key={index}
+              ref={isPdfToPpt ? pdfCardRef : undefined}
               className={`transform transition-transform ${
                 isPdfToPpt
-                  ? "hover:scale-105 hover:shadow-lg cursor-pointer"
+                  ? `hover:scale-105 hover:shadow-lg cursor-pointer ${showTour ? "glow-border" : ""}`
                   : "opacity-90 cursor-not-allowed pointer-events-none"
               }`}
             >
@@ -73,6 +95,60 @@ export default function Home() {
           );
         })}
       </div>
+      {/* Show Guide button fixed to bottom right */}
+      <Button
+        style={{
+          position: "fixed",
+          bottom: 62,
+          right: 12,
+          zIndex: 10010,
+          boxShadow: "0 2px 12px 0rgba(60, 105, 90, 0)"
+        }}
+        onClick={() => {
+          if (showTour) {
+            setShowTour(false);
+            setTourSkipped(true);
+          } else {
+            setShowTour(true);
+          }
+        }}
+      >
+        {showTour ? "Skip Guide" : "Show Guide"}
+      </Button>
+      {showTour && (
+        <span
+          style={{
+            position: "fixed",
+            left: 635,
+            top: 520,
+            zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#3c695a",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+            // transform: "scaleY(-1)",
+          }}
+        >
+          <IconHandFinger stroke={2} />
+        </span>
+      )}
+      <style>{`
+        @keyframes glow-border {
+          0%, 100% { box-shadow: 0 0 0 2px #3c695a, 0 0 8px 4px #3c695a80; border-color: #3c695a; }
+          50% { box-shadow: 0 0 0 2px #3c695a80, 0 0 16px 8px #3c695a80; border-color: #3c695a80; }
+        }
+        .glow-border {
+          animation: glow-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite;
+          border-color: #3c695a !important;
+        }
+        @keyframes blink-cursor-smooth {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+        }
+      `}</style>
     </div>
   );
 }
