@@ -167,12 +167,8 @@ const PromptsPage = () => {
             passHref
           >
             <Button
-              className="self-end"
-              style={
-                showTour
-                  ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' }
-                  : {}
-              }
+              className={showTour ? "border-pulse relative self-end" : "self-end"}
+              style={showTour ? { borderColor: '#3c695a', boxShadow: '0 0 0 2px #3c695a80', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}
             >
               Generate Markdown
             </Button>
@@ -304,6 +300,24 @@ const PromptsPage = () => {
       </div>
 
       <SpotlightOverlay />
+      <style>{`
+        .border-pulse {
+          border-width: 2px !important;
+          animation: border-pulse-anim 1.4s infinite;
+          box-shadow: 0 0 0 2px #3c695a80;
+          border-color: #3c695a !important;
+        }
+        @keyframes border-pulse-anim {
+          0%, 100% {
+            box-shadow: 0 0 0 2px #3c695a80;
+            border-color: #3c695a;
+          }
+          50% {
+            box-shadow: 0 0 0 6px #3c695a40;
+            border-color: #3c695a80;
+          }
+        }
+      `}</style>
     </div>
   );
 };

@@ -114,9 +114,17 @@ function PreviewPageInner() {
           <div className="mt-11">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="outline" className="cursor-pointer">
-                  <IconRefresh />
-                </Button>
+                <Link
+                  href={`/projects/pdf-to-ppt/prompts?book=${encodeURIComponent(
+                    book
+                  )}&chapter=${encodeURIComponent(
+                    chapter
+                  )}&template=${encodeURIComponent(template)}`}
+                >
+                  <Button variant="outline" className="cursor-pointer">
+                    <IconRefresh />
+                  </Button>
+                </Link>
               </TooltipTrigger>
               <TooltipContent>
                 <span>Regenerate Slide</span>
