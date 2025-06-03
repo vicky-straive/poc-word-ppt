@@ -157,15 +157,15 @@ const BookSelectionPage = () => {
             >
               <div
                 ref={idx === 0 ? focusRef : undefined}
-                className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between"
+                className={`border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between ${idx === 0 && showTour ? "border-pulse" : ""}`}
                 style={{
                   ...(idx === 0 && showTour
                     ? {
                         position: "relative",
                         zIndex: 50,
-                        animation: "blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
                         borderColor: '#3c695a',
-                        boxShadow: '0 0 0 2px #3c695a',
+                        boxShadow: '0 0 0 2px #3c695a80',
+                        transition: 'box-shadow 0.3s, border-color 0.3s',
                       }
                     : idx === 0
                       ? { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
@@ -210,8 +210,24 @@ const BookSelectionPage = () => {
         </div> */}
         <style>{`
           @keyframes blink-border {
-            0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
-            50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
+            0%, 100% { box-shadow: 0 0 0 2px rgb(34, 158, 75); border-color: rgb(34, 158, 75); }
+            50% { box-shadow: 0 0 0 6px rgb(34, 158, 75); border-color: #3c695a; }
+          }
+          .border-pulse {
+            border-width: 2px !important;
+            animation: border-pulse-anim 1.4s infinite;
+            box-shadow: 0 0 0 2px rgb(34, 158, 75);
+            border-color: rgb(34, 158, 75) !important;
+          }
+          @keyframes border-pulse-anim {
+            0%, 100% {
+              box-shadow: 0 0 0 2px rgb(34, 158, 75);
+              border-color: rgb(34, 158, 75);
+            }
+            50% {
+              box-shadow: 0 0 0 6px rgb(34, 158, 75);
+              border-color: #3c695a;
+            }
           }
         `}</style>
       </div>
