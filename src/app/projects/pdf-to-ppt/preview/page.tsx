@@ -35,7 +35,7 @@ function PreviewPageInner() {
 
   const [selectedImage, setSelectedImage] = useState(images[0] || "");
 
-  const { setTourSkipped, showTour } = useTourStore();
+  const { setTourSkipped } = useTourStore();
   // Mark the tour as completed as soon as this page mounts
   useEffect(() => {
     setTourSkipped(true);
@@ -123,18 +123,12 @@ function PreviewPageInner() {
                 >
                   <Button
                     variant="outline"
-                    className={`cursor-pointer${
-                      showTour ? " border-pulse relative" : ""
-                    }`}
-                    style={
-                      showTour
-                        ? {
-                            borderColor: "#3c695a",
-                            boxShadow: "0 0 0 2px #3c695a80",
-                            transition: "box-shadow 0.3s, border-color 0.3s",
-                          }
-                        : {}
-                    }
+                    className="cursor-pointer border-pulse relative"
+                    style={{
+                      borderColor: "#3c695a",
+                      boxShadow: "0 0 0 2px #3c695a80",
+                      transition: "box-shadow 0.3s, border-color 0.3s",
+                    }}
                   >
                     <IconRefresh />
                   </Button>
