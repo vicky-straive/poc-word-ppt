@@ -82,7 +82,7 @@ const ExtractedMarkdownPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-8 py-8">
+    <div className="container mx-auto px-8 py-2">
       {/* TOUR SPOTLIGHT OVERLAY */}
       {showTour && spotlightRect && (
         <>
@@ -100,7 +100,7 @@ const ExtractedMarkdownPage = () => {
         {loading ? (
           <span className="text-gray-500 animate-pulse">Loading markdown...</span>
         ) : (
-          <pre className="whitespace-pre-wrap w-full min-h-[40vh] max-h-[50vh] overflow-auto">{markdown}</pre>
+          <pre className="whitespace-pre-wrap w-full min-h-[40vh] max-h-[40vh] overflow-auto">{markdown}</pre>
         )}
       </div>
 
