@@ -17,6 +17,8 @@ const PromptsPage = () => {
   const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
   const { tourSkipped, hydrate } = useTourStore();
   const [showTour, setShowTour] = useState(false);
+  const generateBtnRef = useRef<HTMLButtonElement | null>(null);
+  const [pointerPos, setPointerPos] = useState<{ left: number; top: number } | null>(null);
 
   useEffect(() => {
     hydrate();
@@ -35,10 +37,29 @@ const PromptsPage = () => {
     }
   }, [showTour]);
 
+  useEffect(() => {
+    function updatePointer() {
+      if (showTour && generateBtnRef.current) {
+        const rect = generateBtnRef.current.getBoundingClientRect();
+        setPointerPos({
+          left: rect.left - 46, // 16px to the left of the button
+          top: rect.top + rect.height / 1.2, // center vertically
+        });
+      } else {
+        setPointerPos(null);
+      }
+    }
+    updatePointer();
+    window.addEventListener('scroll', updatePointer, true);
+    window.addEventListener('resize', updatePointer);
+    return () => {
+      window.removeEventListener('scroll', updatePointer, true);
+      window.removeEventListener('resize', updatePointer);
+    };
+  }, [showTour]);
+
   const SpotlightOverlay = () => {
     if (!showTour || !spotlightRect) return null;
-    const centerX = spotlightRect.left + spotlightRect.width / 2;
-    const centerY = spotlightRect.top + spotlightRect.height / 2;
     return createPortal(
       <>
         <svg
@@ -76,24 +97,27 @@ const PromptsPage = () => {
           />
         </svg>
         {/* IconHandFinger pointer indicator */}
-        <span
-          style={{
-            position: "fixed",
-            left: centerX - -650,
-            top: centerY - 30,
-            zIndex: 10002,
-            pointerEvents: "none",
-            fontSize: 48,
-            color: "#3c695a",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            // animation:
-              // "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
-          }}
-        >
-          <IconHandFinger stroke={2} />
-        </span>
+        {showTour && pointerPos && (
+          <span
+            style={{
+              position: "fixed",
+              left: pointerPos.left,
+              top: pointerPos.top,
+              zIndex: 10002,
+              pointerEvents: "none",
+              fontSize: 48,
+              color: "#3c695a",
+              rotate: "90deg",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+              transform: "translate(-100%, -50%)",
+            }}
+          >
+            <IconHandFinger stroke={2} />
+          </span>
+        )}
         <style>{`
           @keyframes blink-cursor-smooth {
             0%, 100% { opacity: 1; }
@@ -167,6 +191,7 @@ const PromptsPage = () => {
             passHref
           >
             <Button
+              ref={generateBtnRef}
               className={showTour ? "border-pulse relative self-end" : "self-end"}
               style={showTour ? { borderColor: '#3c695a', boxShadow: '0 0 0 2px rgb(34, 158, 75)', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}
             >
