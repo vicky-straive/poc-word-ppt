@@ -8,7 +8,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useTourStore } from "../tourStore";
 import { createPortal } from "react-dom";
-import { IconClick } from "@tabler/icons-react";
+import { IconHandFinger } from "@tabler/icons-react";
 
 interface Chapter {
   number: number;
@@ -106,7 +106,11 @@ const ChaptersPage = () => {
             <div
               role="radiogroup"
               ref={unitIndex === 0 ? radioGroupRef : undefined}
-              style={showTour && unitIndex === 0 ? { position: 'relative', zIndex: 10001 } : {}}
+              style={
+                showTour && unitIndex === 0
+                  ? { position: "relative", zIndex: 10001 }
+                  : {}
+              }
             >
               {unit.chapters.map((chapter, chapterIndex) => (
                 <div
@@ -177,12 +181,12 @@ const ChaptersPage = () => {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* IconClick pointer indicator */}
+        {/* IconHandFinger pointer indicator */}
         <span
           style={{
             position: "fixed",
-            left: centerX - 24,
-            top: centerY - 24,
+            left: centerX - -254,
+            top: centerY - 55,
             zIndex: 10002,
             pointerEvents: "none",
             fontSize: 48,
@@ -190,12 +194,18 @@ const ChaptersPage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+            animation: "move-left-right-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
           }}
         >
-          <IconClick stroke={2} />
+          <IconHandFinger stroke={2} />
         </span>
         <style>{`
+          @keyframes move-left-right-smooth {
+            0%, 100% { transform: scaleX(-1) rotate(90deg) translateY(0); }
+            20% { transform: scaleX(-1) rotate(90deg) translateY(-10px); }
+            50% { transform: scaleX(-1) rotate(90deg) translateY(10px); }
+            80% { transform: scaleX(-1) rotate(90deg) translateY(-10px); }
+          }
           @keyframes blink-cursor-smooth {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.8; }
