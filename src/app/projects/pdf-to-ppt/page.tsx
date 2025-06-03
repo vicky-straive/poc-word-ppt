@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 // import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { createPortal } from "react-dom";
-
+import { IconHandFinger } from '@tabler/icons-react';
 interface Project {
   id: number; // Changed to number for sample data
   project_name: string;
@@ -102,12 +102,6 @@ export default function PdfToPptProjectsPage() {
     }
   }, [showTour]);
 
-  const handleSkipTour = () => {
-    setShowTour(false);
-    setTourSkipped(true);
-    localStorage.setItem("pptTourSkipped", "true");
-  };
-
   const handleStartTour = () => {
     setShowTour(true);
     setTourSkipped(false);
@@ -132,9 +126,12 @@ export default function PdfToPptProjectsPage() {
   // Spotlight overlay component
   const SpotlightOverlay = () => {
     if (!showTour) return null;
+    // Calculate center of the spotlight for the pulsing indicator
+    const centerX = spotlightStyle.left + spotlightStyle.width / 2;
+    const centerY = spotlightStyle.top + spotlightStyle.height / 2;
     return createPortal(
       <>
-        {/* Mask - pointerEvents none so it never blocks interaction */}
+        {/* Transparent Mask - pointerEvents none so it never blocks interaction */}
         <svg
           width="100vw"
           height="100vh"
@@ -144,6 +141,7 @@ export default function PdfToPptProjectsPage() {
             width: "100vw",
             height: "100vh",
             pointerEvents: "none", // SVG never blocks pointer events
+            zIndex: 40,
           }}
         >
           <defs>
@@ -159,15 +157,40 @@ export default function PdfToPptProjectsPage() {
               />
             </mask>
           </defs>
+          {/* Transparent mask, no color */}
           <rect
             x="0"
             y="0"
             width="100vw"
             height="100vh"
-            fill="rgba(0,0,0,0.7)"
+            fill="transparent"
             mask="url(#spotlight-mask)"
           />
         </svg>
+        {/* IconHandFinger indicator instead of arrow or pulsing icon */}
+        <span
+          style={{
+            position: "fixed",
+            left: centerX - -4,
+            top: centerY - -24, // position above the element
+            zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#3c695a",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            // animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+          }}
+        >
+          <IconHandFinger stroke={2} />
+        </span>
+        <style>{`
+          @keyframes blink-cursor-smooth {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+          }
+        `}</style>
         {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
         <div
           style={{
@@ -177,6 +200,23 @@ export default function PdfToPptProjectsPage() {
             pointerEvents: "none",
           }}
         />
+        {/* Pulsing ring animation keyframes */}
+        <style>{`
+          @keyframes pulse-ring {
+            0% {
+              transform: scale(0.7);
+              opacity: 0.7;
+            }
+            70% {
+              transform: scale(1.2);
+              opacity: 0.15;
+            }
+            100% {
+              transform: scale(1.4);
+              opacity: 0;
+            }
+          }
+        `}</style>
       </>,
       document.body
     );
@@ -186,44 +226,6 @@ export default function PdfToPptProjectsPage() {
     <div className="container mx-auto py-8 p-8">
       {/* Spotlight Overlay */}
       <SpotlightOverlay />
-      {/* Tour Tooltip */}
-      {showTour && newPresentationBtnRef.current && (
-        <div
-          style={{
-            position: "fixed",
-            left: spotlightStyle.left + spotlightStyle.width / 2 - 130, // Center horizontally (minWidth/2)
-            top: spotlightStyle.top + spotlightStyle.height + 12, // Below the button
-            zIndex: 100,
-            background: "white",
-            borderRadius: 8,
-            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
-            padding: 16,
-            minWidth: 260,
-            maxWidth: 320,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div className="mb-2 font-semibold text-center">
-            Click here to start a new presentation!
-          </div>
-          <div className="flex gap-2 mt-2">
-            <button
-              className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
-              onClick={handleSkipTour}
-            >
-              Skip
-            </button>
-            <button
-              className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
-              onClick={() => setShowTour(false)}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
       {/* Floating Start Tour Button */}
       {!showTour && tourSkipped && (
         <button
@@ -231,7 +233,7 @@ export default function PdfToPptProjectsPage() {
           className="bg-green-700 text-white px-4 py-2 rounded shadow-lg hover:bg-green-800"
           onClick={handleStartTour}
         >
-          Start Tour
+          Show Guide
         </button>
       )}
       <div className="flex justify-between items-center mb-6">
@@ -241,7 +243,16 @@ export default function PdfToPptProjectsPage() {
           passHref
           style={{ position: "relative", zIndex: showTour ? 10001 : undefined }}
         >
-          <Button ref={newPresentationBtnRef}>New Presentation</Button>
+          <Button
+            ref={newPresentationBtnRef}
+            style={
+              showTour
+                ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' }
+                : {}
+            }
+          >
+            New Presentation
+          </Button>
         </Link>
       </div>
 
@@ -293,6 +304,12 @@ export default function PdfToPptProjectsPage() {
           ))}
         </TableBody>
       </Table>
+      <style>{`
+        @keyframes blink-cursor-smooth {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+        }
+      `}</style>
     </div>
   );
 }

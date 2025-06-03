@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTourStore } from "../tourStore";
+import { IconClick } from '@tabler/icons-react';
 
 const TemplatesPage = () => {
   const searchParams = useSearchParams();
@@ -68,7 +69,7 @@ const TemplatesPage = () => {
   const gridRef = useRef<HTMLDivElement>(null);
   const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
   const [showTour, setShowTour] = useState(false);
-  const { tourSkipped, setTourSkipped } = useTourStore();
+  const { tourSkipped } = useTourStore();
 
   useEffect(() => {
     if (!tourSkipped) {
@@ -84,6 +85,18 @@ const TemplatesPage = () => {
     };
   }, [tourSkipped]);
 
+  // Ensure tour is shown on first visit if not skipped
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const skipped = localStorage.getItem("pptTourSkipped");
+      if (skipped === "true") {
+        setShowTour(false);
+      } else {
+        setShowTour(true);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (showTour && gridRef.current) {
       const rect = gridRef.current.getBoundingClientRect();
@@ -91,65 +104,92 @@ const TemplatesPage = () => {
     }
   }, [showTour]);
 
-  function handleTourNext() {
-    setShowTour(false);
-    document.body.style.overflow = "";
-  }
-  function handleTourSkip() {
-    setTourSkipped(true);
-    setShowTour(false);
-    document.body.style.overflow = "";
-  }
   // --- TOUR LOGIC END ---
+
+  const SpotlightOverlay = () => {
+    if (!showTour) return null;
+    const centerX = spotlightRect ? spotlightRect.left + spotlightRect.width / 2 : 0;
+    const centerY = spotlightRect ? spotlightRect.top + spotlightRect.height / 2 : 0;
+    return createPortal(
+      <>
+        <svg
+          width="100vw"
+          height="100vh"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none",
+            zIndex: 40,
+          }}
+        >
+          <defs>
+            <mask id="spotlight-mask">
+              <rect x="0" y="0" width="100vw" height="100vh" fill="white" />
+              {spotlightRect && (
+                <rect
+                  x={spotlightRect.left}
+                  y={spotlightRect.top}
+                  width={spotlightRect.width}
+                  height={spotlightRect.height}
+                  rx="8"
+                  fill="black"
+                />
+              )}
+            </mask>
+          </defs>
+          <rect
+            x="0"
+            y="0"
+            width="100vw"
+            height="100vh"
+            fill="transparent"
+            mask="url(#spotlight-mask)"
+          />
+        </svg>
+        {/* IconClick pointer indicator */}
+        <span
+          style={{
+            position: "fixed",
+            left: centerX - 24,
+            top: centerY - 24,
+            zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#ffdd33",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+          }}
+        >
+          <IconClick stroke={2} />
+        </span>
+        <style>{`
+          @keyframes blink-cursor-smooth {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+          }
+        `}</style>
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 41,
+            pointerEvents: "none",
+          }}
+        />
+      </>,
+      document.body
+    );
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
       {/* TOUR SPOTLIGHT OVERLAY */}
-      {showTour && spotlightRect && createPortal(
-        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none'}}>
-          {/* SVG Mask */}
-          <svg width="100vw" height="100vh" style={{position: 'fixed', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}}>
-            <defs>
-              <mask id="spotlight-mask">
-                <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                <rect
-                  x={spotlightRect.left}
-                  y={spotlightRect.top - 0}
-                  width={spotlightRect.width}
-                  height={spotlightRect.height + 100}
-                  rx={16}
-                  fill="black"
-                />
-              </mask>
-            </defs>
-            <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0.6)" mask="url(#spotlight-mask)" />
-          </svg>
-          {/* Tooltip - now above the spotlighted area */}
-          <div
-            style={{
-              position: 'absolute',
-              left: spotlightRect.left,
-              top: Math.max(spotlightRect.top - 240, 16),
-              width: Math.min(spotlightRect.width, 340),
-              zIndex: 51,
-              background: 'white',
-              borderRadius: 12,
-              boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-              padding: 24,
-              fontSize: 18,
-              color: '#222',
-              pointerEvents: 'auto', // Tooltip remains interactive
-            }}
-          >
-            <div className="mb-4 font-semibold">Choose a PowerPoint template</div>
-            <div className="mb-6 text-base text-gray-600">Pick a template style for your presentation. You can preview each before continuing.</div>
-            <div className="flex gap-3 justify-end">
-              <button onClick={handleTourSkip} className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Skip</button>
-              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-green-800 text-white font-medium hover:bg-green-700">Next</button>
-            </div>
-          </div>
-        </div>,
-        document.body
+      {showTour && spotlightRect && (
+        <SpotlightOverlay />
       )}
       <div className="flex flex-col gap-4 items-center justify-between mb-8">
         <div className="">
@@ -177,7 +217,15 @@ const TemplatesPage = () => {
             key={tpl.name}
             className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 bg-white"
             onClick={() => handleTemplateSelect(tpl.name)}
-            style={showTour ? { boxShadow: 'none', borderColor: '#e5e7eb' } : {}}
+            style={
+              showTour
+                ? {
+                    animation: 'blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
+                    borderColor: '#3c695a',
+                    boxShadow: '0 0 0 2px #3c695a',
+                  }
+                : { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
+            }
           >
             <p className="text-md mb-5 font-medium">{tpl.name}</p>
             <Image
@@ -191,13 +239,12 @@ const TemplatesPage = () => {
           </button>
         ))}
       </div>
-
-      {/* <h2 className="text-xl font-semibold mb-4">Start from scratch</h2>
-      <div className="border-2 border-dashed border-gray-300 p-8 rounded-md text-center">
-        <p className="text-lg font-medium mb-4">Create a blank presentation</p>
-        <p className="text-gray-600 mb-6">Start with a blank canvas and add your own content</p>
-        <Link href="/projects/pdf-to-ppt/prompts"><Button>Create blank presentation</Button></Link>
-      </div> */}
+      <style>{`
+        @keyframes blink-border {
+          0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
+          50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
+        }
+      `}</style>
     </div>
   );
 };

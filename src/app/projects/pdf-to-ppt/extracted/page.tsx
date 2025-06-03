@@ -6,7 +6,7 @@ import { useEffect, useState, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import templateData from "../templates/templateData.json";
 import { useTourStore } from "../tourStore";
-import { createPortal } from "react-dom";
+import { IconHandFinger } from '@tabler/icons-react';
 
 const ExtractedMarkdownPage = () => {
   const searchParams = useSearchParams();
@@ -28,7 +28,7 @@ const ExtractedMarkdownPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
   const [showTour, setShowTour] = useState(false);
-  const { tourSkipped, setTourSkipped } = useTourStore();
+  const { tourSkipped } = useTourStore();
 
   useEffect(() => {
     if (!tourSkipped) {
@@ -60,16 +60,6 @@ const ExtractedMarkdownPage = () => {
       };
     }
   }, [showTour]);
-
-  function handleTourNext() {
-    setShowTour(false);
-    document.body.style.overflow = "";
-  }
-  function handleTourSkip() {
-    setTourSkipped(true);
-    setShowTour(false);
-    document.body.style.overflow = "";
-  }
   // --- TOUR LOGIC END ---
 
   useEffect(() => {
@@ -86,54 +76,18 @@ const ExtractedMarkdownPage = () => {
     }
   }, [markdownPath]);
 
+  const SpotlightOverlay = () => {
+    if (!showTour) return null;
+    return null;
+  };
+
   return (
     <div className="container mx-auto px-8 py-8">
       {/* TOUR SPOTLIGHT OVERLAY */}
-      {showTour && spotlightRect && createPortal(
-        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none'}}>
-          {/* SVG Mask */}
-          <svg width="100vw" height="100vh" style={{position: 'fixed', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}}>
-            <defs>
-              <mask id="spotlight-mask">
-                <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                <rect
-                  x={spotlightRect.left - 12}
-                  y={spotlightRect.top - 12}
-                  width={spotlightRect.width + 24}
-                  height={spotlightRect.height + 24}
-                  rx={20}
-                  fill="black"
-                />
-              </mask>
-            </defs>
-            <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0.6)" mask="url(#spotlight-mask)" />
-          </svg>
-          {/* Tooltip at the bottom right of the mask */}
-          <div
-            style={{
-              position: 'absolute',
-              left: spotlightRect.left + spotlightRect.width - 400,
-              top: spotlightRect.top - 580, // Place tooltip above the button
-              width: 400,
-              zIndex: 51,
-              background: 'white',
-              borderRadius: 12,
-              boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-              padding: 24,
-              fontSize: 18,
-              color: '#222',
-              pointerEvents: 'auto', // Tooltip remains interactive
-            }}
-          >
-            <div className="mb-4 font-semibold">Scroll down if needed and click Generate Slides</div>
-            <div className="mb-6 text-base text-gray-600">If the markdown is long, scroll to the bottom and press the Generate Slides button to continue.</div>
-            <div className="flex gap-3 justify-end">
-              <button onClick={handleTourSkip} className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Skip</button>
-              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-green-800 text-white font-medium hover:bg-green-700">Next</button>
-            </div>
-          </div>
-        </div>,
-        document.body
+      {showTour && spotlightRect && (
+        <>
+          <SpotlightOverlay />
+        </>
       )}
       <h1 className="text-2xl font-bold mb-4">Extracted Markdown</h1>
       <p className="text-gray-600 mb-6">
@@ -154,12 +108,39 @@ const ExtractedMarkdownPage = () => {
         <Button variant="outline" asChild>
           <Link href={`/projects/pdf-to-ppt/prompts?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(template)}`}>Back</Link>
         </Button>
-        <span ref={buttonRef} style={{display: 'inline-flex'}}>
-          <Button asChild>
+        <span ref={buttonRef} style={{display: 'inline-flex', position: 'relative'}}>
+          <Button asChild
+            style={showTour ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' } : {}}>
             <Link href={`/projects/pdf-to-ppt/processing?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(template)}`}>Generate Slides</Link>
           </Button>
+          {showTour && (
+            <span
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: '100%',
+                transform: 'translateX(-50%) translateY(8px)',
+                zIndex: 10002,
+                pointerEvents: 'none',
+                fontSize: 48,
+                color: '#3c695a',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
+              }}
+            >
+              <IconHandFinger stroke={2} />
+            </span>
+          )}
         </span>
       </div>
+      <style>{`
+        @keyframes blink-cursor-smooth {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+        }
+      `}</style>
     </div>
   );
 };

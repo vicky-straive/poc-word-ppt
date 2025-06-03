@@ -8,12 +8,13 @@ import { Separator } from "@/components/ui/separator";
 import { useRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTourStore } from "../tourStore";
+import { IconHandFinger } from '@tabler/icons-react';
 
 const BookSelectionPage = () => {
   const focusRef = useRef<HTMLDivElement | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [spotlightStyle, setSpotlightStyle] = useState({ left: 0, top: 0, width: 0, height: 0 });
-  const { tourSkipped, setTourSkipped, hydrate } = useTourStore();
+  const { tourSkipped, hydrate } = useTourStore();
 
   useEffect(() => {
     hydrate();
@@ -48,21 +49,24 @@ const BookSelectionPage = () => {
     };
   }, [showTour]);
 
-  const handleSkipTour = () => {
-    setShowTour(false);
-    setTourSkipped(true);
-  };
-
-  const handleNextTour = () => {
-    setShowTour(false);
-    // Do NOT setTourSkipped here, so the tour continues on next page
-  };
-
   const SpotlightOverlay = () => {
     if (!showTour) return null;
+    const centerX = spotlightStyle.left + spotlightStyle.width / 2;
+    const centerY = spotlightStyle.top + spotlightStyle.height / 2;
     return createPortal(
-      <div style={{ position: "fixed", inset: 0, zIndex: 40, pointerEvents: "auto" }}>
-        <svg width="100vw" height="100vh" style={{ position: "absolute", inset: 0, width: "100vw", height: "100vh" }}>
+      <>
+        <svg
+          width="100vw"
+          height="100vh"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none",
+            zIndex: 40,
+          }}
+        >
           <defs>
             <mask id="spotlight-mask">
               <rect x="0" y="0" width="100vw" height="100vh" fill="white" />
@@ -71,7 +75,7 @@ const BookSelectionPage = () => {
                 y={spotlightStyle.top}
                 width={spotlightStyle.width}
                 height={spotlightStyle.height}
-                rx="12"
+                rx="8"
                 fill="black"
               />
             </mask>
@@ -81,12 +85,44 @@ const BookSelectionPage = () => {
             y="0"
             width="100vw"
             height="100vh"
-            fill="rgba(0,0,0,0.7)"
+            fill="transparent"
             mask="url(#spotlight-mask)"
           />
         </svg>
-        <div style={{ position: "fixed", inset: 0, zIndex: 41, pointerEvents: "auto" }} onClick={() => setShowTour(false)} />
-      </div>,
+        {/* IconHandFinger pointer indicator */}
+        <span
+          style={{
+            position: "fixed",
+            left: centerX - 14,
+            top: centerY - 275,
+            zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#3c695a",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+            transform: "scaleY(-1)",
+          }}
+        >
+          <IconHandFinger stroke={2} />
+        </span>
+        <style>{`
+          @keyframes blink-cursor-smooth {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+          }
+        `}</style>
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 41,
+            pointerEvents: "none",
+          }}
+        />
+      </>,
       document.body
     );
   };
@@ -94,48 +130,6 @@ const BookSelectionPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <SpotlightOverlay />
-      {/* Tour Tooltip for the first book */}
-      {showTour && focusRef.current && (
-        <div
-          style={{
-            position: "fixed",
-            left: spotlightStyle.left + spotlightStyle.width + 24,
-            top: spotlightStyle.top,
-            zIndex: 100,
-            background: "white",
-            borderRadius: 8,
-            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
-            padding: 16,
-            minWidth: 260,
-            maxWidth: 320,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
-          <div className="mb-2 font-semibold text-center">
-            Click here to select{" "}
-            <span className="text-green-700 font-bold">
-              Medical Terminology in a Flash
-            </span>{" "}
-            and view its chapters!
-          </div>
-          <div className="flex gap-2 mt-2">
-            <button
-              className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
-              onClick={handleSkipTour}
-            >
-              Skip
-            </button>
-            <button
-              className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
-              onClick={handleNextTour}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
       <h1 className="text-2xl font-bold mb-4 text-center">
         Medical Education Excellence{" "}
       </h1>
@@ -155,7 +149,19 @@ const BookSelectionPage = () => {
             <div
               ref={idx === 0 ? focusRef : undefined}
               className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between"
-              style={idx === 0 && showTour ? { position: "relative", zIndex: 50 } : {}}
+              style={{
+                ...(idx === 0 && showTour
+                  ? {
+                      position: "relative",
+                      zIndex: 50,
+                      animation: "blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+                      borderColor: '#3c695a',
+                      boxShadow: '0 0 0 2px #3c695a',
+                    }
+                  : idx === 0
+                    ? { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
+                    : {}),
+              }}
             >
               <div>
                 <Image
@@ -193,6 +199,12 @@ const BookSelectionPage = () => {
         <p className="text-gray-600 mb-6">Start with a blank canvas and add your own content</p>
         <Link href="/projects/pdf-to-ppt/prompts"><Button>Create blank presentation</Button></Link>
       </div> */}
+      <style>{`
+        @keyframes blink-border {
+          0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
+          50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
+        }
+      `}</style>
     </div>
   );
 };
