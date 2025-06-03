@@ -100,7 +100,7 @@ const ExtractedMarkdownPage = () => {
         {loading ? (
           <span className="text-gray-500 animate-pulse">Loading markdown...</span>
         ) : (
-          <pre className="whitespace-pre-wrap w-full">{markdown}</pre>
+          <pre className="whitespace-pre-wrap w-full min-h-[40vh] max-h-[50vh] overflow-auto">{markdown}</pre>
         )}
       </div>
 
@@ -110,7 +110,8 @@ const ExtractedMarkdownPage = () => {
         </Button>
         <span ref={buttonRef} style={{display: 'inline-flex', position: 'relative'}}>
           <Button asChild
-            style={showTour ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' } : {}}>
+            className={showTour ? "border-pulse relative" : undefined}
+            style={showTour ? { borderColor: '#3c695a', boxShadow: '0 0 0 2px #3c695a80', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}>
             <Link href={`/projects/pdf-to-ppt/processing?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(template)}`}>Generate Slides</Link>
           </Button>
           {showTour && (
@@ -139,6 +140,22 @@ const ExtractedMarkdownPage = () => {
         @keyframes blink-cursor-smooth {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.8; }
+        }
+        .border-pulse {
+          border-width: 2px !important;
+          animation: border-pulse-anim 1.4s infinite;
+          box-shadow: 0 0 0 2px #3c695a80;
+          border-color: #3c695a !important;
+        }
+        @keyframes border-pulse-anim {
+          0%, 100% {
+            box-shadow: 0 0 0 2px #3c695a80;
+            border-color: #3c695a;
+          }
+          50% {
+            box-shadow: 0 0 0 6px #3c695a40;
+            border-color: #3c695a80;
+          }
         }
       `}</style>
     </div>
