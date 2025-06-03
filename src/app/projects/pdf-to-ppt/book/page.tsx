@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { useRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTourStore } from "../tourStore";
+import { IconHandFinger } from '@tabler/icons-react';
 
 const BookSelectionPage = () => {
   const focusRef = useRef<HTMLDivElement | null>(null);
@@ -50,12 +51,10 @@ const BookSelectionPage = () => {
 
   const SpotlightOverlay = () => {
     if (!showTour) return null;
-    // Calculate center of the spotlight for the pulsing indicator
     const centerX = spotlightStyle.left + spotlightStyle.width / 2;
     const centerY = spotlightStyle.top + spotlightStyle.height / 2;
     return createPortal(
       <>
-        {/* Transparent Mask - pointerEvents none so it never blocks interaction */}
         <svg
           width="100vw"
           height="100vh"
@@ -64,7 +63,7 @@ const BookSelectionPage = () => {
             inset: 0,
             width: "100vw",
             height: "100vh",
-            pointerEvents: "none", // SVG never blocks pointer events
+            pointerEvents: "none",
             zIndex: 40,
           }}
         >
@@ -81,7 +80,6 @@ const BookSelectionPage = () => {
               />
             </mask>
           </defs>
-          {/* Transparent mask, no color */}
           <rect
             x="0"
             y="0"
@@ -91,62 +89,31 @@ const BookSelectionPage = () => {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* Pulsing focus indicator */}
-        <div
+        {/* IconHandFinger pointer indicator */}
+        <span
           style={{
             position: "fixed",
-            left: centerX - 32,
-            top: centerY - 32,
-            width: 64,
-            height: 64,
-            pointerEvents: "none",
+            left: centerX - 14,
+            top: centerY - 275,
             zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#3c695a",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+            transform: "scaleY(-1)",
           }}
         >
-          <span
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              background: "rgba(255, 221, 51, 0.18)", // yellow
-              boxShadow: "0 0 0 0 rgba(255,221,51,0.5)",
-              animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
-              zIndex: 1,
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              left: 16,
-              top: 16,
-              width: 32,
-              height: 32,
-              borderRadius: "50%",
-              background: "rgba(255, 221, 51, 0.25)", // yellow
-              zIndex: 2,
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              left: 28,
-              top: 28,
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: "#ffdd33", // yellow
-              zIndex: 3,
-              boxShadow: "0 0 8px 2px #ffdd3355",
-            }}
-          />
-        </div>
-        {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
+          <IconHandFinger stroke={2} />
+        </span>
+        <style>{`
+          @keyframes blink-cursor-smooth {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+          }
+        `}</style>
         <div
           style={{
             position: "fixed",
@@ -155,23 +122,6 @@ const BookSelectionPage = () => {
             pointerEvents: "none",
           }}
         />
-        {/* Pulsing ring animation keyframes */}
-        <style>{`
-          @keyframes pulse-ring {
-            0% {
-              transform: scale(0.7);
-              opacity: 0.7;
-            }
-            70% {
-              transform: scale(1.2);
-              opacity: 0.15;
-            }
-            100% {
-              transform: scale(1.4);
-              opacity: 0;
-            }
-          }
-        `}</style>
       </>,
       document.body
     );
@@ -199,7 +149,17 @@ const BookSelectionPage = () => {
             <div
               ref={idx === 0 ? focusRef : undefined}
               className="border p-4 rounded-lg shadow-sm text-center cursor-pointer hover:shadow-md hover:border-blue-500 h-full flex flex-col justify-between"
-              style={idx === 0 && showTour ? { position: "relative", zIndex: 50 } : {}}
+              style={{
+                ...(idx === 0 && showTour
+                  ? {
+                      position: "relative",
+                      zIndex: 50,
+                      animation: "blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+                      borderColor: '#3c695a',
+                      boxShadow: '0 0 0 2px #3c695a',
+                    }
+                  : {}),
+              }}
             >
               <div>
                 <Image
@@ -237,6 +197,12 @@ const BookSelectionPage = () => {
         <p className="text-gray-600 mb-6">Start with a blank canvas and add your own content</p>
         <Link href="/projects/pdf-to-ppt/prompts"><Button>Create blank presentation</Button></Link>
       </div> */}
+      <style>{`
+        @keyframes blink-border {
+          0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
+          50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
+        }
+      `}</style>
     </div>
   );
 };

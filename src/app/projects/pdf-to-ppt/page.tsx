@@ -15,8 +15,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 // import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { createPortal } from "react-dom";
-import { IconClick } from "@/components/icons"; // Adjust the import based on your project structure
-
+import { IconHandFinger } from '@tabler/icons-react';
 interface Project {
   id: number; // Changed to number for sample data
   project_name: string;
@@ -168,23 +167,30 @@ export default function PdfToPptProjectsPage() {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* IconClick indicator instead of arrow or pulsing icon */}
+        {/* IconHandFinger indicator instead of arrow or pulsing icon */}
         <span
           style={{
             position: "fixed",
-            left: centerX - 24,
-            top: centerY - 64, // position above the element
+            left: centerX - -4,
+            top: centerY - -24, // position above the element
             zIndex: 10002,
             pointerEvents: "none",
             fontSize: 48,
-            color: "#ffdd33",
+            color: "#3c695a",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            // animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
           }}
         >
-          <IconClick stroke={2} />
+          <IconHandFinger stroke={2} />
         </span>
+        <style>{`
+          @keyframes blink-cursor-smooth {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+          }
+        `}</style>
         {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
         <div
           style={{
@@ -237,7 +243,15 @@ export default function PdfToPptProjectsPage() {
           passHref
           style={{ position: "relative", zIndex: showTour ? 10001 : undefined }}
         >
-          <Button ref={newPresentationBtnRef}>New Presentation</Button>
+          <Button
+            ref={newPresentationBtnRef}
+            style={{
+              animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
+              // You can add more styles if needed
+            }}
+          >
+            New Presentation
+          </Button>
         </Link>
       </div>
 
@@ -289,6 +303,12 @@ export default function PdfToPptProjectsPage() {
           ))}
         </TableBody>
       </Table>
+      <style>{`
+        @keyframes blink-cursor-smooth {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+        }
+      `}</style>
     </div>
   );
 }

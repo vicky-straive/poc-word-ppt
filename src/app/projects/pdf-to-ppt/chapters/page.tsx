@@ -8,6 +8,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useTourStore } from "../tourStore";
 import { createPortal } from "react-dom";
+import { IconClick } from "@tabler/icons-react";
 
 interface Chapter {
   number: number;
@@ -138,12 +139,10 @@ const ChaptersPage = () => {
 
   const SpotlightOverlay = () => {
     if (!showTour) return null;
-    // Calculate center of the spotlight for the pulsing indicator
     const centerX = spotlightStyle.left + spotlightStyle.width / 2;
     const centerY = spotlightStyle.top + spotlightStyle.height / 2;
     return createPortal(
       <>
-        {/* Transparent Mask - pointerEvents none so it never blocks interaction */}
         <svg
           width="100vw"
           height="100vh"
@@ -152,7 +151,7 @@ const ChaptersPage = () => {
             inset: 0,
             width: "100vw",
             height: "100vh",
-            pointerEvents: "none", // SVG never blocks pointer events
+            pointerEvents: "none",
             zIndex: 40,
           }}
         >
@@ -169,7 +168,6 @@ const ChaptersPage = () => {
               />
             </mask>
           </defs>
-          {/* Transparent mask, no color */}
           <rect
             x="0"
             y="0"
@@ -179,62 +177,30 @@ const ChaptersPage = () => {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* Pulsing focus indicator */}
-        <div
+        {/* IconClick pointer indicator */}
+        <span
           style={{
             position: "fixed",
-            left: centerX - 32,
-            top: centerY - 32,
-            width: 64,
-            height: 64,
-            pointerEvents: "none",
+            left: centerX - 24,
+            top: centerY - 24,
             zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#3c695a",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
           }}
         >
-          <span
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              background: "rgba(255, 221, 51, 0.18)", // yellow
-              boxShadow: "0 0 0 0 rgba(255,221,51,0.5)",
-              animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
-              zIndex: 1,
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              left: 16,
-              top: 16,
-              width: 32,
-              height: 32,
-              borderRadius: "50%",
-              background: "rgba(255, 221, 51, 0.25)", // yellow
-              zIndex: 2,
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              left: 28,
-              top: 28,
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: "#ffdd33", // yellow
-              zIndex: 3,
-              boxShadow: "0 0 8px 2px #ffdd3355",
-            }}
-          />
-        </div>
-        {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
+          <IconClick stroke={2} />
+        </span>
+        <style>{`
+          @keyframes blink-cursor-smooth {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+          }
+        `}</style>
         <div
           style={{
             position: "fixed",
@@ -243,23 +209,6 @@ const ChaptersPage = () => {
             pointerEvents: "none",
           }}
         />
-        {/* Pulsing ring animation keyframes */}
-        <style>{`
-          @keyframes pulse-ring {
-            0% {
-              transform: scale(0.7);
-              opacity: 0.7;
-            }
-            70% {
-              transform: scale(1.2);
-              opacity: 0.15;
-            }
-            100% {
-              transform: scale(1.4);
-              opacity: 0;
-            }
-          }
-        `}</style>
       </>,
       document.body
     );

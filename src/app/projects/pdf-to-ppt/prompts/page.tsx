@@ -1,16 +1,118 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useSearchParams } from "next/navigation";
+import { IconClick } from "@tabler/icons-react";
+import { createPortal } from "react-dom";
+import { useTourStore } from "../tourStore";
 
 import { useRef } from "react";
 
 const PromptsPage = () => {
   const promptSectionRef = useRef<HTMLDivElement | null>(null);
+  const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
+  const { tourSkipped, hydrate } = useTourStore();
+  const [showTour, setShowTour] = useState(false);
+
+  useEffect(() => {
+    hydrate();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (!tourSkipped) setShowTour(true);
+    else setShowTour(false);
+  }, [tourSkipped]);
+
+  useEffect(() => {
+    if (showTour && promptSectionRef.current) {
+      const rect = promptSectionRef.current.getBoundingClientRect();
+      setSpotlightRect(rect);
+    }
+  }, [showTour]);
+
+  const SpotlightOverlay = () => {
+    if (!showTour || !spotlightRect) return null;
+    const centerX = spotlightRect.left + spotlightRect.width / 2;
+    const centerY = spotlightRect.top + spotlightRect.height / 2;
+    return createPortal(
+      <>
+        <svg
+          width="100vw"
+          height="100vh"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none",
+            zIndex: 40,
+          }}
+        >
+          <defs>
+            <mask id="spotlight-mask">
+              <rect x="0" y="0" width="100vw" height="100vh" fill="white" />
+              <rect
+                x={spotlightRect.left}
+                y={spotlightRect.top}
+                width={spotlightRect.width}
+                height={spotlightRect.height}
+                rx="8"
+                fill="black"
+              />
+            </mask>
+          </defs>
+          <rect
+            x="0"
+            y="0"
+            width="100vw"
+            height="100vh"
+            fill="transparent"
+            mask="url(#spotlight-mask)"
+          />
+        </svg>
+        {/* IconClick pointer indicator */}
+        <span
+          style={{
+            position: "fixed",
+            left: centerX - 24,
+            top: centerY - 24,
+            zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#ffdd33",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation:
+              "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+          }}
+        >
+          <IconClick stroke={2} />
+        </span>
+        <style>{`
+          @keyframes blink-cursor-smooth {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+          }
+        `}</style>
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 41,
+            pointerEvents: "none",
+          }}
+        />
+      </>,
+      document.body
+    );
+  };
+
   const predefinedPrompts = [
     {
       title: "Extract key concepts",
@@ -29,17 +131,6 @@ const PromptsPage = () => {
       description: "Extract and format text for PowerPoint slides.",
     },
   ];
-  const [selectedAltTextOption, setSelectedAltTextOption] = useState<
-    string | null
-  >(null);
-  const [selectedTextExtractionPrompt, setSelectedTextExtractionPrompt] =
-    useState<string | null>(null);
-
-  const [
-    selectedMarkdownFormattingOption,
-    setSelectedMarkdownFormattingOption,
-  ] = useState<string | null>(null);
-
   const altTextOptions = [
     {
       id: "generate-alt-text",
@@ -54,7 +145,9 @@ const PromptsPage = () => {
         "Create detailed ARIA descriptions for accessibility purposes for all images.",
     },
   ];
-
+  const [selectedAltTextOption, setSelectedAltTextOption] = useState<string | null>(null);
+  const [selectedTextExtractionPrompt, setSelectedTextExtractionPrompt] = useState<string | null>(null);
+  const [selectedMarkdownFormattingOption, setSelectedMarkdownFormattingOption] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const book = searchParams.get("book") || "";
   const chapter = searchParams.get("chapter") || "";
@@ -201,61 +294,7 @@ const PromptsPage = () => {
         </Tabs>
       </div>
 
-      <div
-        style={{
-          position: "fixed",
-          left: "50%",
-          top: "50%",
-          width: 64,
-          height: 64,
-          pointerEvents: "none",
-          zIndex: 10002,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <span
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: 64,
-            height: 64,
-            borderRadius: "50%",
-            background: "rgba(255, 221, 51, 0.18)", // yellow
-            boxShadow: "0 0 0 0 rgba(255,221,51,0.5)",
-            animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
-            zIndex: 1,
-          }}
-        />
-        <span
-          style={{
-            position: "absolute",
-            left: 16,
-            top: 16,
-            width: 32,
-            height: 32,
-            borderRadius: "50%",
-            background: "rgba(255, 221, 51, 0.25)", // yellow
-            zIndex: 2,
-          }}
-        />
-        <span
-          style={{
-            position: "absolute",
-            left: 28,
-            top: 28,
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: "#ffdd33", // yellow
-            zIndex: 3,
-            boxShadow: "0 0 8px 2px #ffdd3355",
-          }}
-        />
-      </div>
+      <SpotlightOverlay />
     </div>
   );
 };
