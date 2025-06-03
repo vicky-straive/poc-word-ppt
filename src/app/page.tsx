@@ -35,7 +35,7 @@ export default function Home() {
   const setTourSkipped = useTourStore((state) => state.setTourSkipped);
   const hydrateTour = useTourStore((state) => state.hydrate);
   const tourSkipped = useTourStore((state) => state.tourSkipped);
-  const [, setPointerPos] = useState<{left: number, top: number}>({left: 0, top: 0});
+  const [pointerPos, setPointerPos] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
 
   useEffect(() => {
     hydrateTour();
@@ -52,8 +52,8 @@ export default function Home() {
     if (showTour && pdfCardRef.current) {
       const rect = pdfCardRef.current.getBoundingClientRect();
       setPointerPos({
-        left: rect.left + rect.width / 2 - 24, // center pointer (icon ~48px)
-        top: rect.bottom + 12 // 12px below card
+        left: rect.left + rect.width / 2 - 24 + window.scrollX, // center pointer (icon ~48px)
+        top: rect.bottom + 12 + window.scrollY // 12px below card
       });
     }
   }, [showTour]);
@@ -133,8 +133,8 @@ export default function Home() {
         <span
           style={{
             position: "fixed",
-            left: 635,
-            top: 520,
+            left: pointerPos.left,
+            top: pointerPos.top,
             zIndex: 10002,
             pointerEvents: "none",
             fontSize: 48,
@@ -143,7 +143,6 @@ export default function Home() {
             alignItems: "center",
             justifyContent: "center",
             animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
-            // transform: "scaleY(-1)",
           }}
         >
           <IconHandFinger stroke={2} />

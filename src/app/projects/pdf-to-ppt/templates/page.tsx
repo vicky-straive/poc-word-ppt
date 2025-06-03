@@ -74,15 +74,9 @@ const TemplatesPage = () => {
   useEffect(() => {
     if (!tourSkipped) {
       setShowTour(true);
-      // Disable scroll
-      document.body.style.overflow = "hidden";
     } else {
       setShowTour(false);
-      document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [tourSkipped]);
 
   // Ensure tour is shown on first visit if not skipped
@@ -158,7 +152,7 @@ const TemplatesPage = () => {
             pointerEvents: "none",
             fontSize: 48,
             color: "#ffdd33",
-            display: "flex",
+            display: "none",
             alignItems: "center",
             justifyContent: "center",
             animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
@@ -186,66 +180,69 @@ const TemplatesPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* TOUR SPOTLIGHT OVERLAY */}
-      {showTour && spotlightRect && (
-        <SpotlightOverlay />
-      )}
-      <div className="flex flex-col gap-4 items-center justify-between mb-8">
-        <div className="">
-          <h1 className="text-2xl font-bold mb-4">
-            Want to create a stunning presentation? Look no further! Choose a
-            template that best suits your requirements.
-          </h1>
-          <p className="text-2xl font-bold mb-8"></p>
+    <>
+      <style>{`body { overflow-x: hidden !important; }`}</style>
+      <div className="container mx-auto px-4 py-8 overflow-x-hidden">
+        {/* TOUR SPOTLIGHT OVERLAY */}
+        {showTour && spotlightRect && (
+          <SpotlightOverlay />
+        )}
+        <div className="flex flex-col gap-4 items-center justify-between mb-8">
+          <div className="">
+            <h1 className="text-2xl font-bold mb-4">
+              Want to create a stunning presentation? Look no further! Choose a
+              template that best suits your requirements.
+            </h1>
+            <p className="text-2xl font-bold mb-8"></p>
+          </div>
         </div>
-      </div>
-      {(book || chapter) && (
-        <div className="mb-6 mt-8 flex gap-4">
-          {book && (
-            <h2 className="text-gray-600 mb-4 text-start">Book: {book}</h2>
-          )}
-          <span className="text-gray-400">|</span>
-          {chapterDisplay}
-        </div>
-      )}
+        {(book || chapter) && (
+          <div className="mb-6 mt-8 flex gap-4">
+            {book && (
+              <h2 className="text-gray-600 mb-4 text-start">Book: {book}</h2>
+            )}
+            <span className="text-gray-400">|</span>
+            {chapterDisplay}
+          </div>
+        )}
 
-      <h2 className="text-xl font-bold mb-4">Select a template</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" ref={gridRef}>
-        {templateOptions.map((tpl) => (
-          <button
-            key={tpl.name}
-            className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 bg-white"
-            onClick={() => handleTemplateSelect(tpl.name)}
-            style={
-              showTour
-                ? {
-                    animation: 'blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
-                    borderColor: '#3c695a',
-                    boxShadow: '0 0 0 2px #3c695a',
-                  }
-                : { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
-            }
-          >
-            <p className="text-md mb-5 font-medium">{tpl.name}</p>
-            <Image
-              src={tpl.image}
-              alt={tpl.name}
-              width={400}
-              height={128}
-              className="w-full h-auto object-cover object-top rounded"
-            />
-            <p className="text-sm mt-5">{tpl.description}</p>
-          </button>
-        ))}
+        <h2 className="text-xl font-bold mb-4">Select a template</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" ref={gridRef}>
+          {templateOptions.map((tpl) => (
+            <button
+              key={tpl.name}
+              className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 bg-white"
+              onClick={() => handleTemplateSelect(tpl.name)}
+              style={
+                showTour
+                  ? {
+                      animation: 'blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
+                      borderColor: '#3c695a',
+                      boxShadow: '0 0 0 2px #3c695a',
+                    }
+                  : { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
+              }
+            >
+              <p className="text-md mb-5 font-medium">{tpl.name}</p>
+              <Image
+                src={tpl.image}
+                alt={tpl.name}
+                width={400}
+                height={128}
+                className="w-full h-auto object-cover object-top rounded"
+              />
+              <p className="text-sm mt-5">{tpl.description}</p>
+            </button>
+          ))}
+        </div>
+        <style>{`
+          @keyframes blink-border {
+            0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
+            50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
+          }
+        `}</style>
       </div>
-      <style>{`
-        @keyframes blink-border {
-          0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
-          50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
-        }
-      `}</style>
-    </div>
+    </>
   );
 };
 
