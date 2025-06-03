@@ -100,7 +100,7 @@ const PromptsPage = () => {
     <div className="container mx-auto py-8 p-8">
       {/* TOUR SPOTLIGHT OVERLAY */}
       {showTour && spotlightRect && createPortal(
-        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'auto'}}>
+        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none'}}>
           {/* SVG Mask */}
           <svg width="100vw" height="100vh" style={{position: 'fixed', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}}>
             <defs>
@@ -132,6 +132,7 @@ const PromptsPage = () => {
               padding: 24,
               fontSize: 18,
               color: '#222',
+              pointerEvents: 'auto', // Tooltip remains interactive
             }}
           >
             <div className="mb-4 font-semibold">Enter a prompt and click Generate Markdown</div>

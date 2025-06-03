@@ -90,7 +90,7 @@ const ExtractedMarkdownPage = () => {
     <div className="container mx-auto px-8 py-8">
       {/* TOUR SPOTLIGHT OVERLAY */}
       {showTour && spotlightRect && createPortal(
-        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'auto'}}>
+        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none'}}>
           {/* SVG Mask */}
           <svg width="100vw" height="100vh" style={{position: 'fixed', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}}>
             <defs>
@@ -122,6 +122,7 @@ const ExtractedMarkdownPage = () => {
               padding: 24,
               fontSize: 18,
               color: '#222',
+              pointerEvents: 'auto', // Tooltip remains interactive
             }}
           >
             <div className="mb-4 font-semibold">Scroll down if needed and click Generate Slides</div>
