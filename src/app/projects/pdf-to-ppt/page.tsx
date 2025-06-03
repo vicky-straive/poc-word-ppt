@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 // import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { createPortal } from "react-dom";
+import { IconClick } from "@/components/icons"; // Adjust the import based on your project structure
 
 interface Project {
   id: number; // Changed to number for sample data
@@ -167,61 +168,23 @@ export default function PdfToPptProjectsPage() {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* Pulsing focus indicator */}
-        <div
+        {/* IconClick indicator instead of arrow or pulsing icon */}
+        <span
           style={{
             position: "fixed",
-            left: centerX - 32,
-            top: centerY - 32,
-            width: 64,
-            height: 64,
-            pointerEvents: "none",
+            left: centerX - 24,
+            top: centerY - 64, // position above the element
             zIndex: 10002,
+            pointerEvents: "none",
+            fontSize: 48,
+            color: "#ffdd33",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              background: "rgba(255, 221, 51, 0.18)", // yellow
-              boxShadow: "0 0 0 0 rgba(255,221,51,0.5)",
-              animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
-              zIndex: 1,
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              left: 16,
-              top: 16,
-              width: 32,
-              height: 32,
-              borderRadius: "50%",
-              background: "rgba(255, 221, 51, 0.25)", // yellow
-              zIndex: 2,
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              left: 28,
-              top: 28,
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: "#ffdd33", // yellow
-              zIndex: 3,
-              boxShadow: "0 0 8px 2px #ffdd3355",
-            }}
-          />
-        </div>
+          <IconClick stroke={2} />
+        </span>
         {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
         <div
           style={{
