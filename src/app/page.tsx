@@ -1,8 +1,7 @@
 'use client'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useTourStore } from "@/app/projects/pdf-to-ppt/tourStore";
 import { IconHandFinger } from '@tabler/icons-react';
@@ -35,7 +34,6 @@ export default function Home() {
   const setTourSkipped = useTourStore((state) => state.setTourSkipped);
   const hydrateTour = useTourStore((state) => state.hydrate);
   const tourSkipped = useTourStore((state) => state.tourSkipped);
-  const [pointerPos, setPointerPos] = useState<{ left: number; top: number }>({ left: 0, top: 0 });
 
   useEffect(() => {
     hydrateTour();
@@ -47,16 +45,6 @@ export default function Home() {
       setShowTour(true);
     }
   }, [tourSkipped, setShowTour]);
-
-  useEffect(() => {
-    if (showTour && pdfCardRef.current) {
-      const rect = pdfCardRef.current.getBoundingClientRect();
-      setPointerPos({
-        left: rect.left + rect.width / 2 - 24 + window.scrollX, // center pointer (icon ~48px)
-        top: rect.bottom + 12 + window.scrollY // 12px below card
-      });
-    }
-  }, [showTour]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h- py-12 px-4">
@@ -73,28 +61,60 @@ export default function Home() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full m-8">
         {tiles.map((tile, index) => {
           const isPdfToPpt = tile.title === "PDF to PPT";
-          return (
-            <Card
-              key={index}
-              ref={isPdfToPpt ? pdfCardRef : undefined}
-              className={`transform transition-transform ${
-                isPdfToPpt
-                  ? `hover:scale-105 hover:shadow-lg cursor-pointer ${showTour ? "glow-border" : ""}`
-                  : "opacity-90 cursor-not-allowed pointer-events-none"
-              }`}
-            >
-              {isPdfToPpt ? (
-                <Link href={tile.href!} passHref>
-                  <div className="flex flex-col h-auto">
-                    <CardHeader>
-                      <CardTitle>{tile.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow ">
-                      <p>{tile.description}</p>
-                    </CardContent>
-                  </div>
-                </Link>
-              ) : (
+          const cardContent = (
+            <div className="flex flex-col h-auto">
+              <CardHeader>
+                <CardTitle>{tile.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow ">
+                <p>{tile.description}</p>
+              </CardContent>
+              {/* Hand pointer absolutely inside the card when tour is active */}
+              {isPdfToPpt && showTour && (
+                <span
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "100%",
+                    transform: "translate(-50%, 12px)",
+                    zIndex: 10002,
+                    pointerEvents: "none",
+                    fontSize: 48,
+                    color: "#3c695a",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+                  }}
+                >
+                  <IconHandFinger stroke={2} />
+                </span>
+              )}
+            </div>
+          );
+          if (isPdfToPpt) {
+            return (
+              <Card
+                key={index}
+                ref={pdfCardRef}
+                className={`transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer${showTour ? " glow-border" : ""}`}
+                style={showTour ? { position: "relative", zIndex: 10 } : {}}
+                onClick={() => {
+                  window.location.href = tile.href!;
+                }}
+                tabIndex={0}
+                role="button"
+                aria-label="Go to PDF to PPT"
+              >
+                {cardContent}
+              </Card>
+            );
+          } else {
+            return (
+              <Card
+                key={index}
+                className="transform transition-transform opacity-90 cursor-not-allowed pointer-events-none"
+              >
                 <div className="flex flex-col h-auto">
                   <CardHeader>
                     <CardTitle>{tile.title}</CardTitle>
@@ -103,9 +123,9 @@ export default function Home() {
                     <p>{tile.description}</p>
                   </CardContent>
                 </div>
-              )}
-            </Card>
-          );
+              </Card>
+            );
+          }
         })}
       </div>
       {/* Show Guide button fixed to bottom right */}
@@ -129,25 +149,6 @@ export default function Home() {
       >
         {showTour ? "Skip Guide" : "Show Guide"}
       </Button>
-      {showTour && (
-        <span
-          style={{
-            position: "fixed",
-            left: pointerPos.left,
-            top: pointerPos.top,
-            zIndex: 10002,
-            pointerEvents: "none",
-            fontSize: 48,
-            color: "#3c695a",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
-          }}
-        >
-          <IconHandFinger stroke={2} />
-        </span>
-      )}
       <style>{`
         @keyframes glow-border {
           0%, 100% { box-shadow: 0 0 0 2px #3c695a, 0 0 8px 4px #3c695a80; border-color: #3c695a; }

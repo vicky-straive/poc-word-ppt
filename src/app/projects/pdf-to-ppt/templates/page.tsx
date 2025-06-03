@@ -216,14 +216,14 @@ const TemplatesPage = () => {
           {templateOptions.map((tpl) => (
             <button
               key={tpl.name}
-              className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 bg-white"
+              className={`border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 bg-white${showTour ? " border-pulse" : ""}`}
               onClick={() => handleTemplateSelect(tpl.name)}
               style={
                 showTour
                   ? {
-                      animation: 'blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
                       borderColor: '#3c695a',
-                      boxShadow: '0 0 0 2px #3c695a',
+                      boxShadow: '0 0 0 2px #3c695a80',
+                      transition: 'box-shadow 0.3s, border-color 0.3s',
                     }
                   : { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
               }
@@ -241,9 +241,21 @@ const TemplatesPage = () => {
           ))}
         </div>
         <style>{`
-          @keyframes blink-border {
-            0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
-            50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
+          @keyframes border-pulse-anim {
+            0%, 100% {
+              box-shadow: 0 0 0 2px rgb(34, 158, 75);
+              border-color: rgb(34, 158, 75);
+            }
+            50% {
+              box-shadow: 0 0 0 6px rgb(34, 158, 75);
+              border-color: #3c695a;
+            }
+          }
+          .border-pulse {
+            border-width: 2px !important;
+            animation: border-pulse-anim 1.4s infinite;
+            box-shadow: 0 0 0 2px rgb(34, 158, 75);
+            border-color: rgb(34, 158, 75) !important;
           }
         `}</style>
       </div>

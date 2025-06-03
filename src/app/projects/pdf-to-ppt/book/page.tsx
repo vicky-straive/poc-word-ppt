@@ -209,15 +209,13 @@ const BookSelectionPage = () => {
           <Link href="/projects/pdf-to-ppt/prompts"><Button>Create blank presentation</Button></Link>
         </div> */}
         <style>{`
-          @keyframes blink-border {
-            0%, 100% { box-shadow: 0 0 0 2px rgb(34, 158, 75); border-color: rgb(34, 158, 75); }
-            50% { box-shadow: 0 0 0 6px rgb(34, 158, 75); border-color: #3c695a; }
+          @keyframes glow-border {
+            0%, 100% { box-shadow: 0 0 0 2px #3c695a, 0 0 8px 4px #3c695a80; border-color: #3c695a; }
+            50% { box-shadow: 0 0 0 2px #3c695a80, 0 0 16px 8px #3c695a80; border-color: #3c695a80; }
           }
-          .border-pulse {
-            border-width: 2px !important;
-            animation: border-pulse-anim 1.4s infinite;
-            box-shadow: 0 0 0 2px rgb(34, 158, 75);
-            border-color: rgb(34, 158, 75) !important;
+          .glow-border {
+            animation: glow-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite;
+            border-color: #3c695a !important;
           }
           @keyframes border-pulse-anim {
             0%, 100% {
@@ -228,6 +226,12 @@ const BookSelectionPage = () => {
               box-shadow: 0 0 0 6px rgb(34, 158, 75);
               border-color: #3c695a;
             }
+          }
+          .border-pulse {
+            border-width: 2px !important;
+            animation: border-pulse-anim 1.4s infinite;
+            box-shadow: 0 0 0 2px rgb(34, 158, 75);
+            border-color: rgb(34, 158, 75) !important;
           }
         `}</style>
       </div>

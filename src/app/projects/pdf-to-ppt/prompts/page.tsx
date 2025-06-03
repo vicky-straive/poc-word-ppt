@@ -168,7 +168,7 @@ const PromptsPage = () => {
           >
             <Button
               className={showTour ? "border-pulse relative self-end" : "self-end"}
-              style={showTour ? { borderColor: '#3c695a', boxShadow: '0 0 0 2px #3c695a80', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}
+              style={showTour ? { borderColor: '#3c695a', boxShadow: '0 0 0 2px rgb(34, 158, 75)', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}
             >
               Generate Markdown
             </Button>
@@ -304,17 +304,17 @@ const PromptsPage = () => {
         .border-pulse {
           border-width: 2px !important;
           animation: border-pulse-anim 1.4s infinite;
-          box-shadow: 0 0 0 2px #3c695a80;
-          border-color: #3c695a !important;
+          box-shadow: 0 0 0 2px rgba(64, 151, 122, 0.5);
+          border-color:rgb(73, 228, 122) !important;
         }
         @keyframes border-pulse-anim {
           0%, 100% {
-            box-shadow: 0 0 0 2px #3c695a80;
-            border-color: #3c695a;
+            box-shadow: 0 0 0 2px rgb(34, 158, 75);
+            border-color:rgb(65, 208, 160);
           }
           50% {
             box-shadow: 0 0 0 6px #3c695a40;
-            border-color: #3c695a80;
+            border-color: rgb(41, 215, 99);
           }
         }
       `}</style>
