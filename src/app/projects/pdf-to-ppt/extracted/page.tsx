@@ -28,7 +28,7 @@ const ExtractedMarkdownPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
   const [showTour, setShowTour] = useState(false);
-  const { tourSkipped, setTourSkipped } = useTourStore();
+  const { tourSkipped } = useTourStore();
 
   useEffect(() => {
     if (!tourSkipped) {
@@ -76,17 +76,6 @@ const ExtractedMarkdownPage = () => {
     }
   }, [markdownPath]);
 
-  // Mark the tour as completed when leaving this page
-  useEffect(() => {
-    return () => {
-      // Mark the tour as completed when leaving this page
-      if (!tourSkipped) {
-        setTourSkipped(true);
-      }
-      document.body.style.overflow = "";
-    };
-  }, [tourSkipped, setTourSkipped]);
-
   const SpotlightOverlay = () => {
     if (!showTour) return null;
     return null;
@@ -116,22 +105,12 @@ const ExtractedMarkdownPage = () => {
       </div>
 
       <div className="flex justify-end space-x-4">
-        <Button variant="outline" asChild onClick={() => {
-          if (!tourSkipped) {
-            setTourSkipped(true);
-          }
-        }}>
+        <Button variant="outline" asChild>
           <Link href={`/projects/pdf-to-ppt/prompts?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(template)}`}>Back</Link>
         </Button>
         <span ref={buttonRef} style={{display: 'inline-flex', position: 'relative'}}>
           <Button asChild
-            style={showTour ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' } : {}}
-            onClick={() => {
-              if (!tourSkipped) {
-                setTourSkipped(true);
-              }
-            }}
-          >
+            style={showTour ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' } : {}}>
             <Link href={`/projects/pdf-to-ppt/processing?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&template=${encodeURIComponent(template)}`}>Generate Slides</Link>
           </Button>
           {showTour && (

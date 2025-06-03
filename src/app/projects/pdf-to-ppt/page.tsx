@@ -233,7 +233,7 @@ export default function PdfToPptProjectsPage() {
           className="bg-green-700 text-white px-4 py-2 rounded shadow-lg hover:bg-green-800"
           onClick={handleStartTour}
         >
-          Start Tour
+          Show Guide
         </button>
       )}
       <div className="flex justify-between items-center mb-6">

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import templateData from "../templates/templateData.json";
 import { IconRefresh } from "@tabler/icons-react";
@@ -13,6 +13,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTourStore } from "../tourStore";
 
 function PreviewPageInner() {
   const searchParams = useSearchParams();
@@ -33,6 +34,12 @@ function PreviewPageInner() {
   }
 
   const [selectedImage, setSelectedImage] = useState(images[0] || "");
+
+  const { setTourSkipped } = useTourStore();
+  // Mark the tour as completed as soon as this page mounts
+  useEffect(() => {
+    setTourSkipped(true);
+  }, [setTourSkipped]);
 
   // If no images, show a message
   if (!images.length) {
