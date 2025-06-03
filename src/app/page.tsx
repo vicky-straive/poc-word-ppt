@@ -33,7 +33,20 @@ export default function Home() {
   const showTour = useTourStore((state) => state.showTour);
   const setShowTour = useTourStore((state) => state.setShowTour);
   const setTourSkipped = useTourStore((state) => state.setTourSkipped);
+  const hydrateTour = useTourStore((state) => state.hydrate);
+  const tourSkipped = useTourStore((state) => state.tourSkipped);
   const [, setPointerPos] = useState<{left: number, top: number}>({left: 0, top: 0});
+
+  useEffect(() => {
+    hydrateTour();
+  }, [hydrateTour]);
+
+  useEffect(() => {
+    // If not skipped, activate the tour by default
+    if (!tourSkipped) {
+      setShowTour(true);
+    }
+  }, [tourSkipped, setShowTour]);
 
   useEffect(() => {
     if (showTour && pdfCardRef.current) {
@@ -110,6 +123,7 @@ export default function Home() {
             setTourSkipped(true);
           } else {
             setShowTour(true);
+            setTourSkipped(false);
           }
         }}
       >

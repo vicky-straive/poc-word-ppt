@@ -15,7 +15,9 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 // import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { createPortal } from "react-dom";
-import { IconHandFinger } from "@tabler/icons-react";
+import { IconHandFinger } from '@tabler/icons-react';
+import { useTourStore } from "./tourStore";
+
 interface Project {
   id: number; // Changed to number for sample data
   project_name: string;
@@ -72,8 +74,6 @@ export default function PdfToPptProjectsPage() {
 
   const [projects] = useState<Project[]>(sampleProjects);
   const [filter, setFilter] = useState("All");
-  const [showTour, setShowTour] = useState(false);
-  // const [tourSkipped, setTourSkipped] = useState(false);
   const newPresentationBtnRef = useRef<HTMLButtonElement | null>(null);
   const [spotlightStyle, setSpotlightStyle] = useState({
     left: 0,
@@ -82,13 +82,12 @@ export default function PdfToPptProjectsPage() {
     height: 0,
   });
 
+  const showTour = useTourStore((state) => state.showTour);
+  const hydrateTour = useTourStore((state) => state.hydrate);
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const skipped = localStorage.getItem("pptTourSkipped");
-      // setTourSkipped(skipped === "true");
-      if (!skipped) setShowTour(true);
-    }
-  }, []);
+    hydrateTour();
+  }, [hydrateTour]);
 
   useEffect(() => {
     if (showTour && newPresentationBtnRef.current) {
@@ -101,12 +100,6 @@ export default function PdfToPptProjectsPage() {
       });
     }
   }, [showTour]);
-
-  // const handleStartTour = () => {
-  //   setShowTour(true);
-  //   setTourSkipped(false);
-  //   localStorage.removeItem("pptTourSkipped");
-  // };
 
   // Simple client-side filtering for demonstration
   const filteredProjects =
@@ -226,8 +219,6 @@ export default function PdfToPptProjectsPage() {
     <div className="container mx-auto py-8 p-8">
       {/* Spotlight Overlay */}
       <SpotlightOverlay />
-      {/* Floating Start Tour Button */}
-
       <div className="flex justify-between items-center mb-6">
         <h2>My Presentations</h2>
         <Link
@@ -238,16 +229,7 @@ export default function PdfToPptProjectsPage() {
           <Button
             ref={newPresentationBtnRef}
             className={showTour ? "relative border-pulse" : undefined}
-            style={
-              showTour
-                ? {
-                    zIndex: 1,
-                    borderColor: "#3c695a",
-                    boxShadow: "0 0 0 2px #3c695a80",
-                    transition: "box-shadow 0.3s, border-color 0.3s",
-                  }
-                : {}
-            }
+            style={showTour ? { zIndex: 1, borderColor: '#3c695a', boxShadow: '0 0 0 2px #3c695a80', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}
           >
             New Presentation
           </Button>
