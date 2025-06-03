@@ -37,34 +37,41 @@ export default function Home() {
         Operationalizing AI for Human-Centric Tasks
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full m-8">
-        {tiles.map((tile, index) => (
-          <Card
-            key={index}
-            className="transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer"
-          >
-            {tile.href ? (
-              <Link href={tile.href} passHref>
+        {tiles.map((tile, index) => {
+          const isPdfToPpt = tile.title === "PDF to PPT";
+          return (
+            <Card
+              key={index}
+              className={`transform transition-transform ${
+                isPdfToPpt
+                  ? "hover:scale-105 hover:shadow-lg cursor-pointer"
+                  : "opacity-90 cursor-not-allowed pointer-events-none"
+              }`}
+            >
+              {isPdfToPpt ? (
+                <Link href={tile.href!} passHref>
+                  <div className="flex flex-col h-auto">
+                    <CardHeader>
+                      <CardTitle>{tile.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow ">
+                      <p>{tile.description}</p>
+                    </CardContent>
+                  </div>
+                </Link>
+              ) : (
                 <div className="flex flex-col h-auto">
                   <CardHeader>
                     <CardTitle>{tile.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="flex-grow ">
+                  <CardContent className="flex-grow">
                     <p>{tile.description}</p>
                   </CardContent>
                 </div>
-              </Link>
-            ) : (
-              <div className="flex flex-col h-auto">
-                <CardHeader>
-                  <CardTitle>{tile.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p>{tile.description}</p>
-                </CardContent>
-              </div>
-            )}
-          </Card>
-        ))}
+              )}
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
