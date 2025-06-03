@@ -114,9 +114,9 @@ const TemplatesPage = () => {
                 <rect x="0" y="0" width="100%" height="100%" fill="white" />
                 <rect
                   x={spotlightRect.left}
-                  y={spotlightRect.top}
+                  y={spotlightRect.top - 0}
                   width={spotlightRect.width}
-                  height={spotlightRect.height}
+                  height={spotlightRect.height + 100}
                   rx={16}
                   fill="black"
                 />
@@ -144,7 +144,7 @@ const TemplatesPage = () => {
             <div className="mb-6 text-base text-gray-600">Pick a template style for your presentation. You can preview each before continuing.</div>
             <div className="flex gap-3 justify-end">
               <button onClick={handleTourSkip} className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Skip</button>
-              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-blue-600 text-white font-medium hover:bg-blue-700">Next</button>
+              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-green-800 text-white font-medium hover:bg-green-700">Next</button>
             </div>
           </div>
         </div>,

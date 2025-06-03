@@ -217,16 +217,16 @@ export default function PdfToPptProjectsPage() {
           </div>
           <div className="flex gap-2 mt-2">
             <button
-              className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
-              onClick={() => setShowTour(false)}
-            >
-              Next
-            </button>
-            <button
               className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
               onClick={handleSkipTour}
             >
               Skip
+            </button>
+            <button
+              className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
+              onClick={() => setShowTour(false)}
+            >
+              Next
             </button>
           </div>
         </div>

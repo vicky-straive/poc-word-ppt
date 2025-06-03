@@ -138,7 +138,7 @@ const PromptsPage = () => {
             <div className="mb-6 text-base text-gray-600">Type your custom instruction, then press the Generate Markdown button to continue.</div>
             <div className="flex gap-3 justify-end">
               <button onClick={handleTourSkip} className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Skip</button>
-              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-blue-600 text-white font-medium hover:bg-blue-700">Next</button>
+              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-green-800 text-white font-medium hover:bg-green-700">Next</button>
             </div>
           </div>
         </div>,
