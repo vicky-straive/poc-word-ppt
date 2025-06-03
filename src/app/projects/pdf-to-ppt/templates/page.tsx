@@ -181,6 +181,12 @@ const TemplatesPage = () => {
 
   return (
     <>
+      {/* Hide horizontal scroll globally for this page */}
+      <style>{`
+        html, body {
+          overflow-x: hidden !important;
+        }
+      `}</style>
       <div className="container mx-auto px-4 py-8 overflow-x-hidden">
         {/* TOUR SPOTLIGHT OVERLAY */}
         {showTour && spotlightRect && (

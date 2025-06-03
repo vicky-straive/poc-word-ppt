@@ -125,6 +125,27 @@ const ChaptersPage = () => {
                   : {}
               }
             >
+              {/* Hand pointer absolutely inside radio group when tour is active */}
+              {showTour && unitIndex === 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    left: "calc(100% + 24px)", // right of the group
+                    top: 10,
+                    zIndex: 10002,
+                    pointerEvents: "none",
+                    fontSize: 48,
+                    color: "#3c695a",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    animation:
+                      "move-left-right-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+                  }}
+                >
+                  <IconHandFinger stroke={2} />
+                </span>
+              )}
               {unit.chapters.map((chapter, chapterIndex) => (
                 <div
                   key={chapterIndex}
@@ -156,8 +177,6 @@ const ChaptersPage = () => {
 
   const SpotlightOverlay = () => {
     if (!showTour) return null;
-    const centerX = spotlightStyle.left + spotlightStyle.width / 2;
-    const centerY = spotlightStyle.top + spotlightStyle.height / 2;
     return createPortal(
       <>
         <svg
@@ -194,25 +213,6 @@ const ChaptersPage = () => {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* IconHandFinger pointer indicator */}
-        <span
-          style={{
-            position: "fixed",
-            left: centerX - -254,
-            top: centerY - 55,
-            zIndex: 10002,
-            pointerEvents: "none",
-            fontSize: 48,
-            color: "#3c695a",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            animation:
-              "move-left-right-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
-          }}
-        >
-          <IconHandFinger stroke={2} />
-        </span>
         <style>{`
           @keyframes move-left-right-smooth {
             0%, 100% { transform: scaleX(-1) rotate(90deg) translateY(0); }
@@ -225,14 +225,6 @@ const ChaptersPage = () => {
             50% { opacity: 0.8; }
           }
         `}</style>
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 41,
-            pointerEvents: "none",
-          }}
-        />
       </>,
       document.body
     );
