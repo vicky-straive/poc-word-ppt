@@ -217,7 +217,15 @@ const TemplatesPage = () => {
             key={tpl.name}
             className="border p-4 rounded-md text-center cursor-pointer hover:border-blue-500 bg-white"
             onClick={() => handleTemplateSelect(tpl.name)}
-            style={showTour ? { boxShadow: 'none', borderColor: '#e5e7eb' } : {}}
+            style={
+              showTour
+                ? {
+                    animation: 'blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
+                    borderColor: '#3c695a',
+                    boxShadow: '0 0 0 2px #3c695a',
+                  }
+                : { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
+            }
           >
             <p className="text-md mb-5 font-medium">{tpl.name}</p>
             <Image
@@ -231,6 +239,12 @@ const TemplatesPage = () => {
           </button>
         ))}
       </div>
+      <style>{`
+        @keyframes blink-border {
+          0%, 100% { box-shadow: 0 0 0 2px #3c695a; border-color: #3c695a; }
+          50% { box-shadow: 0 0 0 2px #3c695a80; border-color: #3c695a80; }
+        }
+      `}</style>
     </div>
   );
 };

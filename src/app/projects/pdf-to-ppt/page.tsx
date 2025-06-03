@@ -188,7 +188,7 @@ export default function PdfToPptProjectsPage() {
         <style>{`
           @keyframes blink-cursor-smooth {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
+            50% { opacity: 0.7; }
           }
         `}</style>
         {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
@@ -245,10 +245,11 @@ export default function PdfToPptProjectsPage() {
         >
           <Button
             ref={newPresentationBtnRef}
-            style={{
-              animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite',
-              // You can add more styles if needed
-            }}
+            style={
+              showTour
+                ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' }
+                : {}
+            }
           >
             New Presentation
           </Button>

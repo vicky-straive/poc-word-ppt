@@ -158,7 +158,9 @@ const BookSelectionPage = () => {
                       borderColor: '#3c695a',
                       boxShadow: '0 0 0 2px #3c695a',
                     }
-                  : {}),
+                  : idx === 0
+                    ? { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
+                    : {}),
               }}
             >
               <div>

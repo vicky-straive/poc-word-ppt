@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useSearchParams } from "next/navigation";
-import { IconClick } from "@tabler/icons-react";
+import { IconHandFinger } from "@tabler/icons-react";
 import { createPortal } from "react-dom";
 import { useTourStore } from "../tourStore";
 
@@ -75,29 +75,29 @@ const PromptsPage = () => {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* IconClick pointer indicator */}
+        {/* IconHandFinger pointer indicator */}
         <span
           style={{
             position: "fixed",
-            left: centerX - 24,
-            top: centerY - 24,
+            left: centerX - -650,
+            top: centerY - 30,
             zIndex: 10002,
             pointerEvents: "none",
             fontSize: 48,
-            color: "#ffdd33",
+            color: "#3c695a",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            animation:
-              "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+            // animation:
+              // "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
           }}
         >
-          <IconClick stroke={2} />
+          <IconHandFinger stroke={2} />
         </span>
         <style>{`
           @keyframes blink-cursor-smooth {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+            50% { opacity: 0.7; }
           }
         `}</style>
         <div
@@ -166,10 +166,19 @@ const PromptsPage = () => {
             )}&template=${encodeURIComponent(template)}`}
             passHref
           >
-            <Button className="self-end">Generate Markdown</Button>
+            <Button
+              className="self-end"
+              style={
+                showTour
+                  ? { animation: 'blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite' }
+                  : {}
+              }
+            >
+              Generate Markdown
+            </Button>
           </Link>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 mt-8">
           <Textarea placeholder="Enter your custom instruction here" rows={6} />
         </div>
       </div>

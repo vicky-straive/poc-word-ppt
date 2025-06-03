@@ -108,8 +108,10 @@ const ChaptersPage = () => {
               ref={unitIndex === 0 ? radioGroupRef : undefined}
               style={
                 showTour && unitIndex === 0
-                  ? { position: "relative", zIndex: 10001 }
-                  : {}
+                  ? { position: "relative", zIndex: 10001, animation: 'blink-border 1.2s cubic-bezier(0.4,0,0.2,1) infinite', borderColor: '#3c695a', boxShadow: '0 0 0 2pxrgb(255, 255, 255)' }
+                  : unitIndex === 0
+                    ? { boxShadow: 'none', borderColor: '#e5e7eb', animation: 'none' }
+                    : {}
               }
             >
               {unit.chapters.map((chapter, chapterIndex) => (
