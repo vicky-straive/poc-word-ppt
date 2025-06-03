@@ -115,6 +115,7 @@ const ChaptersPage = () => {
             <div
               role="radiogroup"
               ref={unitIndex === 0 ? radioGroupRef : undefined}
+              style={showTour && unitIndex === 0 ? { position: 'relative', zIndex: 10001 } : {}}
             >
               {unit.chapters.map((chapter, chapterIndex) => (
                 <div
@@ -150,14 +151,7 @@ const ChaptersPage = () => {
     return (
       typeof window !== "undefined" &&
       createPortal(
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 40,
-            pointerEvents: "auto",
-          }}
-        >
+        <>
           <svg
             width="100vw"
             height="100vh"
@@ -166,6 +160,7 @@ const ChaptersPage = () => {
               inset: 0,
               width: "100vw",
               height: "100vh",
+              pointerEvents: "none", // SVG never blocks pointer events
             }}
           >
             <defs>
@@ -195,11 +190,10 @@ const ChaptersPage = () => {
               position: "fixed",
               inset: 0,
               zIndex: 41,
-              pointerEvents: "auto",
+              pointerEvents: "none"
             }}
-            onClick={handleSkipTour}
           />
-        </div>,
+        </>,
         document.body
       )
     );

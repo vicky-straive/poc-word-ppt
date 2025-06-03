@@ -133,15 +133,8 @@ export default function PdfToPptProjectsPage() {
   const SpotlightOverlay = () => {
     if (!showTour) return null;
     return createPortal(
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 40,
-          pointerEvents: "auto",
-        }}
-      >
-        {/* Mask */}
+      <>
+        {/* Mask - pointerEvents none so it never blocks interaction */}
         <svg
           width="100vw"
           height="100vh"
@@ -150,6 +143,7 @@ export default function PdfToPptProjectsPage() {
             inset: 0,
             width: "100vw",
             height: "100vh",
+            pointerEvents: "none", // SVG never blocks pointer events
           }}
         >
           <defs>
@@ -174,17 +168,16 @@ export default function PdfToPptProjectsPage() {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* Click to skip area */}
+        {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
         <div
           style={{
             position: "fixed",
             inset: 0,
             zIndex: 41,
-            pointerEvents: "auto",
+            pointerEvents: "none",
           }}
-          onClick={handleSkipTour}
         />
-      </div>,
+      </>,
       document.body
     );
   };
@@ -243,7 +236,11 @@ export default function PdfToPptProjectsPage() {
       )}
       <div className="flex justify-between items-center mb-6">
         <h2>My Presentations</h2>
-        <Link href="/projects/pdf-to-ppt/book" passHref>
+        <Link
+          href="/projects/pdf-to-ppt/book"
+          passHref
+          style={{ position: "relative", zIndex: showTour ? 10001 : undefined }}
+        >
           <Button ref={newPresentationBtnRef}>New Presentation</Button>
         </Link>
       </div>

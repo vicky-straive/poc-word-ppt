@@ -106,7 +106,7 @@ const TemplatesPage = () => {
     <div className="container mx-auto px-4 py-8">
       {/* TOUR SPOTLIGHT OVERLAY */}
       {showTour && spotlightRect && createPortal(
-        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'auto'}}>
+        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none'}}>
           {/* SVG Mask */}
           <svg width="100vw" height="100vh" style={{position: 'fixed', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}}>
             <defs>
@@ -129,7 +129,7 @@ const TemplatesPage = () => {
             style={{
               position: 'absolute',
               left: spotlightRect.left,
-              top: Math.max(spotlightRect.top - 240, 16), // 140px above, but not offscreen
+              top: Math.max(spotlightRect.top - 240, 16),
               width: Math.min(spotlightRect.width, 340),
               zIndex: 51,
               background: 'white',
@@ -138,6 +138,7 @@ const TemplatesPage = () => {
               padding: 24,
               fontSize: 18,
               color: '#222',
+              pointerEvents: 'auto', // Tooltip remains interactive
             }}
           >
             <div className="mb-4 font-semibold">Choose a PowerPoint template</div>
