@@ -81,6 +81,7 @@ export default function PdfToPptProjectsPage() {
     width: 0,
     height: 0,
   });
+  const [pointerPos, setPointerPos] = useState<{ left: number; top: number } | null>(null);
 
   const showTour = useTourStore((state) => state.showTour);
   const hydrateTour = useTourStore((state) => state.hydrate);
@@ -101,6 +102,27 @@ export default function PdfToPptProjectsPage() {
     }
   }, [showTour]);
 
+  useEffect(() => {
+    function updatePointer() {
+      if (showTour && newPresentationBtnRef.current) {
+        const rect = newPresentationBtnRef.current.getBoundingClientRect();
+        setPointerPos({
+          left: rect.left - 46, // 16px to the left of the button
+          top: rect.top + rect.height / 1.2, // center vertically
+        });
+      } else {
+        setPointerPos(null);
+      }
+    }
+    updatePointer();
+    window.addEventListener('scroll', updatePointer, true);
+    window.addEventListener('resize', updatePointer);
+    return () => {
+      window.removeEventListener('scroll', updatePointer, true);
+      window.removeEventListener('resize', updatePointer);
+    };
+  }, [showTour]);
+
   // Simple client-side filtering for demonstration
   const filteredProjects =
     filter === "All"
@@ -119,9 +141,6 @@ export default function PdfToPptProjectsPage() {
   // Spotlight overlay component
   const SpotlightOverlay = () => {
     if (!showTour) return null;
-    // Calculate center of the spotlight for the pulsing indicator
-    const centerX = spotlightStyle.left + spotlightStyle.width / 2;
-    const centerY = spotlightStyle.top + spotlightStyle.height / 2;
     return createPortal(
       <>
         {/* Transparent Mask - pointerEvents none so it never blocks interaction */}
@@ -160,30 +179,6 @@ export default function PdfToPptProjectsPage() {
             mask="url(#spotlight-mask)"
           />
         </svg>
-        {/* IconHandFinger indicator instead of arrow or pulsing icon */}
-        <span
-          style={{
-            position: "fixed",
-            left: centerX - -4,
-            top: centerY - -24, // position above the element
-            zIndex: 10002,
-            pointerEvents: "none",
-            fontSize: 48,
-            color: "#3c695a",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            // animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
-          }}
-        >
-          <IconHandFinger stroke={2} />
-        </span>
-        <style>{`
-          @keyframes blink-cursor-smooth {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-          }
-        `}</style>
         {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
         <div
           style={{
@@ -229,9 +224,10 @@ export default function PdfToPptProjectsPage() {
           <Button
             ref={newPresentationBtnRef}
             className={showTour ? "relative border-pulse" : undefined}
-            style={showTour ? { zIndex: 1, borderColor: '#3c695a', boxShadow: '0 0 0 2px #3c695a80', transition: 'box-shadow 0.3s, border-color 0.3s' } : {}}
+            style={showTour ? { zIndex: 1, borderColor: '#3c695a', boxShadow: '0 0 0 2px #3c695a80', transition: 'box-shadow 0.3s, border-color 0.3s', position: 'relative' } : {}}
           >
             New Presentation
+            {/* Hand pointer removed from inside the button */}
           </Button>
         </Link>
       </div>
@@ -284,6 +280,28 @@ export default function PdfToPptProjectsPage() {
           ))}
         </TableBody>
       </Table>
+      {/* Hand pointer absolutely positioned outside the button but aligned to it */}
+      {showTour && pointerPos && (
+        <span
+          style={{
+            position: "fixed",
+            left: pointerPos.left,
+            top: pointerPos.top,
+            zIndex: 10002,
+            pointerEvents: "none",
+            rotate: "90deg", // flip vertically
+            fontSize: 48,
+            color: "#3c695a",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation: "blink-cursor-smooth 1.2s cubic-bezier(0.4,0,0.2,1) infinite",
+            transform: "translate(-100%, -50%)", // left of and vertically centered
+          }}
+        >
+          <IconHandFinger stroke={2} />
+        </span>
+      )}
       <style>{`
         @keyframes blink-cursor-smooth {
           0%, 100% { opacity: 1; }
@@ -325,17 +343,17 @@ export default function PdfToPptProjectsPage() {
         .border-pulse {
           border-width: 2px !important;
           animation: border-pulse-anim 1.4s infinite;
-          box-shadow: 0 0 0 2px #3c695a80;
-          border-color: #3c695a !important;
+          box-shadow: 0 0 0 2px rgba(64, 151, 122, 0.5);
+          border-color:rgb(73, 228, 122) !important;
         }
         @keyframes border-pulse-anim {
           0%, 100% {
-            box-shadow: 0 0 0 2px #3c695a80;
-            border-color: #3c695a;
+            box-shadow: 0 0 0 2px rgb(34, 158, 75);
+            border-color:rgb(65, 208, 160);
           }
           50% {
             box-shadow: 0 0 0 6px #3c695a40;
-            border-color: #3c695a80;
+            border-color: rgb(41, 215, 99);
           }
         }
       `}</style>

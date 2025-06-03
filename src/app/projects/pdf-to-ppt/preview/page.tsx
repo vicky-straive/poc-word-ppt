@@ -35,7 +35,7 @@ function PreviewPageInner() {
 
   const [selectedImage, setSelectedImage] = useState(images[0] || "");
 
-  const { setTourSkipped } = useTourStore();
+  const { setTourSkipped, showTour } = useTourStore();
   // Mark the tour as completed as soon as this page mounts
   useEffect(() => {
     setTourSkipped(true);
@@ -121,7 +121,21 @@ function PreviewPageInner() {
                     chapter
                   )}&template=${encodeURIComponent(template)}`}
                 >
-                  <Button variant="outline" className="cursor-pointer">
+                  <Button
+                    variant="outline"
+                    className={`cursor-pointer${
+                      showTour ? " border-pulse relative" : ""
+                    }`}
+                    style={
+                      showTour
+                        ? {
+                            borderColor: "#3c695a",
+                            boxShadow: "0 0 0 2px #3c695a80",
+                            transition: "box-shadow 0.3s, border-color 0.3s",
+                          }
+                        : {}
+                    }
+                  >
                     <IconRefresh />
                   </Button>
                 </Link>
@@ -145,6 +159,24 @@ function PreviewPageInner() {
           </div>
         </div>
       </div>
+      <style>{`
+        .border-pulse {
+          border-width: 2px !important;
+          animation: border-pulse-anim 1.4s infinite;
+          box-shadow: 0 0 0 2px rgba(64, 151, 122, 0.5);
+          border-color:rgb(73, 228, 122) !important;
+        }
+        @keyframes border-pulse-anim {
+          0%, 100% {
+            box-shadow: 0 0 0 2px rgb(34, 158, 75);
+            border-color:rgb(65, 208, 160);
+          }
+          50% {
+            box-shadow: 0 0 0 6px #3c695a40;
+            border-color: rgb(41, 215, 99);
+          }
+        }
+      `}</style>
     </div>
   );
 }
