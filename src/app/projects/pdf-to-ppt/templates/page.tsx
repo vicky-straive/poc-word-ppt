@@ -102,54 +102,142 @@ const TemplatesPage = () => {
   }
   // --- TOUR LOGIC END ---
 
+  const SpotlightOverlay = () => {
+    if (!showTour) return null;
+    // Calculate center of the spotlight for the pulsing indicator
+    const centerX = spotlightRect ? spotlightRect.left + spotlightRect.width / 2 : 0;
+    const centerY = spotlightRect ? spotlightRect.top + spotlightRect.height / 2 : 0;
+    return createPortal(
+      <>
+        {/* Transparent Mask - pointerEvents none so it never blocks interaction */}
+        <svg
+          width="100vw"
+          height="100vh"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none", // SVG never blocks pointer events
+            zIndex: 40,
+          }}
+        >
+          <defs>
+            <mask id="spotlight-mask">
+              <rect x="0" y="0" width="100vw" height="100vh" fill="white" />
+              {spotlightRect && (
+                <rect
+                  x={spotlightRect.left}
+                  y={spotlightRect.top}
+                  width={spotlightRect.width}
+                  height={spotlightRect.height}
+                  rx="8"
+                  fill="black"
+                />
+              )}
+            </mask>
+          </defs>
+          {/* Transparent mask, no color */}
+          <rect
+            x="0"
+            y="0"
+            width="100vw"
+            height="100vh"
+            fill="transparent"
+            mask="url(#spotlight-mask)"
+          />
+        </svg>
+        {/* Pulsing focus indicator */}
+        <div
+          style={{
+            position: "fixed",
+            left: centerX - 32,
+            top: centerY - 32,
+            width: 64,
+            height: 64,
+            pointerEvents: "none",
+            zIndex: 10002,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: 64,
+              height: 64,
+              borderRadius: "50%",
+              background: "rgba(0, 180, 90, 0.18)",
+              boxShadow: "0 0 0 0 rgba(0,180,90,0.5)",
+              animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
+              zIndex: 1,
+            }}
+          />
+          <span
+            style={{
+              position: "absolute",
+              left: 16,
+              top: 16,
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              background: "rgba(0, 180, 90, 0.25)",
+              zIndex: 2,
+            }}
+          />
+          <span
+            style={{
+              position: "absolute",
+              left: 28,
+              top: 28,
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              background: "#00b45a",
+              zIndex: 3,
+              boxShadow: "0 0 8px 2px #00b45a55",
+            }}
+          />
+        </div>
+        {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 41,
+            pointerEvents: "none",
+          }}
+        />
+        {/* Pulsing ring animation keyframes */}
+        <style>{`
+          @keyframes pulse-ring {
+            0% {
+              transform: scale(0.7);
+              opacity: 0.7;
+            }
+            70% {
+              transform: scale(1.2);
+              opacity: 0.15;
+            }
+            100% {
+              transform: scale(1.4);
+              opacity: 0;
+            }
+          }
+        `}</style>
+      </>,
+      document.body
+    );
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* TOUR SPOTLIGHT OVERLAY */}
-      {showTour && spotlightRect && createPortal(
-        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none'}}>
-          {/* SVG Mask */}
-          <svg width="100vw" height="100vh" style={{position: 'fixed', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}}>
-            <defs>
-              <mask id="spotlight-mask">
-                <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                <rect
-                  x={spotlightRect.left}
-                  y={spotlightRect.top - 0}
-                  width={spotlightRect.width}
-                  height={spotlightRect.height + 100}
-                  rx={16}
-                  fill="black"
-                />
-              </mask>
-            </defs>
-            <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0.6)" mask="url(#spotlight-mask)" />
-          </svg>
-          {/* Tooltip - now above the spotlighted area */}
-          <div
-            style={{
-              position: 'absolute',
-              left: spotlightRect.left,
-              top: Math.max(spotlightRect.top - 240, 16),
-              width: Math.min(spotlightRect.width, 340),
-              zIndex: 51,
-              background: 'white',
-              borderRadius: 12,
-              boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-              padding: 24,
-              fontSize: 18,
-              color: '#222',
-              pointerEvents: 'auto', // Tooltip remains interactive
-            }}
-          >
-            <div className="mb-4 font-semibold">Choose a PowerPoint template</div>
-            <div className="mb-6 text-base text-gray-600">Pick a template style for your presentation. You can preview each before continuing.</div>
-            <div className="flex gap-3 justify-end">
-              <button onClick={handleTourSkip} className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Skip</button>
-              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-green-800 text-white font-medium hover:bg-green-700">Next</button>
-            </div>
-          </div>
-        </div>,
-        document.body
+      {showTour && spotlightRect && (
+        <SpotlightOverlay />
       )}
       <div className="flex flex-col gap-4 items-center justify-between mb-8">
         <div className="">

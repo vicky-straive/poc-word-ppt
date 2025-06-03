@@ -53,16 +53,26 @@ const BookSelectionPage = () => {
     setTourSkipped(true);
   };
 
-  const handleNextTour = () => {
-    setShowTour(false);
-    // Do NOT setTourSkipped here, so the tour continues on next page
-  };
-
   const SpotlightOverlay = () => {
     if (!showTour) return null;
+    // Calculate center of the spotlight for the pulsing indicator
+    const centerX = spotlightStyle.left + spotlightStyle.width / 2;
+    const centerY = spotlightStyle.top + spotlightStyle.height / 2;
     return createPortal(
-      <div style={{ position: "fixed", inset: 0, zIndex: 40, pointerEvents: "auto" }}>
-        <svg width="100vw" height="100vh" style={{ position: "absolute", inset: 0, width: "100vw", height: "100vh" }}>
+      <>
+        {/* Transparent Mask - pointerEvents none so it never blocks interaction */}
+        <svg
+          width="100vw"
+          height="100vh"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            pointerEvents: "none", // SVG never blocks pointer events
+            zIndex: 40,
+          }}
+        >
           <defs>
             <mask id="spotlight-mask">
               <rect x="0" y="0" width="100vw" height="100vh" fill="white" />
@@ -71,22 +81,105 @@ const BookSelectionPage = () => {
                 y={spotlightStyle.top}
                 width={spotlightStyle.width}
                 height={spotlightStyle.height}
-                rx="12"
+                rx="8"
                 fill="black"
               />
             </mask>
           </defs>
+          {/* Transparent mask, no color */}
           <rect
             x="0"
             y="0"
             width="100vw"
             height="100vh"
-            fill="rgba(0,0,0,0.7)"
+            fill="transparent"
             mask="url(#spotlight-mask)"
           />
         </svg>
-        <div style={{ position: "fixed", inset: 0, zIndex: 41, pointerEvents: "auto" }} onClick={() => setShowTour(false)} />
-      </div>,
+        {/* Pulsing focus indicator */}
+        <div
+          style={{
+            position: "fixed",
+            left: centerX - 32,
+            top: centerY - 32,
+            width: 64,
+            height: 64,
+            pointerEvents: "none",
+            zIndex: 10002,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              left: -15,
+              top: 153,
+              width: 84,
+              height: 84,
+              borderRadius: "50%",
+              background: "rgba(0, 255, 128, 0.18)",
+              boxShadow: "0 0 0 0 rgba(0,180,90,0.5)",
+              animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
+              zIndex: 1,
+            }}
+          />
+          <span
+            style={{
+              position: "absolute",
+              left: 15,
+              top: 185,
+              width: 22,
+              height: 22,
+              borderRadius: "50%",
+              background: "rgba(60, 255, 0, 0.42)",
+              zIndex: 2,
+              // animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
+            }}
+          />
+          <span
+            style={{
+              position: "absolute",
+              left: 18,
+              top: 190,
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              background: "#00b45a",
+              zIndex: 3,
+              boxShadow: "0 0 0 0 rgba(0,180,90,0.5)",
+              display: "none",
+            }}
+          />
+        </div>
+        {/* Transparent overlay for skip, but pointerEvents: none so it doesn't block anything */}
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 41,
+            pointerEvents: "none",
+          }}
+        />
+        {/* Pulsing ring animation keyframes */}
+        <style>{`
+          @keyframes pulse-ring {
+            0% {
+              transform: scale(0.7);
+              opacity: 0.7;
+            }
+            70% {
+              transform: scale(1.2);
+              opacity: 0.15;
+            }
+            100% {
+              transform: scale(1.4);
+              opacity: 0;
+            }
+          }
+        `}</style>
+      </>,
       document.body
     );
   };
@@ -126,12 +219,6 @@ const BookSelectionPage = () => {
               onClick={handleSkipTour}
             >
               Skip
-            </button>
-            <button
-              className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-800"
-              onClick={handleNextTour}
-            >
-              Next
             </button>
           </div>
         </div>
