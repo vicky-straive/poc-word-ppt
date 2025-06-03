@@ -293,6 +293,42 @@ const ExtractedMarkdownPage = () => {
           </Button>
         </span>
       </div>
+
+      {/* TOUR DIALOG BOX - GREEN THEME */}
+      {showTour && spotlightRect && buttonRef.current && (
+        <div
+          style={{
+            position: "fixed",
+            left: spotlightRect.left + spotlightRect.width + 5,
+            top: spotlightRect.top,
+            zIndex: 100,
+            background: "#00b45a", // green background
+            borderRadius: 8,
+            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
+            padding: 16,
+            minWidth: 260,
+            maxWidth: 320,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <div className="mb-2 font-semibold text-center text-white">
+            Scroll down if needed and click Generate Slides
+          </div>
+          <div className="mb-4 text-center text-white text-sm">
+            If the markdown is long, scroll to the bottom and press the Generate Slides button to continue.
+          </div>
+          <div className="flex gap-2 mt-2">
+            <button
+             className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
+              onClick={handleTourSkip}
+            >
+              Skip
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

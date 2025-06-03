@@ -147,8 +147,8 @@ const PromptsPage = () => {
         <div
           style={{
             position: "fixed",
-            left: centerX ? centerX - 32 : 0,
-            top: centerY ? centerY - 32 : 0,
+            left: centerX ? centerX - -625 : 0,
+            top: centerY ? centerY - 72 : 0,
             width: 64,
             height: 64,
             pointerEvents: "none",
@@ -272,7 +272,7 @@ const PromptsPage = () => {
                 y="0"
                 width="100%"
                 height="100%"
-                fill="rgba(0,0,0,0.6)"
+                fill="rgba(0, 0, 0, 0)"
                 mask="url(#spotlight-mask)"
               />
             </svg>
@@ -309,12 +309,6 @@ const PromptsPage = () => {
                   className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
                 >
                   Skip
-                </button>
-                <button
-                  onClick={handleTourNext}
-                  className="px-4 py-2 rounded bg-green-800 text-white font-medium hover:bg-green-700"
-                >
-                  Next
                 </button>
               </div>
             </div>

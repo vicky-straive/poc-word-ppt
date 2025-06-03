@@ -192,10 +192,10 @@ const BookSelectionPage = () => {
         <div
           style={{
             position: "fixed",
-            left: spotlightStyle.left + spotlightStyle.width + 24,
-            top: spotlightStyle.top,
-            zIndex: 100,
-            background: "white",
+            left: spotlightStyle.left + spotlightStyle.width + 5,
+            top: 530, // Use dynamic top for correct positioning
+            zIndex: 0,
+            background: "white", // green background
             borderRadius: 8,
             boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
             padding: 16,
@@ -208,14 +208,14 @@ const BookSelectionPage = () => {
         >
           <div className="mb-2 font-semibold text-center">
             Click here to select{" "}
-            <span className="text-green-700 font-bold">
+            <span className=" font-bold">
               Medical Terminology in a Flash
             </span>{" "}
             and view its chapters!
           </div>
           <div className="flex gap-2 mt-2">
             <button
-              className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
+              className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
               onClick={handleSkipTour}
             >
               Skip

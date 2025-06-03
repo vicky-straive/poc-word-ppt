@@ -84,6 +84,18 @@ const TemplatesPage = () => {
     };
   }, [tourSkipped]);
 
+  // Ensure tour is shown on first visit if not skipped
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const skipped = localStorage.getItem("pptTourSkipped");
+      if (skipped === "true") {
+        setShowTour(false);
+      } else {
+        setShowTour(true);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (showTour && gridRef.current) {
       const rect = gridRef.current.getBoundingClientRect();
@@ -91,14 +103,13 @@ const TemplatesPage = () => {
     }
   }, [showTour]);
 
-  function handleTourNext() {
-    setShowTour(false);
-    document.body.style.overflow = "";
-  }
   function handleTourSkip() {
     setTourSkipped(true);
     setShowTour(false);
     document.body.style.overflow = "";
+    if (typeof window !== "undefined") {
+      localStorage.setItem("pptTourSkipped", "true");
+    }
   }
   // --- TOUR LOGIC END ---
 
@@ -151,7 +162,7 @@ const TemplatesPage = () => {
         <div
           style={{
             position: "fixed",
-            left: centerX - 32,
+            left: centerX - 570,
             top: centerY - 32,
             width: 64,
             height: 64,
@@ -280,12 +291,39 @@ const TemplatesPage = () => {
         ))}
       </div>
 
-      {/* <h2 className="text-xl font-semibold mb-4">Start from scratch</h2>
-      <div className="border-2 border-dashed border-gray-300 p-8 rounded-md text-center">
-        <p className="text-lg font-medium mb-4">Create a blank presentation</p>
-        <p className="text-gray-600 mb-6">Start with a blank canvas and add your own content</p>
-        <Link href="/projects/pdf-to-ppt/prompts"><Button>Create blank presentation</Button></Link>
-      </div> */}
+      {/* TOUR DIALOG BOX - GREEN BACKGROUND */}
+      {showTour && spotlightRect && (
+        <div
+          style={{
+            position: "fixed",
+            left: spotlightRect.left + spotlightRect.width + -1000,
+            top: 450,
+            zIndex: 100,
+            background: "white", // green background
+            borderRadius: 8,
+            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
+            padding: 16,
+            minWidth: 260,
+            maxWidth: 320,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div className="mb-2 font-semibold text-center">
+            {/* Tooltip content can go here if needed */}
+            Select the template.
+          </div>
+          <div className="flex gap-2 mt-2">
+            <button
+              className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
+              onClick={handleTourSkip}
+            >
+              Skip
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

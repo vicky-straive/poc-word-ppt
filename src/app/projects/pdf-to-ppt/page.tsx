@@ -271,7 +271,7 @@ export default function PdfToPptProjectsPage() {
             left: spotlightStyle.left + spotlightStyle.width / 2 - 130, // Center horizontally (minWidth/2)
             top: spotlightStyle.top + spotlightStyle.height + 12, // Below the button
             zIndex: 100,
-            background: "white",
+            background: "white", // green background
             borderRadius: 8,
             boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
             padding: 16,
@@ -287,7 +287,7 @@ export default function PdfToPptProjectsPage() {
           </div>
           <div className="flex gap-2 mt-2">
             <button
-              className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
+              className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
               onClick={handleSkipTour}
             >
               Skip
