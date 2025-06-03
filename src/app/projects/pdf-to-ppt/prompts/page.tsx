@@ -1,11 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useSearchParams } from "next/navigation";
+import { createPortal } from "react-dom";
+import { useTourStore } from "../tourStore";
 
 const PromptsPage = () => {
   const predefinedPrompts = [
@@ -57,15 +59,92 @@ const PromptsPage = () => {
   const chapter = searchParams.get("chapter") || "";
   const template = searchParams.get("template") || "";
 
+  // --- TOUR LOGIC START ---
+  const promptSectionRef = useRef<HTMLDivElement>(null);
+  const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
+  const [showTour, setShowTour] = useState(false);
+  const { tourSkipped, setTourSkipped } = useTourStore();
+
+  useEffect(() => {
+    if (!tourSkipped) {
+      setShowTour(true);
+      document.body.style.overflow = "hidden";
+    } else {
+      setShowTour(false);
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [tourSkipped]);
+
+  useEffect(() => {
+    if (showTour && promptSectionRef.current) {
+      const rect = promptSectionRef.current.getBoundingClientRect();
+      setSpotlightRect(rect);
+    }
+  }, [showTour]);
+
+  function handleTourNext() {
+    setShowTour(false);
+    document.body.style.overflow = "";
+  }
+  function handleTourSkip() {
+    setTourSkipped(true);
+    setShowTour(false);
+    document.body.style.overflow = "";
+  }
+  // --- TOUR LOGIC END ---
+
   return (
     <div className="container mx-auto py-8 p-8">
-      <h1 className="text-3xl font-bold mb-4">Custom Instructions</h1>
-      <p className="text-gray-600 mb-8">
-        Tailor the AI&#39;s content extraction with custom instruction or use
-        pre-defined options.
-      </p>
-
-      <div className="mb-8">
+      {/* TOUR SPOTLIGHT OVERLAY */}
+      {showTour && spotlightRect && createPortal(
+        <div style={{position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'auto'}}>
+          {/* SVG Mask */}
+          <svg width="100vw" height="100vh" style={{position: 'fixed', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}}>
+            <defs>
+              <mask id="spotlight-mask">
+                <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                <rect
+                  x={spotlightRect.left - 12}
+                  y={spotlightRect.top - 12}
+                  width={spotlightRect.width + 24}
+                  height={spotlightRect.height + 24}
+                  rx={20}
+                  fill="black"
+                />
+              </mask>
+            </defs>
+            <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0.6)" mask="url(#spotlight-mask)" />
+          </svg>
+          {/* Tooltip above the spotlighted area */}
+          <div
+            style={{
+              position: 'absolute',
+              left: spotlightRect.left + spotlightRect.width - Math.min(spotlightRect.width, 340),
+              top: spotlightRect.top + spotlightRect.height + 24,
+              width: Math.min(spotlightRect.width, 340),
+              zIndex: 51,
+              background: 'white',
+              borderRadius: 12,
+              boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
+              padding: 24,
+              fontSize: 18,
+              color: '#222',
+            }}
+          >
+            <div className="mb-4 font-semibold">Enter a prompt and click Generate Markdown</div>
+            <div className="mb-6 text-base text-gray-600">Type your custom instruction, then press the Generate Markdown button to continue.</div>
+            <div className="flex gap-3 justify-end">
+              <button onClick={handleTourSkip} className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Skip</button>
+              <button onClick={handleTourNext} className="px-4 py-2 rounded bg-green-800 text-white font-medium hover:bg-green-700">Next</button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+      <div className="mb-8" ref={promptSectionRef}>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold mb-4">Add Custom Instruction</h2>
           <Link
