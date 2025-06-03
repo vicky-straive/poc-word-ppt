@@ -42,7 +42,7 @@ const ChaptersPage = () => {
     (chaptersData[0] as Book);
 
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
-  const { tourSkipped, setTourSkipped, hydrate } = useTourStore();
+  const { tourSkipped, hydrate } = useTourStore();
   const radioGroupRef = useRef<HTMLDivElement | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [spotlightStyle, setSpotlightStyle] = useState({
@@ -84,11 +84,6 @@ const ChaptersPage = () => {
       document.body.style.overflow = "";
     };
   }, [showTour]);
-
-  const handleSkipTour = () => {
-    setShowTour(false);
-    setTourSkipped(true);
-  };
 
   const handleChapterChange = (chapterTitle: string) => {
     setSelectedChapter(chapterTitle === selectedChapter ? null : chapterTitle);
@@ -207,8 +202,8 @@ const ChaptersPage = () => {
               width: 64,
               height: 64,
               borderRadius: "50%",
-              background: "rgba(0, 180, 90, 0.18)",
-              boxShadow: "0 0 0 0 rgba(0,180,90,0.5)",
+              background: "rgba(255, 221, 51, 0.18)", // yellow
+              boxShadow: "0 0 0 0 rgba(255,221,51,0.5)",
               animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
               zIndex: 1,
             }}
@@ -221,7 +216,7 @@ const ChaptersPage = () => {
               width: 32,
               height: 32,
               borderRadius: "50%",
-              background: "rgba(0, 180, 90, 0.25)",
+              background: "rgba(255, 221, 51, 0.25)", // yellow
               zIndex: 2,
             }}
           />
@@ -233,9 +228,9 @@ const ChaptersPage = () => {
               width: 8,
               height: 8,
               borderRadius: "50%",
-              background: "#00b45a",
+              background: "#ffdd33", // yellow
               zIndex: 3,
-              boxShadow: "0 0 8px 2px #00b45a55",
+              boxShadow: "0 0 8px 2px #ffdd3355",
             }}
           />
         </div>
@@ -273,38 +268,6 @@ const ChaptersPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex justify-between items-start">
       <SpotlightOverlay />
-      {/* Tour Tooltip for the radio group */}
-      {showTour && radioGroupRef.current && (
-        <div
-          style={{
-            position: "fixed",
-            left: spotlightStyle.left + spotlightStyle.width + 5,
-            top: spotlightStyle.top,
-            zIndex: 100,
-            background: "white", // green background
-            borderRadius: 8,
-            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
-            padding: 16,
-            minWidth: 260,
-            maxWidth: 320,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div className="mb-2 font-semibold text-center ">
-            Select a chapter to continue!
-          </div>
-          <div className="flex gap-2 mt-2">
-            <button
-             className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
-              onClick={handleSkipTour}
-            >
-              Skip
-            </button>
-          </div>
-        </div>
-      )}
       <div>
         <h1 className="text-2xl font-bold mb-4 m-2">Select a chapter</h1>
         <div className="mb-4 m-2"></div>

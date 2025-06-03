@@ -102,12 +102,6 @@ export default function PdfToPptProjectsPage() {
     }
   }, [showTour]);
 
-  const handleSkipTour = () => {
-    setShowTour(false);
-    setTourSkipped(true);
-    localStorage.setItem("pptTourSkipped", "true");
-  };
-
   const handleStartTour = () => {
     setShowTour(true);
     setTourSkipped(false);
@@ -196,8 +190,8 @@ export default function PdfToPptProjectsPage() {
               width: 64,
               height: 64,
               borderRadius: "50%",
-              background: "rgba(0, 180, 90, 0.18)",
-              boxShadow: "0 0 0 0 rgba(0,180,90,0.5)",
+              background: "rgba(255, 221, 51, 0.18)", // yellow
+              boxShadow: "0 0 0 0 rgba(255,221,51,0.5)",
               animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
               zIndex: 1,
             }}
@@ -210,7 +204,7 @@ export default function PdfToPptProjectsPage() {
               width: 32,
               height: 32,
               borderRadius: "50%",
-              background: "rgba(0, 180, 90, 0.25)",
+              background: "rgba(255, 221, 51, 0.25)", // yellow
               zIndex: 2,
             }}
           />
@@ -222,9 +216,9 @@ export default function PdfToPptProjectsPage() {
               width: 8,
               height: 8,
               borderRadius: "50%",
-              background: "#00b45a",
+              background: "#ffdd33", // yellow
               zIndex: 3,
-              boxShadow: "0 0 8px 2px #00b45a55",
+              boxShadow: "0 0 8px 2px #ffdd3355",
             }}
           />
         </div>
@@ -263,38 +257,6 @@ export default function PdfToPptProjectsPage() {
     <div className="container mx-auto py-8 p-8">
       {/* Spotlight Overlay */}
       <SpotlightOverlay />
-      {/* Tour Tooltip */}
-      {showTour && newPresentationBtnRef.current && (
-        <div
-          style={{
-            position: "fixed",
-            left: spotlightStyle.left + spotlightStyle.width / 2 - 130, // Center horizontally (minWidth/2)
-            top: spotlightStyle.top + spotlightStyle.height + 12, // Below the button
-            zIndex: 100,
-            background: "white", // green background
-            borderRadius: 8,
-            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
-            padding: 16,
-            minWidth: 260,
-            maxWidth: 320,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div className="mb-2 font-semibold text-center">
-            Start a new presentation!
-          </div>
-          <div className="flex gap-2 mt-2">
-            <button
-              className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
-              onClick={handleSkipTour}
-            >
-              Skip
-            </button>
-          </div>
-        </div>
-      )}
       {/* Floating Start Tour Button */}
       {!showTour && tourSkipped && (
         <button

@@ -13,7 +13,7 @@ const BookSelectionPage = () => {
   const focusRef = useRef<HTMLDivElement | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [spotlightStyle, setSpotlightStyle] = useState({ left: 0, top: 0, width: 0, height: 0 });
-  const { tourSkipped, setTourSkipped, hydrate } = useTourStore();
+  const { tourSkipped, hydrate } = useTourStore();
 
   useEffect(() => {
     hydrate();
@@ -47,11 +47,6 @@ const BookSelectionPage = () => {
       document.body.style.overflow = "";
     };
   }, [showTour]);
-
-  const handleSkipTour = () => {
-    setShowTour(false);
-    setTourSkipped(true);
-  };
 
   const SpotlightOverlay = () => {
     if (!showTour) return null;
@@ -114,13 +109,13 @@ const BookSelectionPage = () => {
           <span
             style={{
               position: "absolute",
-              left: -15,
-              top: 153,
-              width: 84,
-              height: 84,
+              left: 0,
+              top: 0,
+              width: 64,
+              height: 64,
               borderRadius: "50%",
-              background: "rgba(0, 255, 128, 0.18)",
-              boxShadow: "0 0 0 0 rgba(0,180,90,0.5)",
+              background: "rgba(255, 221, 51, 0.18)", // yellow
+              boxShadow: "0 0 0 0 rgba(255,221,51,0.5)",
               animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
               zIndex: 1,
             }}
@@ -128,28 +123,26 @@ const BookSelectionPage = () => {
           <span
             style={{
               position: "absolute",
-              left: 15,
-              top: 185,
-              width: 22,
-              height: 22,
+              left: 16,
+              top: 16,
+              width: 32,
+              height: 32,
               borderRadius: "50%",
-              background: "rgba(60, 255, 0, 0.42)",
+              background: "rgba(255, 221, 51, 0.25)", // yellow
               zIndex: 2,
-              // animation: "pulse-ring 1.5s cubic-bezier(0.66, 0, 0, 1) infinite",
             }}
           />
           <span
             style={{
               position: "absolute",
-              left: 18,
-              top: 190,
+              left: 28,
+              top: 28,
               width: 8,
               height: 8,
               borderRadius: "50%",
-              background: "#00b45a",
+              background: "#ffdd33", // yellow
               zIndex: 3,
-              boxShadow: "0 0 0 0 rgba(0,180,90,0.5)",
-              display: "none",
+              boxShadow: "0 0 8px 2px #ffdd3355",
             }}
           />
         </div>
@@ -187,42 +180,6 @@ const BookSelectionPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <SpotlightOverlay />
-      {/* Tour Tooltip for the first book */}
-      {showTour && focusRef.current && (
-        <div
-          style={{
-            position: "fixed",
-            left: spotlightStyle.left + spotlightStyle.width + 5,
-            top: 530, // Use dynamic top for correct positioning
-            zIndex: 0,
-            background: "white", // green background
-            borderRadius: 8,
-            boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
-            padding: 16,
-            minWidth: 260,
-            maxWidth: 320,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
-          <div className="mb-2 font-semibold text-center">
-            Click here to select{" "}
-            <span className=" font-bold">
-              Medical Terminology in a Flash
-            </span>{" "}
-            and view its chapters!
-          </div>
-          <div className="flex gap-2 mt-2">
-            <button
-              className="px-4 py-2 rounded bg-gray-200 text-gray-700 font-medium hover:bg-gray-300"
-              onClick={handleSkipTour}
-            >
-              Skip
-            </button>
-          </div>
-        </div>
-      )}
       <h1 className="text-2xl font-bold mb-4 text-center">
         Medical Education Excellence{" "}
       </h1>
